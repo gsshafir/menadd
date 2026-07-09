@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+import SubscribeForm from "../components/SubscribeForm.astro";
+import { meta } from "../data";
+---
+
+<Base title={meta.notes.title} description={meta.notes.description} canonical="/notes/">
+  <section>
+    <h1>Diligence Notes</h1>
+    <p>Periodic notes on diligence, cap tables, governance and structure in MENA.</p>
+    <p>Not a newsletter in the usual sense. No weekly cadence, no roundups, no links to other people's content. A note goes out when there is a mechanism worth explaining or a pattern worth naming. Some months that is twice. Some months it is zero.</p>
+    <p>What subscribers get: the same material as the library, earlier, plus artifacts as they are released.</p>
+    <SubscribeForm sourcePage="/notes/" quiet />
+    <p>One address, no sharing, unsubscribe any time.</p>
+  </section>
+</Base>

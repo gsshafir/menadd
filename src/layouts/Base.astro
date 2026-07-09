@@ -1,0 +1,58 @@
+---
+import "../styles/global.css";
+import { nav, site } from "../data";
+
+type Props = {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogType?: "website" | "article";
+};
+
+const { title, description, canonical = Astro.url.pathname, ogType = "website" } = Astro.props;
+const canonicalUrl = new URL(canonical, site.url).toString();
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={site.name} />
+    <meta name="twitter:card" content="summary" />
+    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"REPLACE_WITH_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="/">{site.name}</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        {
+          nav.map((item) => (
+            <a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div>{site.positioning}</div>
+      <div class="footer-links">
+        <a href={site.linkedIn}>LinkedIn</a>
+        <a href="/notes/">Subscribe</a>
+        <span>Copyright {new Date().getFullYear()} MENADD</span>
+      </div>
+    </footer>
+  </body>
+</html>

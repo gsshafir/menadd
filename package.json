@@ -1,0 +1,21 @@
+{
+  "name": "menadd",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "build": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "deploy": "wrangler pages deploy dist --project-name menadd"
+  },
+  "dependencies": {
+    "@astrojs/check": "latest",
+    "astro": "latest",
+    "cross-env": "latest",
+    "typescript": "latest",
+    "wrangler": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {}
+}

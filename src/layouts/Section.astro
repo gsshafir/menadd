@@ -1,0 +1,35 @@
+---
+import Base from "./Base.astro";
+import type { CollectionEntry } from "astro:content";
+import { meta } from "../data";
+
+type SectionKey = "ownership" | "control" | "structure" | "cash" | "process";
+type Props = {
+  sectionKey: SectionKey;
+  title: string;
+  description: string;
+  articles: CollectionEntry<"articles">[];
+};
+
+const { sectionKey, title, description, articles } = Astro.props;
+---
+
+<Base title={meta[sectionKey].title} description={meta[sectionKey].description} canonical={`/library/${sectionKey}/`}>
+  <section>
+    <p class="eyebrow">The Diligence Library</p>
+    <h1>{title}</h1>
+    <p class="lede">{description}</p>
+    <div class="article-list">
+      {
+        articles.map((article) => (
+          <article class="article-entry">
+            <h3>
+              <a href={`/library/${article.data.section}/${article.id}/`}>{article.data.title}</a>
+            </h3>
+            <p>{article.data.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,34 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import Base from "./Base.astro";
+import SubscribeForm from "../components/SubscribeForm.astro";
+import { sections } from "../data";
+
+type Props = {
+  article: CollectionEntry<"articles">;
+};
+
+const { article } = Astro.props;
+const section = sections.find((item) => item.key === article.data.section);
+const href = `/library/${article.data.section}/${article.id}/`;
+const formattedDate = article.data.date.toLocaleDateString("en", {
+  year: "numeric",
+  month: "long",
+  day: "numeric"
+});
+const { Content } = await render(article);
+---
+
+<Base title={`${article.data.title} | MENADD`} description={article.data.description} canonical={href} ogType="article">
+  <article>
+    <p class="eyebrow"><a href={`/library/${article.data.section}/`}>{section?.title}</a></p>
+    <h1>{article.data.title}</h1>
+    <p class="lede">{article.data.description}</p>
+    <p class="article-meta">{formattedDate}</p>
+    <div class="article-body">
+      <Content />
+    </div>
+    <SubscribeForm sourcePage={href} quiet />
+  </article>
+</Base>

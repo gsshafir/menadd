@@ -1,0 +1,269 @@
+:root {
+  color-scheme: light;
+  --bg: #fbfaf7;
+  --text: #171717;
+  --muted: #5d5a55;
+  --rule: #ded9cf;
+  --accent: #7a2e1f;
+  --accent-soft: #f1e6e1;
+  --measure: 680px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 18px;
+  line-height: 1.68;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.site-header,
+.site-footer,
+main {
+  width: min(var(--measure), calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.site-header {
+  padding: 28px 0 22px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.wordmark {
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  justify-content: flex-end;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.78rem;
+}
+
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--text);
+}
+
+main {
+  padding: 56px 0 72px;
+}
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding: 28px 0 36px;
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin-top: 12px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  font-weight: 600;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2.1rem, 10vw, 3.2rem);
+  letter-spacing: 0;
+}
+
+h2 {
+  font-size: 1.42rem;
+  margin-top: 3.25rem;
+}
+
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.9rem;
+}
+
+p {
+  margin: 1rem 0 0;
+}
+
+.lede {
+  color: var(--muted);
+  font-size: 1.08rem;
+}
+
+.eyebrow {
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.7rem;
+  text-transform: uppercase;
+}
+
+.section-list,
+.article-list,
+.artifact-list {
+  display: grid;
+  gap: 1.4rem;
+  margin-top: 1.4rem;
+}
+
+.section-entry,
+.article-entry,
+.artifact-entry {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.1rem;
+}
+
+.section-entry h3,
+.article-entry h3,
+.artifact-entry h3 {
+  margin-top: 0;
+}
+
+.article-meta {
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.78rem;
+  margin-top: 0.35rem;
+}
+
+.article-body {
+  margin-top: 2.5rem;
+}
+
+.article-body h2 {
+  margin-top: 2.6rem;
+}
+
+.article-body p {
+  margin-top: 1.05rem;
+}
+
+.cta-link {
+  display: inline-block;
+  margin-top: 1.25rem;
+}
+
+.subscribe-block {
+  border-top: 1px solid var(--rule);
+  margin-top: 3rem;
+  padding-top: 1.4rem;
+}
+
+.subscribe-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.hp-field {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+input,
+button {
+  border-radius: 0;
+  font: inherit;
+}
+
+input[type="email"] {
+  background: #fffefb;
+  border: 1px solid var(--rule);
+  color: var(--text);
+  min-width: 0;
+  padding: 0.62rem 0.7rem;
+  width: 100%;
+}
+
+button {
+  background: var(--text);
+  border: 1px solid var(--text);
+  color: var(--bg);
+  cursor: pointer;
+  padding: 0.62rem 0.9rem;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.form-message {
+  color: var(--muted);
+  min-height: 1.4em;
+}
+
+.form-message[data-state="success"] {
+  color: var(--accent);
+}
+
+.form-message[data-state="error"] {
+  color: var(--accent);
+}
+
+@media (max-width: 620px) {
+  html {
+    font-size: 17px;
+  }
+
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .site-nav {
+    justify-content: flex-start;
+  }
+
+  .subscribe-form {
+    flex-direction: column;
+  }
+}

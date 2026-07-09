@@ -1,0 +1,12 @@
+---
+import { getCollection } from "astro:content";
+import Section from "../../../layouts/Section.astro";
+import { sections } from "../../../data";
+
+const section = sections.find((item) => item.key === "control")!;
+const articles = (await getCollection("articles", ({ data }) => data.section === "control" && !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Section sectionKey="control" title={section.title} description={section.description} articles={articles} />
