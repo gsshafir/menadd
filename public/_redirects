@@ -1,3 +1,4 @@
 # Add any known legacy Framer paths here as exact 301s.
 # Example:
 # /old-path/  /  301
+/artifacts/  /assessment/  301

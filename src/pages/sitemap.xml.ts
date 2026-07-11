@@ -7,7 +7,7 @@ export async function GET() {
     "/",
     "/library/",
     ...sections.map((section) => section.href),
-    "/artifacts/",
+    "/assessment/",
     "/about/",
     "/notes/",
     ...articles.map((article) => `/library/${article.data.section}/${article.id}/`)

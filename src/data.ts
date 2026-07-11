@@ -8,7 +8,7 @@ export const site = {
 
 export const nav = [
   { href: "/library/", label: "Library" },
-  { href: "/artifacts/", label: "Artifacts" },
+  { href: "/assessment/", label: "Assessment" },
   { href: "/about/", label: "About" },
   { href: "/notes/", label: "Diligence Notes" }
 ];
@@ -97,10 +97,10 @@ export const meta = {
     description:
       "How fundraising actually works in the UAE and MENA: trust sequences, family offices, and realistic timelines."
   },
-  artifacts: {
-    title: "Artifacts | MENADD",
+  assessment: {
+    title: "Investor Readiness Assessment | MENADD",
     description:
-      "Working tools built for real companies: cash flow reporting from bank exports, cap table models, diligence checklists."
+      "A 3-minute baseline diagnostic for B2B founders: 13 numbers, one verdict, and the questions investors will ask in diligence."
   },
   about: {
     title: "About | MENADD",

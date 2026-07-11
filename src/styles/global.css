@@ -181,7 +181,8 @@ p {
   margin-top: 1.05rem;
 }
 
-.article-body table {
+.article-body table,
+.assessment-results table {
   border-collapse: collapse;
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
@@ -191,12 +192,15 @@ p {
   width: 100%;
 }
 
-.article-body thead {
+.article-body thead,
+.assessment-results thead {
   border-bottom: 1px solid var(--rule);
 }
 
 .article-body th,
-.article-body td {
+.article-body td,
+.assessment-results th,
+.assessment-results td {
   padding: 0.45rem 0.7rem 0.45rem 0;
   text-align: left;
   vertical-align: top;
@@ -265,6 +269,132 @@ button {
 button:disabled {
   cursor: wait;
   opacity: 0.65;
+}
+
+.assessment-form {
+  margin-top: 2.2rem;
+}
+
+.assessment-form fieldset {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 2rem 0 0;
+  padding: 1.2rem 0 0;
+}
+
+.assessment-form legend {
+  font-weight: 600;
+  padding: 0;
+}
+
+.assessment-form label {
+  display: block;
+  margin-top: 1.1rem;
+}
+
+.assessment-form label > span:first-child {
+  display: block;
+}
+
+.assessment-form input,
+.assessment-form select {
+  background: #fffefb;
+  border: 1px solid var(--rule);
+  color: var(--text);
+  margin-top: 0.35rem;
+  padding: 0.55rem 0.65rem;
+  width: 100%;
+}
+
+.assessment-form button {
+  margin-top: 1.5rem;
+}
+
+.field-hint,
+.assessment-caveat,
+.form-warning,
+.form-errors {
+  color: var(--muted);
+  display: block;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin-top: 0.35rem;
+}
+
+.form-errors {
+  color: var(--accent);
+}
+
+.form-errors p {
+  margin-top: 0.35rem;
+}
+
+.form-warning {
+  color: var(--accent);
+}
+
+.assessment-results {
+  margin-top: 3rem;
+  overflow-x: auto;
+}
+
+.verdict-banner {
+  margin-top: 0;
+  padding: 1.1rem 1.2rem;
+}
+
+.verdict-banner[data-verdict="green"] {
+  background: #d6e8d0;
+}
+
+.verdict-banner[data-verdict="amber"] {
+  background: #f5e5bb;
+}
+
+.verdict-banner[data-verdict="red"] {
+  background: #efc7bc;
+}
+
+.verdict-banner h2 {
+  margin-top: 0;
+}
+
+.verdict-banner p {
+  margin-top: 0.7rem;
+}
+
+.assessment-results ul {
+  margin: 1rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.assessment-results li + li {
+  margin-top: 0.45rem;
+}
+
+.status-dot {
+  border-radius: 50%;
+  display: inline-block;
+  height: 0.55rem;
+  margin-right: 0.45rem;
+  width: 0.55rem;
+}
+
+.status-green {
+  background: #5f8c55;
+}
+
+.status-amber {
+  background: #b98524;
+}
+
+.status-red {
+  background: #a94634;
+}
+
+.status-grey {
+  background: var(--muted);
 }
 
 .form-message {

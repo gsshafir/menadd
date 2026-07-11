@@ -1,0 +1,482 @@
+---
+import Base from "../layouts/Base.astro";
+import { meta } from "../data";
+---
+
+<Base title={meta.assessment.title} description={meta.assessment.description} canonical="/assessment/">
+  <section>
+    <h1>Investor Readiness Assessment</h1>
+    <p>Thirteen numbers and a business type. One verdict, and the questions investors will ask when they see your metrics. Designed for B2B companies with recurring or repeatable revenue. All calculations run in your browser; nothing you enter is sent or stored anywhere.</p>
+  </section>
+
+  <form class="assessment-form" data-assessment-form novalidate>
+    <div class="form-errors" data-form-errors aria-live="polite"></div>
+    <div class="form-warning" data-form-warning aria-live="polite"></div>
+
+    <fieldset>
+      <legend>Business profile</legend>
+      <label>
+        <span>Business type</span>
+        <select name="business_type">
+          <option value="SaaS">SaaS</option>
+          <option value="Services">Services</option>
+          <option value="Hardware">Hardware</option>
+          <option value="Hardware+Software">Hardware+Software</option>
+        </select>
+        <span class="field-hint">Drives benchmark thresholds. Pick: SaaS / Services / Hardware / Hardware+Software.</span>
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>P&amp;L, trailing 12 months</legend>
+      <label>
+        <span>Revenue</span>
+        <input name="revenue" type="number" inputmode="decimal" min="0" step="1" />
+        <span class="field-hint">Total recognized revenue, last 12 months. Must be above zero for the assessment to run.</span>
+      </label>
+      <label>
+        <span>COGS (cost of serving customers)</span>
+        <input name="cogs" type="number" inputmode="decimal" min="0" step="1" />
+        <span class="field-hint">Hosting, support, implementation, components, manufacturing, logistics, warranty. NOT sales or admin.</span>
+      </label>
+      <label>
+        <span>Sales &amp; Marketing (S&amp;M)</span>
+        <input name="sm" type="number" inputmode="decimal" min="0" step="1" />
+        <span class="field-hint">Sales team, marketing, outbound, paid acquisition, commissions.</span>
+      </label>
+      <label>
+        <span>General &amp; Administrative (G&amp;A)</span>
+        <input name="ga" type="number" inputmode="decimal" min="0" step="1" />
+        <span class="field-hint">Finance, legal, HR, admin, office.</span>
+      </label>
+      <label>
+        <span>R&amp;D (product &amp; engineering)</span>
+        <input name="rd" type="number" inputmode="decimal" min="0" step="1" />
+        <span class="field-hint">Client-specific implementation belongs in COGS, not here.</span>
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Cash and growth, same 12 months</legend>
+      <label>
+        <span>Net burn</span>
+        <input name="net_burn" type="number" inputmode="decimal" min="0" step="1" />
+        <span class="field-hint">Cash out minus cash in. Positive number; 0 if cash-flow positive.</span>
+      </label>
+      <label>
+        <span>Net new recurring / repeatable revenue (ARR)</span>
+        <input name="net_new_arr" type="number" inputmode="decimal" min="0" step="1" />
+        <span class="field-hint">Increase in annualized recurring (or demonstrably repeatable) revenue over the period. If your revenue is one-off projects only, this tool will misread you: talk to us instead.</span>
+      </label>
+      <label>
+        <span>New customers acquired</span>
+        <input name="new_customers" type="number" inputmode="numeric" min="0" step="1" />
+        <span class="field-hint">Used only for the CAC context figure; does not drive the assessment.</span>
+      </label>
+      <label>
+        <span>Cash balance today</span>
+        <input name="cash" type="number" inputmode="decimal" min="0" step="1" />
+        <span class="field-hint">All bank accounts combined.</span>
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Working capital, today</legend>
+      <label>
+        <span>Accounts receivable (AR)</span>
+        <input name="ar" type="number" inputmode="decimal" min="0" step="1" />
+        <span class="field-hint">Invoiced but not yet paid.</span>
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Prior year (optional, for operating leverage)</legend>
+      <label>
+        <span>Revenue, prior 12 months</span>
+        <input name="prior_revenue" type="number" inputmode="decimal" min="0" step="1" />
+        <span class="field-hint">Leave 0 if younger than 24 months; the trend rows will show n/a.</span>
+      </label>
+      <label>
+        <span>S&amp;M, prior 12 months</span>
+        <input name="prior_sm" type="number" inputmode="decimal" min="0" step="1" />
+        <span class="field-hint"></span>
+      </label>
+      <label>
+        <span>G&amp;A, prior 12 months</span>
+        <input name="prior_ga" type="number" inputmode="decimal" min="0" step="1" />
+        <span class="field-hint"></span>
+      </label>
+    </fieldset>
+
+    <button type="submit">Run assessment</button>
+  </form>
+
+  <section class="assessment-results" data-results hidden>
+    <div class="verdict-banner" data-verdict-banner>
+      <h2 data-verdict-title></h2>
+      <p data-verdict-summary></p>
+    </div>
+
+    <h2>What investors will ask</h2>
+    <ul data-questions></ul>
+
+    <h2>Metrics behind the assessment</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Your value</th>
+          <th>Threshold</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody data-metrics></tbody>
+    </table>
+    <p class="assessment-caveat">Thresholds assume SMB/mid-market B2B with recurring or repeatable revenue. Burn multiple bands reflect market convention, not a formal institutional standard. Hardware figures are indicative.</p>
+  </section>
+
+  <section>
+    <p>Prefer a spreadsheet? <a href="/files/investor-readiness-assessment.xlsx">Download the Excel version.</a></p>
+    <p>This is the baseline. A full capital readiness review goes deeper: cap table, governance, structure, and the diligence file itself.</p>
+    <p><a href="mailto:gennady@menadd.com">gennady@menadd.com</a> · <a href="https://calendar.app.google/NHdtM4bGDWJgMDi16">book a call</a> · <a href="/library/cash/how-a-b2b-startup-survives-to-a-real-round/">source article</a></p>
+  </section>
+
+  <script is:inline>
+    const config = {
+      gmFloor: {
+        SaaS: 0.5,
+        Services: 0.4,
+        Hardware: 0.35,
+        "Hardware+Software": 0.45
+      },
+      paybackOk: {
+        SaaS: 18,
+        Services: 18,
+        Hardware: 24,
+        "Hardware+Software": 24
+      }
+    };
+
+    const verdictText = {
+      GREEN:
+        "Baseline metrics support an institutional conversation. Diligence will go deeper than this sheet, but you negotiate from strength.",
+      AMBER:
+        "Fundable trajectory with fixable gaps. Fix them before the raise, not during it: every open item below becomes a discount argument at the table.",
+      RED:
+        "At least one metric is in critical territory. Raising in this state means raising without leverage; the items below need structural work before an institutional process makes sense."
+    };
+
+    const questionRules = [
+      {
+        text:
+          "Margin structure: why is gross margin at or below the floor for your business type, and what is the path to Series A norms?",
+        test: (metrics) => ["Negative", "Below floor", "At floor"].includes(metrics.gmStatus)
+      },
+      {
+        text:
+          "Customer acquisition efficiency: why does CAC payback exceed the acceptable range, and what specifically changes it?",
+        test: (metrics) => ["Risk zone", "Problem", "Red zone"].includes(metrics.paybackStatus)
+      },
+      {
+        text: "Burn efficiency: why does it cost this much to generate one dollar of new ARR?",
+        test: (metrics) => ["Risk zone", "Red zone"].includes(metrics.bmStatus)
+      },
+      {
+        text: "Operating leverage: why have S&M and G&A not become more efficient as revenue grew?",
+        test: (metrics) => metrics.smLeverage === "No leverage" || metrics.gaLeverage === "No leverage"
+      },
+      {
+        text:
+          "Working capital management: who finances the gap between delivery and payment, and for how long?",
+        test: (metrics) => ["Financing clients", "Red zone"].includes(metrics.dsoStatus)
+      },
+      {
+        text: "Runway: what is the plan if the round takes nine months instead of four?",
+        test: (metrics) => ["Start raising now", "Distress zone"].includes(metrics.runwayStatus)
+      }
+    ];
+
+    const fallbackQuestion =
+      "No obvious red flags in the baseline metrics. Expect diligence to test the quality behind the numbers: cohort data, revenue recognition, cash conversion.";
+
+    const form = document.querySelector("[data-assessment-form]");
+    const errorsEl = document.querySelector("[data-form-errors]");
+    const warningEl = document.querySelector("[data-form-warning]");
+    const resultsEl = document.querySelector("[data-results]");
+    const verdictBanner = document.querySelector("[data-verdict-banner]");
+    const verdictTitle = document.querySelector("[data-verdict-title]");
+    const verdictSummary = document.querySelector("[data-verdict-summary]");
+    const questionsEl = document.querySelector("[data-questions]");
+    const metricsEl = document.querySelector("[data-metrics]");
+
+    const numberFields = [
+      "revenue",
+      "cogs",
+      "sm",
+      "ga",
+      "rd",
+      "net_burn",
+      "net_new_arr",
+      "new_customers",
+      "cash",
+      "ar"
+    ];
+    const priorFields = ["prior_revenue", "prior_sm", "prior_ga"];
+
+    function readNumber(data, key) {
+      const raw = String(data.get(key) || "").trim();
+      return raw === "" ? null : Number(raw);
+    }
+
+    function validate(values) {
+      const messages = [];
+
+      if (!(values.revenue > 0)) {
+        messages.push("Enter revenue above zero to run the assessment.");
+      }
+
+      for (const key of numberFields) {
+        if (values[key] === null || Number.isNaN(values[key]) || values[key] < 0) {
+          messages.push("Enter non-negative numbers for all required fields.");
+          break;
+        }
+      }
+
+      if (!Number.isInteger(values.new_customers) || values.new_customers < 0) {
+        messages.push("New customers acquired must be an integer at or above zero.");
+      }
+
+      const priorFilled = priorFields.filter((key) => values[key] !== null);
+      if (priorFilled.length > 0 && priorFilled.length < priorFields.length) {
+        messages.push("Fill all three prior-year fields, or leave all three empty.");
+      }
+
+      for (const key of priorFields) {
+        if (values[key] !== null && (Number.isNaN(values[key]) || values[key] < 0)) {
+          messages.push("Prior-year fields must be non-negative numbers.");
+          break;
+        }
+      }
+
+      return messages;
+    }
+
+    function statusColor(status) {
+      if (["On track", "Exceptional", "Improving", "Cash-flow positive", "Flat"].includes(status)) {
+        return "green";
+      }
+      if (["At floor", "Risk zone", "Financing clients", "Start raising now", "Monitor cash"].includes(status)) {
+        return "amber";
+      }
+      if (["Negative", "Below floor", "Problem", "Red zone", "No leverage", "Distress zone"].includes(status)) {
+        return "red";
+      }
+      return "grey";
+    }
+
+    function formatMoney(value) {
+      if (value === null) return "n/a";
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0
+      }).format(value);
+    }
+
+    function formatPercent(value) {
+      if (value === null) return "n/a";
+      return `${(value * 100).toFixed(1)}%`;
+    }
+
+    function formatMonths(value) {
+      if (value === null) return "n/a";
+      return `${value.toFixed(1)} months`;
+    }
+
+    function formatDays(value) {
+      return `${Math.round(value)} days`;
+    }
+
+    function formatMultiple(value) {
+      if (value === null) return "n/a";
+      return `${value.toFixed(1)}x`;
+    }
+
+    function leverageStatus(now, prior) {
+      if (prior === null) return "n/a";
+      if (now < prior - 0.03) return "Improving";
+      if (now > prior + 0.03) return "No leverage";
+      return "Flat";
+    }
+
+    function calculate(values) {
+      const floor = config.gmFloor[values.business_type];
+      const ok = config.paybackOk[values.business_type];
+      const gm = (values.revenue - values.cogs) / values.revenue;
+      const gmStatus = gm < 0 ? "Negative" : gm >= floor + 0.1 ? "On track" : gm >= floor ? "At floor" : "Below floor";
+      const cac = values.new_customers > 0 ? values.sm / values.new_customers : null;
+      const payback = values.net_new_arr > 0 && gm > 0 ? (values.sm / (values.net_new_arr * gm)) * 12 : null;
+      const paybackStatus =
+        payback === null ? "n/a" : payback <= ok ? "On track" : payback <= ok + 6 ? "Risk zone" : payback <= 36 ? "Problem" : "Red zone";
+      const burnMultiple = values.net_new_arr > 0 ? values.net_burn / values.net_new_arr : null;
+      const bmStatus =
+        burnMultiple === null ? "n/a" : burnMultiple < 1 ? "Exceptional" : burnMultiple <= 2 ? "On track" : burnMultiple <= 3 ? "Risk zone" : "Red zone";
+      const smPct = values.sm / values.revenue;
+      const gaPct = values.ga / values.revenue;
+      const priorSmPct = values.prior_revenue !== null && values.prior_revenue > 0 ? values.prior_sm / values.prior_revenue : null;
+      const priorGaPct = values.prior_revenue !== null && values.prior_revenue > 0 ? values.prior_ga / values.prior_revenue : null;
+      const smLeverage = leverageStatus(smPct, priorSmPct);
+      const gaLeverage = leverageStatus(gaPct, priorGaPct);
+      const dso = (values.ar / values.revenue) * 365;
+      const dsoStatus = dso < 30 ? "On track" : dso <= 60 ? "Monitor cash" : dso <= 90 ? "Financing clients" : "Red zone";
+      const runway = values.net_burn > 0 ? values.cash / (values.net_burn / 12) : null;
+      const runwayStatus =
+        runway === null ? "Cash-flow positive" : runway >= 12 ? "On track" : runway >= 6 ? "Start raising now" : "Distress zone";
+
+      const statuses = [gmStatus, paybackStatus, bmStatus, smLeverage, gaLeverage, dsoStatus, runwayStatus];
+      const critical =
+        gmStatus === "Negative" ||
+        paybackStatus === "Red zone" ||
+        bmStatus === "Red zone" ||
+        dsoStatus === "Red zone" ||
+        runwayStatus === "Distress zone";
+      const reds = statuses.filter((status) => ["Below floor", "Problem"].includes(status)).length;
+      const ambers = statuses.filter((status) =>
+        ["At floor", "Risk zone", "No leverage", "Financing clients", "Start raising now"].includes(status)
+      ).length;
+      const verdict = critical || reds >= 2 ? "RED" : reds === 1 || ambers >= 2 ? "AMBER" : "GREEN";
+
+      return {
+        floor,
+        ok,
+        gm,
+        gmStatus,
+        cac,
+        payback,
+        paybackStatus,
+        burnMultiple,
+        bmStatus,
+        smPct,
+        gaPct,
+        priorSmPct,
+        priorGaPct,
+        smLeverage,
+        gaLeverage,
+        dso,
+        dsoStatus,
+        runway,
+        runwayStatus,
+        verdict
+      };
+    }
+
+    function metricRows(metrics) {
+      return [
+        {
+          metric: "Gross margin",
+          value: formatPercent(metrics.gm),
+          threshold: `${formatPercent(metrics.floor)} floor`,
+          status: metrics.gmStatus
+        },
+        {
+          metric: "CAC (context only)",
+          value: formatMoney(metrics.cac),
+          threshold: "n/a",
+          status: "Context"
+        },
+        {
+          metric: "Indicative CAC payback (months)",
+          value: formatMonths(metrics.payback),
+          threshold: `${metrics.ok} months`,
+          status: metrics.paybackStatus
+        },
+        {
+          metric: "Burn multiple",
+          value: formatMultiple(metrics.burnMultiple),
+          threshold: "2.0x",
+          status: metrics.bmStatus
+        },
+        {
+          metric: "S&M % of revenue (now vs prior)",
+          value: formatPercent(metrics.smPct),
+          threshold: metrics.priorSmPct === null ? "n/a" : formatPercent(metrics.priorSmPct),
+          status: metrics.smLeverage
+        },
+        {
+          metric: "G&A % of revenue (now vs prior)",
+          value: formatPercent(metrics.gaPct),
+          threshold: metrics.priorGaPct === null ? "n/a" : formatPercent(metrics.priorGaPct),
+          status: metrics.gaLeverage
+        },
+        {
+          metric: "DSO, approximate (days)",
+          value: formatDays(metrics.dso),
+          threshold: "60 days",
+          status: metrics.dsoStatus
+        },
+        {
+          metric: "Runway (months)",
+          value: formatMonths(metrics.runway),
+          threshold: "12 months",
+          status: metrics.runwayStatus
+        }
+      ];
+    }
+
+    function render(metrics) {
+      verdictBanner.dataset.verdict = metrics.verdict.toLowerCase();
+      verdictTitle.textContent = `CAPITAL READINESS: ${metrics.verdict}`;
+      verdictSummary.textContent = verdictText[metrics.verdict];
+
+      const questions = questionRules.filter((rule) => rule.test(metrics)).map((rule) => rule.text);
+      questionsEl.innerHTML = "";
+      for (const question of questions.length ? questions : [fallbackQuestion]) {
+        const item = document.createElement("li");
+        item.textContent = question;
+        questionsEl.append(item);
+      }
+
+      metricsEl.innerHTML = "";
+      for (const row of metricRows(metrics)) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${row.metric}</td><td>${row.value}</td><td>${row.threshold}</td><td><span class="status-dot status-${statusColor(row.status)}"></span>${row.status}</td>`;
+        metricsEl.append(tr);
+      }
+
+      resultsEl.hidden = false;
+      resultsEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const values = {
+        business_type: String(data.get("business_type") || "SaaS")
+      };
+
+      for (const key of [...numberFields, ...priorFields]) {
+        values[key] = readNumber(data, key);
+      }
+
+      const validationMessages = validate(values);
+      errorsEl.innerHTML = "";
+      warningEl.textContent = "";
+
+      if (validationMessages.length) {
+        for (const message of validationMessages) {
+          const p = document.createElement("p");
+          p.textContent = message;
+          errorsEl.append(p);
+        }
+        resultsEl.hidden = true;
+        return;
+      }
+
+      if (values.cogs > values.revenue) {
+        warningEl.textContent = "Gross margin is negative.";
+      }
+
+      render(calculate(values));
+    });
+  </script>
+</Base>
