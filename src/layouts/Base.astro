@@ -12,6 +12,34 @@ type Props = {
 const { title, description, canonical = Astro.url.pathname, ogType = "website" } = Astro.props;
 const canonicalUrl = new URL(canonical, site.url).toString();
 const currentPath = Astro.url.pathname;
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "MENADD",
+  url: "https://menadd.com"
+};
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://menadd.com/about/#gennady",
+  name: "Gennady Shafir",
+  jobTitle: "CFO & Board Advisor",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Abu Dhabi",
+    addressCountry: "AE"
+  },
+  url: "https://menadd.com/about/",
+  sameAs: ["https://www.linkedin.com/in/gennadyshafir"],
+  knowsAbout: [
+    "cap tables",
+    "corporate governance",
+    "cross-border structuring",
+    "capital readiness",
+    "investor due diligence",
+    "startup finance"
+  ]
+};
 ---
 
 <!doctype html>
@@ -31,6 +59,9 @@ const currentPath = Astro.url.pathname;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+    <slot name="head" />
   </head>
   <body>
     <header class="site-header">

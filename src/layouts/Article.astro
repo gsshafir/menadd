@@ -12,15 +12,32 @@ type Props = {
 const { article } = Astro.props;
 const section = sections.find((item) => item.key === article.data.section);
 const href = `/library/${article.data.section}/${article.id}/`;
+const canonicalUrl = new URL(href, "https://menadd.com").toString();
 const formattedDate = article.data.date.toLocaleDateString("en", {
   year: "numeric",
   month: "long",
   day: "numeric"
 });
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: article.data.title,
+  description: article.data.description,
+  datePublished: article.data.date.toISOString(),
+  inLanguage: "en",
+  author: { "@id": "https://menadd.com/about/#gennady" },
+  publisher: {
+    "@type": "Organization",
+    name: "MENADD",
+    url: "https://menadd.com"
+  },
+  mainEntityOfPage: canonicalUrl
+};
 const { Content } = await render(article);
 ---
 
 <Base title={`${article.data.title} | MENADD`} description={article.data.description} canonical={href} ogType="article">
+  <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
   <article>
     <p class="eyebrow"><a href={`/library/${article.data.section}/`}>{section?.title}</a></p>
     <h1>{article.data.title}</h1>

@@ -221,6 +221,27 @@ p {
   margin-top: 1.25rem;
 }
 
+.assessment-cta-group {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem 1rem;
+  margin-top: 1.25rem;
+}
+
+.button-link {
+  background: var(--text);
+  border: 1px solid var(--text);
+  color: var(--bg);
+  display: inline-block;
+  padding: 0.62rem 0.9rem;
+  text-decoration: none;
+}
+
+.quiet-link {
+  display: inline-block;
+}
+
 .subscribe-block {
   border-top: 1px solid var(--rule);
   margin-top: 3rem;
@@ -426,5 +447,15 @@ button:disabled {
 
   .subscribe-form {
     flex-direction: column;
+  }
+
+  .assessment-cta-group {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .button-link {
+    text-align: center;
+    width: 100%;
   }
 }
