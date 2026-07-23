@@ -11,7 +11,7 @@ const articles = (await getCollection("articles", ({ data }) => !data.draft)).so
 <Base title={meta.library.title} description={meta.library.description} canonical="/library/">
   <section>
     <h1>The Diligence Library</h1>
-    <p class="lede">Diligence for MENA founders, organized the way a diligence report is organized: ownership, control, structure, cash, process.</p>
+    <p class="lede">A diligence report is organized in sections. So is this library: ownership, control, structure, cash, process. Each one covers what a reviewer will check, and what an investor-grade answer looks like.</p>
     <div class="section-list">
       {
         sections.map((section) => (
