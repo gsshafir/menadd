@@ -7,6 +7,12 @@ const section = sections.find((item) => item.key === "ownership")!;
 const articles = (await getCollection("articles", ({ data }) => data.section === "ownership" && !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+
+const intro = [
+  "Ownership diligence does not start with the percentage. It starts with whether the percentage is real. A cap table is a spreadsheet until the instruments behind it agree with it: the register of members, share certificates, board resolutions authorising each issuance, signed vesting agreements, every SAFE and convertible note still outstanding, and the side letters nobody filed. A reviewer rebuilds the table from those documents. When the rebuild does not match the spreadsheet, the spreadsheet is not the problem. The gap is.",
+  "The questions are the same in every deal. Were the shares actually issued, or only promised. Is founder equity subject to vesting, and did the cliff survive the last restructuring. What sits in the option pool: reserved, granted, exercised, and what was committed in an offer letter but never documented. Whether the plan issues real options or a phantom formula, and whether the entity can legally issue options at all. What converts at the next round, at what cap, at what discount, and in what order. Which anti-dilution provisions apply. Who can transfer shares, and who can block a transfer. In UAE structures, whether any holding sits with a nominee, and what document makes that reversible.",
+  "What gets flagged is rarely one missing document. It is the accumulation. A co-founder who left in month nine and kept everything. An uncapped SAFE signed for speed. A pool refreshed pre-money twice. A grant letter that promises shares and delivers a bonus. Each was a small administrative choice at the time. Together they decide what the founder actually receives at exit, after every preference has been paid. That number is rarely the one on the cap table."
+];
 ---
 
-<Section sectionKey="ownership" title={section.title} description={section.description} articles={articles} />
+<Section sectionKey="ownership" title={section.title} description={section.description} articles={articles} intro={intro} />

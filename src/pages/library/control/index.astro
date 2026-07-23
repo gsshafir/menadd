@@ -7,6 +7,12 @@ const section = sections.find((item) => item.key === "control")!;
 const articles = (await getCollection("articles", ({ data }) => data.section === "control" && !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+
+const intro = [
+  "Control diligence answers one question: who can make or block a material decision. Not who owns the most shares. The cap table comes first, but only as a map. It shows the share classes and where the voting blocks sit. What those holdings actually allow is written somewhere else: the shareholders agreement and its amendments, the articles, board and shareholder resolutions, side letters, the register of members. A reviewer reads them against each other, because they do not always agree.",
+  "The checklist does not change much between deals. Who appoints and removes each board seat, and what constitutes a quorum. Which matters require investor consent. What thresholds apply at board level and at shareholder level. Which protective provisions attach to which share class. Who receives what information, and on what schedule. How a deadlock is resolved. Where authority has been delegated, and who can sign on behalf of the company. How a founder can be removed, which is three separate questions: as a director, as an employee, and as a shareholder. In cross-border setups, where the control chain actually sits between the holding company and the operating entity.",
+  "What gets flagged is rarely a single clause. It is the accumulation. A veto granted at seed. A board seat conceded at Series A. A threshold lowered in a bridge round. Each was reasonable when it was signed. Together they mean the founder can no longer approve a budget, appoint an executive, raise the next round, or accept an offer without someone else's consent. By the time this shows up in diligence, it is already expensive."
+];
 ---
 
-<Section sectionKey="control" title={section.title} description={section.description} articles={articles} />
+<Section sectionKey="control" title={section.title} description={section.description} articles={articles} intro={intro} />

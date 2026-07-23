@@ -9,9 +9,10 @@ type Props = {
   title: string;
   description: string;
   articles: CollectionEntry<"articles">[];
+  intro?: string[];
 };
 
-const { sectionKey, title, description, articles } = Astro.props;
+const { sectionKey, title, description, articles, intro } = Astro.props;
 ---
 
 <Base title={meta[sectionKey].title} description={meta[sectionKey].description} canonical={`/library/${sectionKey}/`}>
@@ -19,6 +20,11 @@ const { sectionKey, title, description, articles } = Astro.props;
     <p class="eyebrow">The Diligence Library</p>
     <h1>{title}</h1>
     <p class="lede">{description}</p>
+    {intro && intro.length > 0 && (
+      <div class="section-intro">
+        {intro.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    )}
     <div class="article-list">
       {
         articles.map((article) => (

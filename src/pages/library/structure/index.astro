@@ -7,6 +7,12 @@ const section = sections.find((item) => item.key === "structure")!;
 const articles = (await getCollection("articles", ({ data }) => data.section === "structure" && !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+
+const intro = [
+  "Structure diligence does not ask whether the company exists. It asks whether this entity can hold outside capital. Those are different questions, and a setup built for licensing and invoicing usually answers only the first. A reviewer maps four things before anything else: which entity the investor would actually own shares in, which entity owns the intellectual property, which entity signs the revenue contracts, and which entity holds the cash. When those are four different companies in three jurisdictions with nothing written between them, the structure is not a structure. It is a set of accounts.",
+  "From there the review is mechanical. Whether the holding jurisdiction supports the instruments the round requires: preferred shares, options, and enforceable investor rights. Convertible instruments sit slightly apart. A SAFE or a note is a contract, and the question is not only whether it is enforceable, but whether conversion into shares can actually be executed in that entity when the priced round closes. Where the holdco is managed and controlled, which can matter more than where it is registered. What substance exists behind each entity, and whether it matches the tax position being claimed. Whether intercompany agreements exist for the flows that are already happening. How money moves between entities, on what documentation, and whether the banks have been told the same story. Which entity employs the team. Where the IP was assigned, and whether the assignment was ever signed. What the exit path looks like from this structure, and whether it survives the next jurisdiction the company enters.",
+  "What gets flagged is rarely one wrong jurisdiction. It is the accumulation. An entity opened where the license was fastest. A second one opened for a bank account. IP left with a founder personally. A holding company added later, above a chain nobody redrew. Each was the practical answer to a real problem that week. Together they mean the round cannot close on the entity the investor was introduced to, and restructuring under a term sheet happens at the moment the founder has the least leverage of the entire raise."
+];
 ---
 
-<Section sectionKey="structure" title={section.title} description={section.description} articles={articles} />
+<Section sectionKey="structure" title={section.title} description={section.description} articles={articles} intro={intro} />

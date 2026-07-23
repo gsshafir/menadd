@@ -7,6 +7,12 @@ const section = sections.find((item) => item.key === "cash")!;
 const articles = (await getCollection("articles", ({ data }) => data.section === "cash" && !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+
+const intro = [
+  "Cash diligence starts from the bank, not from the P&L. A reviewer takes the statements from every account, in every currency, and rebuilds the movement independently of the accounting. Then the two are compared. Revenue that was recognised but never collected shows up here. So does a receivable that has been open for four quarters, a related-party transfer described as a payment, and a balance that looks like runway but belongs to a tax account or a customer deposit. Profit is an accounting position. Cash is a fact, and it is the one that gets verified first.",
+  "The questions follow the cash, not the calendar. What the collection cycle actually is, measured from invoice to cleared funds rather than from contract signature. How concentrated receivables are, and what happens to the company if the largest client pays sixty days late. What working capital the current delivery plan consumes, and who finances it. Whether the backlog converts, at what historical rate, and on what margin. What the burn actually is once one-off items are normalised and delayed payables are added back. How many months of runway remain on that number, and whether the calculation assumes collections that have not happened yet. Which balances are unavailable: restricted, pledged, held against a facility, or sitting in an entity the operating company cannot draw from. Where a facility exists, what it costs to service and what covenants could pull it forward.",
+  "What gets flagged is rarely a single bad month. It is the accumulation. Growth funded by stretching suppliers. A payroll month covered by a client prepayment. A bridge taken to cover a receivable that was always going to be late. Each looked like a manageable timing problem. Together they describe a company that is financing its customers, and a founder who will start the raise with three months of cash instead of twelve. Runway is not a number. It is a negotiation position."
+];
 ---
 
-<Section sectionKey="cash" title={section.title} description={section.description} articles={articles} />
+<Section sectionKey="cash" title={section.title} description={section.description} articles={articles} intro={intro} />
