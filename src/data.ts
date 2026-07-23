@@ -37,7 +37,7 @@ export const sections = [
     title: "Structure & Jurisdiction",
     href: "/library/structure/",
     description:
-      "ADGM, DIFC, UAE mainland, offshore holdcos, cross-border setups. A company can be operational and still not be fundable. This section covers the gap between a structure that invoices and a structure that holds capital.",
+      "ADGM, DIFC, UAE mainland, offshore holdcos, cross-border setups. A company can be operational and still not be fundable. A structure that invoices is not a structure that holds capital.",
     short:
       "ADGM, DIFC, mainland, cross-border holdcos. A clean structure is not the same as a fundable structure."
   },
