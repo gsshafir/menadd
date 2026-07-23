@@ -55,9 +55,9 @@ export const sections = [
     title: "The MENA Process",
     href: "/library/process/",
     description:
-      "How a raise actually works in the UAE, Saudi Arabia, and the wider region. Trust sequences, family offices, timelines, and why a Silicon Valley playbook produces MENA-specific failure modes.",
+      "How a raise actually works in the UAE, Saudi Arabia, and the wider region. The trust process, family offices, timelines, and why a Silicon Valley playbook produces MENA-specific failure modes.",
     short:
-      "How a raise actually works in the region. Trust sequences, family offices, timelines."
+      "How a raise actually works in the region. The trust process, family offices, timelines."
   }
 ] as const;
 
