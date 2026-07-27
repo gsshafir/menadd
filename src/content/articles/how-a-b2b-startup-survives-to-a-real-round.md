@@ -6,6 +6,10 @@ date: 2026-07-10
 draft: false
 ---
 
+A B2B startup survives to a real round by fixing its unit economics before it scales, and by starting the raise while it still has twelve months of cash. Six numbers decide whether that is possible: gross margin, contribution margin, CAC payback, burn multiple, operating leverage, and working capital.
+
+What follows is what each one has to show, what to do when it does not, and how to run a round when debt already exists.
+
 *This article is written for B2B startups: companies that sell a product or service to other businesses. Within B2B, there are material differences: SaaS and software, professional services, and hardware or deep tech with physical production. Where the numbers diverge significantly, that is noted separately. If you are B2C or a marketplace, the underlying logic holds, but the benchmark values will differ.*
 
 ---
@@ -28,13 +32,13 @@ One thing needs to be understood from the beginning: this is not a fundraising p
 
 When a founder says "we need money," it usually means "our model does not generate enough cash to finance its own growth."
 
-Investor money does not fix broken economics. It accelerates them.
+Investor money does not fix negative contribution economics. It accelerates the cash consequences.
 
 If the company loses money on every customer, more customers means more losses. If the cost of delivery is high and does not decrease with scale, growth will make the problem visible, not solve it.
 
 Institutional Series A investors do not look only at revenue growth. They look at how much the company spends to produce that growth. This is why strong ARR numbers alongside broken unit economics do not get you funded.
 
-**You cannot scale a loss.**
+**You cannot sustainably scale negative unit economics.**
 
 ---
 
@@ -57,7 +61,7 @@ Before calculating, costs need to be properly separated. This is methodologicall
 | **COGS** | Hosting, infrastructure, customer support, implementation, delivery, components, manufacturing, logistics, warranty service | Sales, marketing, CEO salary, legal, accounting |
 | **S&M** | Sales team, marketing, outbound, paid acquisition, sales commissions | Support of existing customers, technical maintenance |
 | **G&A** | Finance, legal, HR, admin, office, back office | Anything related to product or customer |
-| **R&D** | Product and engineering team, development | Implementation and customization for a specific client: that is COGS |
+| **R&D** | Product and engineering team, development | Implementation and customisation for a specific client: that is COGS |
 
 > **A note on account management.** If it is retention and ongoing client service, it is COGS. If it is upsell and renewal sales, it is S&M. Many companies mix these. It is a methodological error that overstates gross margin and understates true CAC.
 
@@ -112,7 +116,7 @@ Contribution Margin = Revenue per Customer - Variable Serving Costs
 | Total serving costs | $33,000 |
 | **Contribution Margin** | **$17,000 (34%)** |
 
-34% for hardware is the survival floor, not the norm. At this margin, the company must show a clear path to 45%+ through volume, supply chain optimization, a service contract, or a software layer. 33% for SaaS is a catastrophe without exception.
+34% for hardware is the survival floor, not the norm. At this margin, the company must show a clear path to 45%+ through volume, supply chain optimisation, a service contract, or a software layer. 33% for SaaS is a catastrophe.
 
 If contribution margin is negative, every new customer increases the loss. That is not growth. That is managed destruction of capital. No volume of sales will fix it.
 
@@ -171,7 +175,7 @@ Burn Multiple is the primary filter used by institutional Series A investors. Mo
 Burn Multiple = Net Burn for Period / Net New ARR for Same Period
 ```
 
-Net Burn is how much cash the company spent net of receipts. Net New ARR is the increase in annualized revenue for the period. Calculated on a trailing 12-month basis.
+Net Burn is how much cash the company spent net of receipts. Net New ARR is the increase in annualised revenue for the period. Calculated on a trailing 12-month basis.
 
 > **For companies without recurring revenue** (hardware with project-based sales, one-time deliveries, deep tech) Net New ARR does not apply. Instead, look at gross profit growth for the period, or contracted recurring revenue if it exists. Otherwise the metric loses meaning.
 
@@ -231,11 +235,11 @@ This is operating leverage: the company grows faster than its costs.
 
 A B2B startup can show growing ARR while experiencing chronic cash shortages. The reason: money on the P&L and money in the bank live in different months.
 
-**Full working capital formula:**
+**Simplified operating working capital:**
 
 ```
-Net Working Capital = Accounts Receivable + Inventory + WIP
-                    - Accounts Payable - Deferred Revenue
+Operating Working Capital = Accounts Receivable + Inventory + WIP
+                          - Accounts Payable - Deferred Revenue
 ```
 
 **What this means in practice:**
@@ -263,7 +267,9 @@ DSO = Accounts Receivable / Revenue × Number of Days
 | 60–90 days | Actively financing customers |
 | 90+ days | Critical at high growth. Structural solution required |
 
-For hardware this is more acute than for SaaS: the company must purchase components and manufacture the product before the customer pays. The gap between cash out and cash in can be 90–120 days. At high growth, this demands ever more cash, regardless of paper profitability.
+Read DSO against your contractual payment terms and customer type rather than against the table alone. Government and large enterprise contracts run on structurally longer cycles, and a high DSO there is a financing question rather than a collection failure.
+
+For hardware this is more acute than for SaaS: the company must purchase components and manufacture the product before the customer pays. The gap between cash out and cash in can be 90–120 days. The same dynamic sits inside any large [backlog, where signed value and collected cash are separated by delivery](/library/cash/backlog-is-not-revenue/). At high growth, this demands ever more cash, regardless of paper profitability.
 
 What to do: invoice with upfront payment or milestone-based terms. Even 30% upfront changes the cash position materially. For hardware, consider accounts receivable factoring as a gap management tool.
 
@@ -279,7 +285,7 @@ When the numbers show a problem, that is not a reason to panic. It is a reason t
 
 **2.** Raise prices or repackage. Low gross margin usually means the company is selling enterprise value at SMB prices. This is a management decision, not a market constraint.
 
-**3.** Move implementation and customization into paid professional services. Free implementation is a hidden subsidy to the customer at the expense of margin.
+**3.** Move implementation and customisation into paid professional services. Free implementation is a hidden subsidy to the customer at the expense of margin.
 
 **4.** Reduce manual delivery. If every customer requires custom work, the business does not scale. Standardize onboarding, build playbooks, automate repeatable operations.
 
@@ -305,7 +311,7 @@ When the numbers show a problem, that is not a reason to panic. It is a reason t
 
 ## What to Do If You Are Already in Debt
 
-Chances are you are already here. Not at the point where they can build perfect economics from scratch. At the point where the debt exists, cash is running out, and a round is needed.
+Chances are you are already here. Not at the point where you can build perfect economics from scratch. At the point where the debt exists, cash is running out, and a round is needed.
 
 This is not the end. But it requires a different approach.
 
@@ -315,11 +321,11 @@ Before approaching investors, understand the nature of the debt. The investor wi
 
 | Type of debt | What it means | How the investor reads it |
 |---|---|---|
-| Delayed payroll | Cash gap with a working model | Neutral if explainable and being resolved |
+| Delayed payroll | Employee claim and potential regulatory exposure | Serious. Requires disclosure, a documented settlement and remediation before the round |
 | Supplier payables | Working capital problem | Neutral if not systemic |
 | Personal loans | No access to normal financing | Concerning. Explanation of terms required |
 | Convertible notes from angels | Professional instrument | Normal. Standard practice |
-| Debt secured by equity or assets | High risk for round structure | Red flag. Must be resolved before closing |
+| Debt secured by equity or assets | High risk for round structure | Must be disclosed and modelled, then released, refinanced or expressly accepted by the incoming investor |
 
 ### What to Do Before the Pitch
 
@@ -327,7 +333,7 @@ Before approaching investors, understand the nature of the debt. The investor wi
 - Agree on restructuring of delayed salaries, in writing, with a repayment schedule
 - Convert personal loans into convertible notes with clear terms, or lock in repayment from the round in the term sheet
 - Clear any obligations secured by equity before the round closes
-- Confirm the cap table is clean: all prior investors with documentation
+- Confirm the cap table is clean: every prior investor documented, and [no instrument that will surprise the new investor at conversion](/library/ownership/how-founders-lose-a-company-in-three-years/)
 
 ### How to Build the Narrative
 
@@ -341,7 +347,7 @@ A weak narrative is when the founder hides the debt history or cannot explain wh
 
 ### Structuring the Round When Debt Exists
 
-- Split the round into tranches: the first tranche covers critical obligations, the second goes to growth
+- If investors require tranches, model the conditions attached to each one and confirm the company survives if a later tranche is delayed or never funded
 - State the use of funds explicitly: X% to obligations, Y% to growth. Transparency is better than concealment
 - Negotiate with creditors to convert debt to equity at the round valuation. It cleans the balance sheet and signals their confidence
 - If the debt is to the team, offer a retention package tied to round closing
@@ -361,11 +367,11 @@ Debt is not inherently a bad instrument. It becomes fatal in a specific context.
 | Professional lender with clear terms | Loans from acquaintances with loose terms |
 | Finances growth after product-market fit | Finances the search for PMF at someone else's cost |
 
-**Practical check before taking debt:**
+**Screening test before taking debt.** This is a first-pass check, not a lender-grade debt capacity calculation:
 
 ```
-Debt Capacity = Predictable Gross Profit - Fixed Operating Costs
-              - Debt Service - Required Cash Buffer
+Headroom = Predictable Gross Profit - Fixed Operating Costs
+         - Debt Service - Required Cash Buffer
 ```
 
 If the result is negative or near zero, debt is not a bridge. It moves the crisis forward by a few months while increasing its cost.
@@ -382,7 +388,7 @@ Series A is not a rescue. It is the next growth instrument. You should arrive at
 
 **1. Start the process with 12 months of runway**
 
-B2B fundraising takes a minimum of 6–9 months done properly: material preparation, outreach, first meetings, due diligence, term sheet, closing. Most founders start with 3 months remaining. That is not a fundraise. That is a distress sale. The investor feels it, and pricing reflects it accordingly.
+A properly run B2B raise often takes 6–9 months: material preparation, outreach, first meetings, due diligence, term sheet, closing. In this region it frequently runs longer, because [the trust process that precedes the raise](/library/process/the-uae-raise-is-a-trust-process/) is measured in months of its own. Founders routinely start with 3 months remaining. That is not a fundraise. That is a distress sale. The investor feels it, and pricing reflects it accordingly.
 
 **2. Arrive with proven economics, not a forecast**
 
@@ -402,6 +408,8 @@ The strong Series A narrative: as we scale aggressively, our economics improve. 
 - Do not arrive without knowing your burn multiple and CAC payback. These are the first questions in any serious meeting
 
 ### The Final Formula
+
+For recurring-revenue software companies, the target profile looks like this. For project-based, services and hardware businesses, replace the ARR-based metrics with gross profit conversion, contract-level contribution margin and working capital requirements.
 
 ```
 Gross Margin at the right level for your business type
