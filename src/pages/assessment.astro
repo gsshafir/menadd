@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import SubscribeForm from "../components/SubscribeForm.astro";
 import { meta } from "../data";
 ---
 
@@ -129,6 +130,11 @@ import { meta } from "../data";
       <tbody data-metrics></tbody>
     </table>
     <p class="assessment-caveat">Thresholds assume SMB/mid-market B2B with recurring or repeatable revenue. Burn multiple bands reflect market convention, not a formal institutional standard. Hardware figures are indicative.</p>
+    <div class="verdict-cta" data-verdict-cta></div>
+    <SubscribeForm
+      sourcePage="/assessment/"
+      description="The metrics are the baseline. Diligence Notes covers what reviewers read next: cap tables, governance, structure in MENA. Sent when there is something worth sending."
+    />
   </section>
 
   <section>
@@ -160,6 +166,15 @@ import { meta } from "../data";
         "Fundable trajectory with fixable gaps. Fix them before the raise, not during it: every open item below becomes a discount argument at the table.",
       RED:
         "At least one metric is in critical territory. Raising in this state means raising without leverage; the items below need structural work before an institutional process makes sense."
+    };
+
+    const verdictCta = {
+      GREEN:
+        '<h2>Next step</h2><p>The baseline holds. The next layer is what diligence actually reads: cap table, governance, structure. Run the same discipline across those, starting with <a href="/library/ownership/">Ownership and Cap Table</a>. Or <a href="https://calendar.app.google/NHdtM4bGDWJgMDi16">book a 30-minute call</a> to pressure-test the full file before an investor does.</p>',
+      AMBER:
+        '<h2>Next step</h2><p>Every open item above becomes a discount argument at the table. A capital readiness review sequences the fixes before investors price them: what to fix, in what order, and what can wait. <a href="https://calendar.app.google/NHdtM4bGDWJgMDi16">Book a 30-minute call</a> and bring these numbers.</p>',
+      RED:
+        '<h2>Next step</h2><p>At least one metric needs structural work before an institutional raise makes sense. That work is specific: which number, what fixes it, and how long the fix takes. <a href="https://calendar.app.google/NHdtM4bGDWJgMDi16">Book a 30-minute call</a> and bring these numbers. The conversation is about the numbers, not a pitch.</p>'
     };
 
     const questionRules = [
@@ -365,6 +380,20 @@ import { meta } from "../data";
       };
     }
 
+    function weakestLink(metrics) {
+      if (["Start raising now", "Distress zone"].includes(metrics.runwayStatus))
+        return { href: "/library/cash/how-a-b2b-startup-survives-to-a-real-round/", label: "Runway and burn: how a B2B startup survives to a real round" };
+      if (["Financing clients", "Red zone"].includes(metrics.dsoStatus))
+        return { href: "/library/cash/backlog-is-not-revenue/", label: "Receivables and backlog: why signed value is not cash" };
+      if (["Risk zone", "Red zone"].includes(metrics.bmStatus))
+        return { href: "/library/cash/how-a-b2b-startup-survives-to-a-real-round/", label: "Burn multiple: the cost of a dollar of new ARR" };
+      if (["Negative", "Below floor", "At floor"].includes(metrics.gmStatus))
+        return { href: "/library/cash/how-a-b2b-startup-survives-to-a-real-round/", label: "Gross margin: the first number diligence tests" };
+      if (["Risk zone", "Problem", "Red zone"].includes(metrics.paybackStatus))
+        return { href: "/library/cash/how-a-b2b-startup-survives-to-a-real-round/", label: "CAC payback: what the acceptable range actually is" };
+      return null;
+    }
+
     function metricRows(metrics) {
       return [
         {
@@ -440,6 +469,15 @@ import { meta } from "../data";
 
       resultsEl.hidden = false;
       resultsEl.scrollIntoView({ behavior: "smooth", block: "start" });
+
+      const ctaEl = document.querySelector("[data-verdict-cta]");
+      if (ctaEl) ctaEl.innerHTML = verdictCta[metrics.verdict] || "";
+      const wl = weakestLink(metrics);
+      if (ctaEl && wl) {
+        const p = document.createElement("p");
+        p.innerHTML = 'Read the mechanics first: <a href="' + wl.href + '">' + wl.label + "</a>.";
+        ctaEl.append(p);
+      }
     }
 
     form.addEventListener("submit", (event) => {

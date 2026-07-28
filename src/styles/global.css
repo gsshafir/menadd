@@ -409,6 +409,10 @@ button:disabled {
   margin-top: 0.45rem;
 }
 
+.verdict-cta {
+  margin-top: 2rem;
+}
+
 .status-dot {
   border-radius: 50%;
   display: inline-block;

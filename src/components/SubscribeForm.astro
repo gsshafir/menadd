@@ -2,19 +2,21 @@
 type Props = {
   sourcePage?: string;
   quiet?: boolean;
+  description?: string;
 };
 
-const { sourcePage = Astro.url.pathname, quiet = false } = Astro.props;
+const {
+  sourcePage = Astro.url.pathname,
+  quiet = false,
+  description = "Periodic notes on diligence, cap tables, governance and structure in MENA. Sent when there is something worth sending."
+} = Astro.props;
 ---
 
 <section class="subscribe-block" aria-labelledby="subscribe-title">
   <h2 id="subscribe-title">Diligence Notes</h2>
   {
     !quiet && (
-      <p>
-        Periodic notes on diligence, cap tables, governance and structure in MENA.
-        Sent when there is something worth sending.
-      </p>
+      <p>{description}</p>
     )
   }
   <form class="subscribe-form" action="/api/subscribe" method="post" data-subscribe-form>
