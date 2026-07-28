@@ -9,6 +9,7 @@ import { meta } from "../data";
     <p>Thirteen numbers and a business type. One verdict, and the questions investors will ask when they see your metrics. Designed for B2B companies with recurring or repeatable revenue. All calculations run in your browser; nothing you enter is sent or stored anywhere.</p>
   </section>
 
+  <p class="field-hint">Enter all monetary values in USD.</p>
   <form class="assessment-form" data-assessment-form novalidate>
     <div class="form-errors" data-form-errors aria-live="polite"></div>
     <div class="form-warning" data-form-warning aria-live="polite"></div>
@@ -30,41 +31,36 @@ import { meta } from "../data";
     <fieldset>
       <legend>P&amp;L, trailing 12 months</legend>
       <label>
-        <span>Revenue</span>
+        <span>Revenue (USD)</span>
         <input name="revenue" type="number" inputmode="decimal" min="0" step="1" />
         <span class="field-hint">Total recognized revenue, last 12 months. Must be above zero for the assessment to run.</span>
       </label>
       <label>
-        <span>COGS (cost of serving customers)</span>
+        <span>COGS (cost of serving customers) (USD)</span>
         <input name="cogs" type="number" inputmode="decimal" min="0" step="1" />
         <span class="field-hint">Hosting, support, implementation, components, manufacturing, logistics, warranty. NOT sales or admin.</span>
       </label>
       <label>
-        <span>Sales &amp; Marketing (S&amp;M)</span>
+        <span>Sales &amp; Marketing (S&amp;M) (USD)</span>
         <input name="sm" type="number" inputmode="decimal" min="0" step="1" />
         <span class="field-hint">Sales team, marketing, outbound, paid acquisition, commissions.</span>
       </label>
       <label>
-        <span>General &amp; Administrative (G&amp;A)</span>
+        <span>General &amp; Administrative (G&amp;A) (USD)</span>
         <input name="ga" type="number" inputmode="decimal" min="0" step="1" />
         <span class="field-hint">Finance, legal, HR, admin, office.</span>
-      </label>
-      <label>
-        <span>R&amp;D (product &amp; engineering)</span>
-        <input name="rd" type="number" inputmode="decimal" min="0" step="1" />
-        <span class="field-hint">Client-specific implementation belongs in COGS, not here.</span>
       </label>
     </fieldset>
 
     <fieldset>
       <legend>Cash and growth, same 12 months</legend>
       <label>
-        <span>Net burn</span>
+        <span>Net burn (USD)</span>
         <input name="net_burn" type="number" inputmode="decimal" min="0" step="1" />
         <span class="field-hint">Cash out minus cash in. Positive number; 0 if cash-flow positive.</span>
       </label>
       <label>
-        <span>Net new recurring / repeatable revenue (ARR)</span>
+        <span>Net new recurring / repeatable revenue (ARR) (USD)</span>
         <input name="net_new_arr" type="number" inputmode="decimal" min="0" step="1" />
         <span class="field-hint">Increase in annualized recurring (or demonstrably repeatable) revenue over the period. If your revenue is one-off projects only, this tool will misread you: talk to us instead.</span>
       </label>
@@ -74,7 +70,7 @@ import { meta } from "../data";
         <span class="field-hint">Used only for the CAC context figure; does not drive the assessment.</span>
       </label>
       <label>
-        <span>Cash balance today</span>
+        <span>Cash balance today (USD)</span>
         <input name="cash" type="number" inputmode="decimal" min="0" step="1" />
         <span class="field-hint">All bank accounts combined.</span>
       </label>
@@ -83,7 +79,7 @@ import { meta } from "../data";
     <fieldset>
       <legend>Working capital, today</legend>
       <label>
-        <span>Accounts receivable (AR)</span>
+        <span>Accounts receivable (AR) (USD)</span>
         <input name="ar" type="number" inputmode="decimal" min="0" step="1" />
         <span class="field-hint">Invoiced but not yet paid.</span>
       </label>
@@ -92,17 +88,17 @@ import { meta } from "../data";
     <fieldset>
       <legend>Prior year (optional, for operating leverage)</legend>
       <label>
-        <span>Revenue, prior 12 months</span>
+        <span>Revenue, prior 12 months (USD)</span>
         <input name="prior_revenue" type="number" inputmode="decimal" min="0" step="1" />
         <span class="field-hint">Leave 0 if younger than 24 months; the trend rows will show n/a.</span>
       </label>
       <label>
-        <span>S&amp;M, prior 12 months</span>
+        <span>S&amp;M, prior 12 months (USD)</span>
         <input name="prior_sm" type="number" inputmode="decimal" min="0" step="1" />
         <span class="field-hint"></span>
       </label>
       <label>
-        <span>G&amp;A, prior 12 months</span>
+        <span>G&amp;A, prior 12 months (USD)</span>
         <input name="prior_ga" type="number" inputmode="decimal" min="0" step="1" />
         <span class="field-hint"></span>
       </label>
@@ -214,7 +210,6 @@ import { meta } from "../data";
       "cogs",
       "sm",
       "ga",
-      "rd",
       "net_burn",
       "net_new_arr",
       "new_customers",

@@ -13,6 +13,8 @@ const { article } = Astro.props;
 const section = sections.find((item) => item.key === article.data.section);
 const href = `/library/${article.data.section}/${article.id}/`;
 const canonicalUrl = new URL(href, "https://menadd.com").toString();
+const ogImage = "/og-default.png";
+const ogImageUrl = new URL(ogImage, "https://menadd.com").toString();
 const formattedDate = article.data.date.toLocaleDateString("en", {
   year: "numeric",
   month: "long",
@@ -31,12 +33,13 @@ const articleJsonLd = {
     name: "MENADD",
     url: "https://menadd.com"
   },
-  mainEntityOfPage: canonicalUrl
+  mainEntityOfPage: canonicalUrl,
+  image: ogImageUrl
 };
 const { Content } = await render(article);
 ---
 
-<Base title={`${article.data.title} | MENADD`} description={article.data.description} canonical={href} ogType="article">
+<Base title={`${article.data.title} | MENADD`} description={article.data.description} canonical={href} ogType="article" ogImage={ogImage}>
   <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
   <article>
     <p class="eyebrow"><a href={`/library/${article.data.section}/`}>{section?.title}</a></p>

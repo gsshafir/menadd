@@ -7,10 +7,20 @@ type Props = {
   description: string;
   canonical?: string;
   ogType?: "website" | "article";
+  ogImage?: string;
+  noindex?: boolean;
 };
 
-const { title, description, canonical = Astro.url.pathname, ogType = "website" } = Astro.props;
+const {
+  title,
+  description,
+  canonical = Astro.url.pathname,
+  ogType = "website",
+  ogImage = "/og-default.png",
+  noindex = false
+} = Astro.props;
 const canonicalUrl = new URL(canonical, site.url).toString();
+const ogImageUrl = new URL(ogImage, site.url).toString();
 const currentPath = Astro.url.pathname;
 const websiteJsonLd = {
   "@context": "https://schema.org",
@@ -49,13 +59,18 @@ const personJsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content={site.name} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="MENADD. Investor-grade structure for MENA founders." />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -81,9 +96,11 @@ const personJsonLd = {
     </main>
     <footer class="site-footer">
       <div>{site.positioning}</div>
+      <div>MENADD provides general information, not legal, tax or investment advice. Take advice for your own company and jurisdiction before acting.</div>
       <div class="footer-links">
         <a href={site.linkedIn}>LinkedIn</a>
         <a href="/notes/">Subscribe</a>
+        <a href="/privacy/">Privacy</a>
         <span>Copyright {new Date().getFullYear()} MENADD</span>
       </div>
     </footer>

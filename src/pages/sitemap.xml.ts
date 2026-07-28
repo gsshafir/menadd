@@ -10,6 +10,7 @@ export async function GET() {
     "/assessment/",
     "/about/",
     "/notes/",
+    "/privacy/",
     ...articles.map((article) => `/library/${article.data.section}/${article.id}/`)
   ];
 
