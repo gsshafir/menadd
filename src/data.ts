@@ -100,7 +100,7 @@ export const meta = {
   assessment: {
     title: "Investor Readiness Assessment | MENADD",
     description:
-      "A 3-minute baseline diagnostic for B2B founders: 13 numbers, one verdict, and the questions investors will ask in diligence."
+      "A 3-minute baseline diagnostic for B2B founders: 12 numbers, one verdict, and the questions investors will ask in diligence."
   },
   about: {
     title: "About | MENADD",
