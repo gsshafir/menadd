@@ -3,6 +3,8 @@ title: "The UAE Raise Is a Trust Process"
 description: "The process differs by who is writing the cheque. How to tell interest from process, and why the term sheet is not the end."
 section: process
 date: 2026-07-01
+updated: 2026-07-28
+seoTitle: "The UAE Raise Is a Trust Process"
 draft: false
 ---
 

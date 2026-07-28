@@ -3,6 +3,8 @@ title: "How a B2B Startup Survives Long Enough to Raise a Real Round"
 description: "The financial formula from pre-seed to institutional capital: gross margin, burn multiple, CAC payback, working capital, and raising with debt."
 section: cash
 date: 2026-07-10
+updated: 2026-07-28
+seoTitle: "B2B Startup Economics Before a Real Round"
 draft: false
 ---
 

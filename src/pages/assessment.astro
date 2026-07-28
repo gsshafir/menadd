@@ -6,7 +6,7 @@ import { meta } from "../data";
 <Base title={meta.assessment.title} description={meta.assessment.description} canonical="/assessment/">
   <section>
     <h1>Investor Readiness Assessment</h1>
-    <p>Thirteen numbers and a business type. One verdict, and the questions investors will ask when they see your metrics. Designed for B2B companies with recurring or repeatable revenue. All calculations run in your browser; nothing you enter is sent or stored anywhere.</p>
+    <p>Twelve numbers and a business type. One verdict, and the questions investors will ask when they see your metrics. Designed for B2B companies with recurring or repeatable revenue. All calculations run in your browser; nothing you enter is sent or stored anywhere.</p>
   </section>
 
   <p class="field-hint">Enter all monetary values in USD.</p>
@@ -72,7 +72,7 @@ import { meta } from "../data";
       <label>
         <span>Cash balance today (USD)</span>
         <input name="cash" type="number" inputmode="decimal" min="0" step="1" />
-        <span class="field-hint">All bank accounts combined.</span>
+        <span class="field-hint">Available operating cash across all accounts. Exclude restricted, pledged and customer funds.</span>
       </label>
     </fieldset>
 
@@ -81,7 +81,7 @@ import { meta } from "../data";
       <label>
         <span>Accounts receivable (AR) (USD)</span>
         <input name="ar" type="number" inputmode="decimal" min="0" step="1" />
-        <span class="field-hint">Invoiced but not yet paid.</span>
+        <span class="field-hint">Approximation based on ending receivables and annual revenue.</span>
       </label>
     </fieldset>
 
@@ -404,7 +404,7 @@ import { meta } from "../data";
           status: metrics.gaLeverage
         },
         {
-          metric: "DSO, approximate (days)",
+          metric: "AR days (proxy)",
           value: formatDays(metrics.dso),
           threshold: "60 days",
           status: metrics.dsoStatus

@@ -3,6 +3,7 @@ title: "Valuation Makes Headlines. Control Shifts Quietly."
 description: "Control usually moves through board seats, consent rights and thresholds that each looked reasonable when signed. Where it actually goes."
 section: control
 date: 2026-07-01
+updated: 2026-07-28
 draft: false
 ---
 

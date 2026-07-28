@@ -3,6 +3,7 @@ title: "Which Entity a Round Actually Closes Into"
 description: "Mainland LLC, ADGM, DIFC or an offshore holdco. Which one an institutional round accepts, why, and what a restructuring mid-deal costs."
 section: structure
 date: 2026-07-01
+updated: 2026-07-28
 draft: false
 ---
 

@@ -3,6 +3,7 @@ title: "How Founders Lose a Company in Three Years"
 description: "A cap table scenario with the arithmetic shown: capped SAFEs, pool shuffle, a bridge with full ratchet, a recapitalisation. Six decisions."
 section: ownership
 date: 2026-07-01
+updated: 2026-07-28
 draft: false
 ---
 

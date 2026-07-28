@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { render } from "astro:content";
 import Base from "./Base.astro";
 import SubscribeForm from "../components/SubscribeForm.astro";
 import { sections } from "../data";
@@ -13,6 +12,7 @@ const { article } = Astro.props;
 const section = sections.find((item) => item.key === article.data.section);
 const href = `/library/${article.data.section}/${article.id}/`;
 const canonicalUrl = new URL(href, "https://menadd.com").toString();
+const seoTitle = article.data.seoTitle ?? article.data.title;
 const ogImage = "/og-default.png";
 const ogImageUrl = new URL(ogImage, "https://menadd.com").toString();
 const modifiedDate = article.data.updated ?? article.data.date;
@@ -38,10 +38,19 @@ const articleJsonLd = {
   mainEntityOfPage: canonicalUrl,
   image: ogImageUrl
 };
-const { Content } = await render(article);
+const articleImageDimensions: Record<string, { width: number; height: number }> = {
+  "/images/founder-ownership-chart.png": { width: 2188, height: 1295 }
+};
+const articleHtml = (article.rendered?.html ?? "").replace(/<img\b([^>]*)>/g, (_, attributes: string) => {
+  const src = attributes.match(/\bsrc="([^"]+)"/)?.[1];
+  const dimensions = src ? articleImageDimensions[src] : undefined;
+  const sizeAttributes = dimensions ? ` width="${dimensions.width}" height="${dimensions.height}"` : "";
+
+  return `<img loading="lazy" decoding="async"${sizeAttributes}${attributes}>`;
+});
 ---
 
-<Base title={`${article.data.title} | MENADD`} description={article.data.description} canonical={href} ogType="article" ogImage={ogImage}>
+<Base title={`${seoTitle} | MENADD`} description={article.data.description} canonical={href} ogType="article" ogImage={ogImage}>
   <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
   <article>
     <p class="eyebrow"><a href={`/library/${article.data.section}/`}>{section?.title}</a></p>
@@ -50,11 +59,11 @@ const { Content } = await render(article);
     <p class="article-meta">{formattedDate}</p>
     <p class="article-meta">By <a href="/about/">Gennady Shafir</a>, CFO and Board Advisor</p>
     <div class="article-body">
-      <Content />
+      <Fragment set:html={articleHtml} />
     </div>
     <section>
       <h2>Before your next round</h2>
-      <p>Thirteen numbers, one verdict, and the questions investors will ask.</p>
+      <p>Twelve numbers, one verdict, and the questions investors will ask.</p>
       <a class="button-link" href="/assessment/">Run the assessment</a>
     </section>
     <SubscribeForm sourcePage={href} quiet />

@@ -27,8 +27,33 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return json("Subscription storage is not configured yet.", 500);
   }
 
+  const clientIp = request.headers.get("CF-Connecting-IP")?.trim();
+  const rateLimitKey = clientIp ? `ratelimit:${clientIp}` : null;
+  let rateLimitCount: number | null = null;
+
+  if (rateLimitKey) {
+    try {
+      const storedCount = await env.SUBSCRIBERS.get(rateLimitKey);
+      rateLimitCount = Number(storedCount || "0");
+
+      if (rateLimitCount >= 5) {
+        return json("Too many requests. Please try again later.", 429);
+      }
+    } catch {
+      rateLimitCount = null;
+    }
+  }
+
   const timestamp = new Date().toISOString();
   await env.SUBSCRIBERS.put(`subscriber:${email}`, JSON.stringify({ email, timestamp, source_page: sourcePage }));
+
+  if (rateLimitKey && rateLimitCount !== null) {
+    try {
+      await env.SUBSCRIBERS.put(rateLimitKey, String(rateLimitCount + 1), { expirationTtl: 3600 });
+    } catch {
+      // Rate limiting fails open so storage issues do not block a valid subscription.
+    }
+  }
 
   return json(successMessage, 200);
 };

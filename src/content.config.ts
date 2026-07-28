@@ -6,6 +6,7 @@ const articles = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/articles" }),
   schema: z.object({
     title: z.string(),
+    seoTitle: z.string().optional(),
     description: z.string(),
     section: z.enum(["ownership", "control", "structure", "cash", "process"]),
     date: z.coerce.date(),

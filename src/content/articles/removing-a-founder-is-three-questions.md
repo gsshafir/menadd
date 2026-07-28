@@ -3,6 +3,7 @@ title: "Removing a Founder Is Three Questions, Not One"
 description: "Corporate office, service relationship, equity. Three separate capacities, different rules by jurisdiction, and the clause that connects them."
 section: control
 date: 2026-07-25
+updated: 2026-07-28
 draft: false
 ---
 

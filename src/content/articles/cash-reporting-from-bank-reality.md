@@ -3,6 +3,7 @@ title: "Cash Flow Reporting Should Start from Bank Reality"
 description: "Early-stage companies do not need a finance system first. They need cash reporting built from bank exports, and the reaction time it buys."
 section: cash
 date: 2026-07-01
+updated: 2026-07-28
 draft: false
 ---
 

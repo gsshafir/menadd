@@ -3,6 +3,7 @@ title: "What Founders Actually Own: Reading the Carta 2026 Data From a Structuri
 description: "Carta 2026: founding teams fall from 82.5% at pre-seed to 10.4% at Series D. What each stage tests in your structure, and where MENA differs."
 section: ownership
 date: 2026-07-19
+seoTitle: "What Founders Actually Own: Carta 2026 Data"
 draft: false
 ---
 

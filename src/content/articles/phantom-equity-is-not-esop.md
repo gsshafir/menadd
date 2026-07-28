@@ -3,6 +3,7 @@ title: "Phantom Equity Is Not ESOP"
 description: "Phantom equity is a right to cash, not a right to shares. What UAE onshore LLCs can and cannot issue, what ADGM and DIFC allow, and the cost at exit."
 section: ownership
 date: 2026-07-01
+updated: 2026-07-28
 draft: false
 ---
 

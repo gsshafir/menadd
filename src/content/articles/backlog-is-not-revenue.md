@@ -3,6 +3,7 @@ title: "Your $80M Backlog Is Not $80M Revenue"
 description: "Backlog is a claim on future execution. The four risks between a signed number and collected cash, and when a backlog becomes a liquidity problem."
 section: cash
 date: 2026-07-01
+updated: 2026-07-28
 draft: false
 ---
 

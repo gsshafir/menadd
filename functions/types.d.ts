@@ -1,5 +1,6 @@
 type KVNamespace = {
-  put(key: string, value: string): Promise<void>;
+  get(key: string): Promise<string | null>;
+  put(key: string, value: string, options?: { expirationTtl?: number }): Promise<void>;
 };
 
 type PagesFunction<Env = unknown> = (context: {
