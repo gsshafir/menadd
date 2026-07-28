@@ -12,7 +12,7 @@ Startups do not need a finance system first. They need to know where the cash is
 
 ## The questions that actually matter
 
-Founders do not need a beautiful finance dashboard. They need answers to six questions:
+Founders do not need a beautiful finance dashboard. They need answers to seven questions:
 
 Where is the cash? Where is it going? Which account creates the problem? Which inflows are real? Which outflows are recurring? Which transfers are only money moving between the company's own accounts? And which balances can actually fund operations, as opposed to sitting restricted, pledged, held for tax, or received on behalf of a client?
 
@@ -20,7 +20,7 @@ The reality behind those questions is messy: multiple banks, multiple currencies
 
 ## Why the bank statement is the right source
 
-Every early-stage finance discussion eventually proposes a system: accounting software, a BI dashboard, an integration project. All of it is premature if the company cannot yet answer the six questions above.
+Every early-stage finance discussion eventually proposes a system: accounting software, a BI dashboard, an integration project. All of it is premature if the company cannot yet answer the seven questions above.
 
 The bank statement is where cash reality starts. It is factual, it exists today for every company in every jurisdiction, and it needs no implementation. It is complete for cleared movements inside the accounts you include, which is not the same as a complete view of what is owed, what is still with a payment processor, or what has not cleared yet. Revenue can be a matter of accounting judgement, and [a signed contract is a claim rather than cash](/library/cash/backlog-is-not-revenue/). A bank statement is neither.
 
