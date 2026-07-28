@@ -9,6 +9,7 @@ const articles = defineCollection({
     description: z.string(),
     section: z.enum(["ownership", "control", "structure", "cash", "process"]),
     date: z.coerce.date(),
+    updated: z.coerce.date().optional(),
     draft: z.boolean().default(false)
   })
 });

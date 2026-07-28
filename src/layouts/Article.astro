@@ -15,6 +15,7 @@ const href = `/library/${article.data.section}/${article.id}/`;
 const canonicalUrl = new URL(href, "https://menadd.com").toString();
 const ogImage = "/og-default.png";
 const ogImageUrl = new URL(ogImage, "https://menadd.com").toString();
+const modifiedDate = article.data.updated ?? article.data.date;
 const formattedDate = article.data.date.toLocaleDateString("en", {
   year: "numeric",
   month: "long",
@@ -26,6 +27,7 @@ const articleJsonLd = {
   headline: article.data.title,
   description: article.data.description,
   datePublished: article.data.date.toISOString(),
+  dateModified: modifiedDate.toISOString(),
   inLanguage: "en",
   author: { "@id": "https://menadd.com/about/#gennady" },
   publisher: {
@@ -46,9 +48,15 @@ const { Content } = await render(article);
     <h1>{article.data.title}</h1>
     <p class="lede">{article.data.description}</p>
     <p class="article-meta">{formattedDate}</p>
+    <p class="article-meta">By <a href="/about/">Gennady Shafir</a>, CFO and Board Advisor</p>
     <div class="article-body">
       <Content />
     </div>
+    <section>
+      <h2>Before your next round</h2>
+      <p>Thirteen numbers, one verdict, and the questions investors will ask.</p>
+      <a class="button-link" href="/assessment/">Run the assessment</a>
+    </section>
     <SubscribeForm sourcePage={href} quiet />
   </article>
 </Base>

@@ -157,8 +157,9 @@ p {
 }
 
 .section-entry h3,
-.article-entry h3,
+.article-entry h2,
 .artifact-entry h3 {
+  font-size: 1.05rem;
   margin-top: 0;
 }
 

@@ -22,6 +22,8 @@ const {
 const canonicalUrl = new URL(canonical, site.url).toString();
 const ogImageUrl = new URL(ogImage, site.url).toString();
 const currentPath = Astro.url.pathname;
+const isCurrentNavItem = (href: string) =>
+  href === "/library/" ? currentPath.startsWith("/library") : currentPath === href;
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -84,7 +86,7 @@ const personJsonLd = {
       <nav class="site-nav" aria-label="Main navigation">
         {
           nav.map((item) => (
-            <a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>
+            <a href={item.href} aria-current={isCurrentNavItem(item.href) ? "page" : undefined}>
               {item.label}
             </a>
           ))

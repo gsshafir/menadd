@@ -29,9 +29,9 @@ const { sectionKey, title, description, articles, intro } = Astro.props;
       {
         articles.map((article) => (
           <article class="article-entry">
-            <h3>
+            <h2>
               <a href={`/library/${article.data.section}/${article.id}/`}>{article.data.title}</a>
-            </h3>
+            </h2>
             <p>{article.data.description}</p>
           </article>
         ))
