@@ -129,6 +129,10 @@ import { meta } from "../data";
       </thead>
       <tbody data-metrics></tbody>
     </table>
+    <div class="copy-summary">
+      <button type="button" data-copy-summary>Copy summary</button>
+      <span class="field-hint" data-copy-status aria-live="polite"></span>
+    </div>
     <p class="assessment-caveat">Thresholds assume SMB/mid-market B2B with recurring or repeatable revenue. Burn multiple bands reflect market convention, not a formal institutional standard. Hardware figures are indicative.</p>
     <div class="verdict-cta" data-verdict-cta></div>
     <SubscribeForm
@@ -219,6 +223,7 @@ import { meta } from "../data";
     const verdictSummary = document.querySelector("[data-verdict-summary]");
     const questionsEl = document.querySelector("[data-questions]");
     const metricsEl = document.querySelector("[data-metrics]");
+    let lastMetrics = null;
 
     const numberFields = [
       "revenue",
@@ -394,6 +399,25 @@ import { meta } from "../data";
       return null;
     }
 
+    function buildSummary(metrics) {
+      const lines = [];
+      lines.push("CAPITAL READINESS: " + metrics.verdict);
+      lines.push(verdictText[metrics.verdict]);
+      lines.push("");
+      lines.push("Metrics:");
+      for (const row of metricRows(metrics)) {
+        lines.push("- " + row.metric + ": " + row.value + " (threshold " + row.threshold + ") - " + row.status);
+      }
+      lines.push("");
+      lines.push("What investors will ask:");
+      const qs = questionRules.filter((r) => r.test(metrics)).map((r) => r.text);
+      for (const q of qs.length ? qs : [fallbackQuestion]) lines.push("- " + q);
+      lines.push("");
+      lines.push("Run your own numbers: https://menadd.com/assessment/");
+      lines.push("MENADD. Investor-grade structure for MENA founders.");
+      return lines.join("\n");
+    }
+
     function metricRows(metrics) {
       return [
         {
@@ -480,6 +504,42 @@ import { meta } from "../data";
       }
     }
 
+    const copyBtn = document.querySelector("[data-copy-summary]");
+    const copyStatus = document.querySelector("[data-copy-status]");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", async () => {
+        if (!lastMetrics) return;
+        const text = buildSummary(lastMetrics);
+        let ok = false;
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            ok = true;
+          }
+        } catch (e) {
+          ok = false;
+        }
+        if (!ok) {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "fixed";
+          ta.style.left = "-9999px";
+          document.body.append(ta);
+          ta.select();
+          try {
+            ok = document.execCommand("copy");
+          } catch (e) {
+            ok = false;
+          }
+          ta.remove();
+        }
+        copyStatus.textContent = ok
+          ? "Copied. Paste it to your co-founder or your finance lead."
+          : "Copy failed. Select the results and copy manually.";
+      });
+    }
+
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       const data = new FormData(form);
@@ -509,7 +569,9 @@ import { meta } from "../data";
         warningEl.textContent = "Gross margin is negative.";
       }
 
-      render(calculate(values));
+      const metrics = calculate(values);
+      lastMetrics = metrics;
+      render(metrics);
     });
   </script>
 </Base>

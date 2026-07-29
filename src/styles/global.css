@@ -409,6 +409,24 @@ button:disabled {
   margin-top: 0.45rem;
 }
 
+.copy-summary {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1rem;
+  margin-top: 1rem;
+}
+
+.copy-summary button {
+  background: transparent;
+  border: 0;
+  color: var(--accent);
+  padding: 0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
 .verdict-cta {
   margin-top: 2rem;
 }
