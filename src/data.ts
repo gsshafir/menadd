@@ -105,7 +105,7 @@ export const meta = {
   about: {
     title: "About | MENADD",
     description:
-      "Written by a CFO and board advisor based in Abu Dhabi, with a decade of operating experience inside venture-backed companies."
+      "Gennady Shafir, CFO and board advisor in Abu Dhabi. Board work on cap tables, control and cross-border structure for MENA founders."
   },
   notes: {
     title: "Diligence Notes | MENADD",
