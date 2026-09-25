@@ -28,6 +28,14 @@ function fill(template, values) {
   );
 }
 
+function countLabel(count, singular, plural) {
+  return `${count} ${count === 1 ? singular : plural}`;
+}
+
+function lowercaseFirstWord(text) {
+  return text.replace(/^[A-Z]/, (letter) => letter.toLowerCase());
+}
+
 export function evaluateStructureAssessment(answers) {
   const triggered = findingLibrary
     .map((finding, order) => ({ finding, order }))
@@ -45,19 +53,23 @@ export function evaluateStructureAssessment(answers) {
   const unknowns = questions.filter(
     (question) => question.id !== "entity_jurisdiction" && answers[question.id] === "unsure"
   ).length;
-  const highCount = findings.filter((finding) => finding.severity === "high").length;
+  const issues = findings.filter((finding) => finding.severity === "high");
+  const points = findings.filter((finding) => finding.severity !== "high");
+  const highCount = issues.length;
   const mediumCount = findings.filter((finding) => finding.severity === "medium").length;
-  const verifyCount = findings.length - highCount;
+  const verifyCount = points.length;
 
   let verdictKey = highCount > 0 || mediumCount >= 3 ? "work" : mediumCount > 0 ? "slow" : "clear";
   const unknownOverride = unknowns >= 5 && verdictKey === "clear";
   if (unknownOverride) verdictKey = "slow";
 
   const basis = fill(outputStrings.basis, {
-    high: highCount,
-    verify: verifyCount,
-    unknowns
-  }) + (findings[0] ? ` ${findings[0].title}.` : "");
+    issues: countLabel(highCount, "structural issue", "structural issues"),
+    points: countLabel(verifyCount, "point to verify", "points to verify"),
+    unknowns: countLabel(unknowns, "unknown", "unknowns")
+  }) + (findings[0]
+    ? ` ${fill(outputStrings.priority, { finding: lowercaseFirstWord(findings[0].title) })}`
+    : "");
   const unknownText = unknowns === 0
     ? outputStrings.noUnknowns
     : fill(outputStrings.unknown, { unknowns });
@@ -76,10 +88,12 @@ export function evaluateStructureAssessment(answers) {
     basis,
     findings,
     highCount,
+    issues,
     mediumCount,
     unknownOverride,
     unknowns,
     unknownText,
+    points,
     verdict: verdicts[verdictKey],
     verdictKey,
     verifyCount
@@ -111,7 +125,7 @@ function buildCopyText(result) {
   if (result.actions.length) {
     lines.push("");
     lines.push(structureAssessmentCopy.actionsHeading + ":");
-    result.actions.forEach((finding, index) => lines.push(`${index + 1}. ${finding.fixedBy}`));
+    result.actions.forEach((finding, index) => lines.push(`${index + 1}. ${finding.action}`));
   }
 
   const date = new Intl.DateTimeFormat("en-GB", {
@@ -159,7 +173,10 @@ export function initialiseStructureAssessment() {
   const readinessElement = document.querySelector("[data-question-readiness]");
   const summaryElement = document.querySelector("[data-result-summary]");
   const findingsSection = document.querySelector("[data-findings-section]");
-  const findingsElement = document.querySelector("[data-findings]");
+  const issuesGroup = document.querySelector("[data-issues-group]");
+  const issuesElement = document.querySelector("[data-issues]");
+  const pointsGroup = document.querySelector("[data-points-group]");
+  const pointsElement = document.querySelector("[data-points]");
   const actionsSection = document.querySelector("[data-actions-section]");
   const actionsElement = document.querySelector("[data-actions]");
   const ctaTextElement = document.querySelector("[data-cta-text]");
@@ -196,10 +213,14 @@ export function initialiseStructureAssessment() {
       if (!result.unknownOverride) appendTextElement(summaryElement, "p", result.unknownText);
     }
 
-    if (findingsSection && findingsElement) {
-      findingsElement.innerHTML = "";
+    if (findingsSection && issuesGroup && issuesElement && pointsGroup && pointsElement) {
+      issuesElement.innerHTML = "";
+      pointsElement.innerHTML = "";
       findingsSection.hidden = result.findings.length === 0;
-      for (const finding of result.findings) {
+      issuesGroup.hidden = result.issues.length === 0;
+      pointsGroup.hidden = result.points.length === 0;
+
+      const renderFinding = (finding, parent) => {
         const article = document.createElement("article");
         article.className = "section-entry";
         appendTextElement(article, "h3", finding.title);
@@ -208,15 +229,18 @@ export function initialiseStructureAssessment() {
         const label = document.createElement("strong");
         label.textContent = "Fixed by: ";
         fixedBy.prepend(label);
-        findingsElement.append(article);
-      }
+        parent.append(article);
+      };
+
+      result.issues.forEach((finding) => renderFinding(finding, issuesElement));
+      result.points.forEach((finding) => renderFinding(finding, pointsElement));
     }
 
     if (actionsSection && actionsElement) {
       actionsElement.innerHTML = "";
       actionsSection.hidden = result.actions.length === 0;
       for (const finding of result.actions) {
-        appendTextElement(actionsElement, "li", finding.fixedBy);
+        appendTextElement(actionsElement, "li", finding.action);
       }
     }
 

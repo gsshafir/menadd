@@ -349,6 +349,16 @@ button:disabled {
 
 .structure-question-group {
   margin-top: 3rem;
+  position: relative;
+}
+
+.structure-question-group::before {
+  border-top: 1px solid var(--rule);
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: -1.2rem;
 }
 
 .structure-question-group > h2 {
@@ -356,6 +366,7 @@ button:disabled {
 }
 
 .structure-assessment-form .structure-question {
+  border-top: 0;
   margin-top: 1.5rem;
 }
 

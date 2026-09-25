@@ -59,7 +59,14 @@ import {
 
     <section data-findings-section>
       <h2>{structureAssessmentCopy.findingsHeading}</h2>
-      <div class="section-list" data-findings></div>
+      <div data-issues-group>
+        <h3>{structureAssessmentCopy.issuesHeading}</h3>
+        <div class="section-list" data-issues></div>
+      </div>
+      <div data-points-group>
+        <h3>{structureAssessmentCopy.pointsHeading}</h3>
+        <div class="section-list" data-points></div>
+      </div>
     </section>
 
     <section data-actions-section>
@@ -78,8 +85,8 @@ import {
       <p><a href={assessmentLinks.ownership}>{structureAssessmentCopy.libraryLabel}</a></p>
     </section>
 
-    <div class="copy-summary">
-      <button type="button" data-copy-structure>{structureAssessmentCopy.copyButton}</button>
+    <div class="assessment-cta-group">
+      <button class="button-link" type="button" data-copy-structure>{structureAssessmentCopy.copyButton}</button>
       <span class="field-hint" data-copy-structure-status aria-live="polite"></span>
     </div>
 
