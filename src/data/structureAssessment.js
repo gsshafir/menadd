@@ -15,6 +15,8 @@ export const structureAssessmentCopy = {
   authorityLink: "Why this assessment exists",
   submit: "See your result",
   findingsHeading: "Findings",
+  issuesHeading: "Issues",
+  pointsHeading: "Points to verify",
   actionsHeading: "Where to start",
   boundary:
     "This check looks at fourteen things. A real review looks at the documents behind them, which is not something a form can do.",
@@ -24,7 +26,7 @@ export const structureAssessmentCopy = {
   disclaimer: "MENADD provides general information, not legal, tax or investment advice.",
   calendarLabel: "Book a 30-minute call",
   emailLabel: "gennady@menadd.com",
-  libraryLabel: "Ownership and Cap Table"
+  libraryLabel: "Read the Ownership and Cap Table library"
 };
 
 export const questionGroups = [
@@ -474,7 +476,8 @@ export const verdicts = {
 };
 
 export const outputStrings = {
-  basis: "Your answers produced {high} structural issues, {verify} points to verify and {unknowns} unknowns.",
+  basis: "Your answers produced {issues}, {points} and {unknowns}.",
+  priority: "The first priority is {finding}.",
   unknown:
     'You answered "not sure" to {unknowns} of 14 questions. In diligence, an unknown stays an open item until a document or a register closes it. Closing it now is faster than explaining it after the investor asks.',
   noUnknowns: "You answered every question. That alone puts you ahead of most companies at this stage.",
