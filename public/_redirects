@@ -2,3 +2,5 @@
 # Example:
 # /old-path/  /  301
 /artifacts/  /assessment/  301
+/notes    /library/    301
+/notes/   /library/    301

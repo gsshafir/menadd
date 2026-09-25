@@ -10,7 +10,6 @@ export const nav = [
   { href: "/library/", label: "Library" },
   { href: "/assessment/", label: "Assessment" },
   { href: "/about/", label: "About" },
-  { href: "/notes/", label: "Diligence Notes" }
 ];
 
 export const sections = [
