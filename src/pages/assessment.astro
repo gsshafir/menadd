@@ -1,10 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
 import SubscribeForm from "../components/SubscribeForm.astro";
+import AssessmentChooser from "../components/AssessmentChooser.astro";
 import { meta } from "../data";
 ---
 
 <Base title={meta.assessment.title} description={meta.assessment.description} canonical="/assessment/">
+  <AssessmentChooser current="financial" />
+
   <section>
     <h1>Investor Readiness Assessment</h1>
     <p>Twelve numbers and a business type. One verdict, and the questions investors will ask when they see your metrics. Designed for B2B companies with recurring or repeatable revenue. All calculations run in your browser; nothing you enter is sent or stored anywhere.</p>

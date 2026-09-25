@@ -311,6 +311,81 @@ button:disabled {
   margin-top: 2.2rem;
 }
 
+.assessment-chooser {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 3rem;
+}
+
+.assessment-choice {
+  border: 1px solid var(--rule);
+  color: var(--text);
+  display: block;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.assessment-choice[aria-current="page"] {
+  border-color: var(--text);
+}
+
+.assessment-choice h2 {
+  font-size: 1.05rem;
+  margin-top: 0;
+}
+
+.assessment-choice p {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin-top: 0.55rem;
+}
+
+.assessment-question {
+  font-size: 1.2rem;
+  margin-top: 1.4rem;
+}
+
+.structure-question-group {
+  margin-top: 3rem;
+}
+
+.structure-question-group > h2 {
+  margin-top: 0;
+}
+
+.structure-assessment-form .structure-question {
+  margin-top: 1.5rem;
+}
+
+.structure-assessment-form .structure-option {
+  align-items: flex-start;
+  display: flex;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.structure-assessment-form .structure-option input[type="radio"] {
+  flex: 0 0 auto;
+  margin: 0.32rem 0 0;
+  padding: 0;
+  width: auto;
+}
+
+.structure-result-summary h2 {
+  margin-top: 0;
+}
+
+.structure-results ol {
+  margin: 1rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.structure-results li + li {
+  margin-top: 0.65rem;
+}
+
 .assessment-form fieldset {
   border: 0;
   border-top: 1px solid var(--rule);
@@ -484,6 +559,10 @@ button:disabled {
 
   .subscribe-form {
     flex-direction: column;
+  }
+
+  .assessment-chooser {
+    grid-template-columns: 1fr;
   }
 
   .assessment-cta-group {

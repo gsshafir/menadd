@@ -1,0 +1,94 @@
+---
+import AssessmentChooser from "../../components/AssessmentChooser.astro";
+import Base from "../../layouts/Base.astro";
+import {
+  assessmentLinks,
+  questionGroups,
+  structureAssessmentCopy,
+  structureAssessmentSeo
+} from "../../data/structureAssessment.js";
+---
+
+<Base
+  title={structureAssessmentSeo.title}
+  description={structureAssessmentSeo.description}
+  canonical="/assessment/structure/"
+>
+  <AssessmentChooser current="structure" />
+
+  <section>
+    <h1>{structureAssessmentCopy.heading}</h1>
+    <h2 class="assessment-question">{structureAssessmentCopy.question}</h2>
+    <p>{structureAssessmentCopy.introduction}</p>
+    <p class="field-hint">{structureAssessmentCopy.privacy}</p>
+    <p>{structureAssessmentCopy.authority}</p>
+    <p><a href="/about/">{structureAssessmentCopy.authorityLink}</a></p>
+  </section>
+
+  <form class="assessment-form structure-assessment-form" data-structure-form novalidate>
+    {
+      questionGroups.map((group) => (
+        <section class="structure-question-group" aria-labelledby={`group-${group.id}`}>
+          <h2 id={`group-${group.id}`}>{group.title}</h2>
+          {
+            group.questions.map((question) => (
+              <fieldset class="structure-question" id={`question-${question.id}`} tabindex="-1">
+                <legend>{question.text}</legend>
+                {
+                  question.options.map((option) => (
+                    <label class="structure-option">
+                      <input type="radio" name={question.id} value={option.id} />
+                      <span>{option.text}</span>
+                    </label>
+                  ))
+                }
+              </fieldset>
+            ))
+          }
+        </section>
+      ))
+    }
+
+    <p class="field-hint" data-question-progress aria-live="polite"></p>
+    <p class="field-hint" data-question-readiness aria-live="polite"></p>
+    <button type="submit">{structureAssessmentCopy.submit}</button>
+  </form>
+
+  <section class="assessment-results structure-results" data-structure-results hidden>
+    <div class="structure-result-summary" data-result-summary></div>
+
+    <section data-findings-section>
+      <h2>{structureAssessmentCopy.findingsHeading}</h2>
+      <div class="section-list" data-findings></div>
+    </section>
+
+    <section data-actions-section>
+      <h2>{structureAssessmentCopy.actionsHeading}</h2>
+      <ol data-actions></ol>
+    </section>
+
+    <p class="assessment-caveat">{structureAssessmentCopy.boundary}</p>
+
+    <section class="verdict-cta">
+      <p data-cta-text></p>
+      <div class="assessment-cta-group">
+        <a class="button-link" href={assessmentLinks.calendar} data-calendar-link>{structureAssessmentCopy.calendarLabel}</a>
+        <a href={assessmentLinks.email}>{structureAssessmentCopy.emailLabel}</a>
+      </div>
+      <p><a href={assessmentLinks.ownership}>{structureAssessmentCopy.libraryLabel}</a></p>
+    </section>
+
+    <div class="copy-summary">
+      <button type="button" data-copy-structure>{structureAssessmentCopy.copyButton}</button>
+      <span class="field-hint" data-copy-structure-status aria-live="polite"></span>
+    </div>
+
+    <p class="assessment-caveat">{structureAssessmentCopy.disclaimer}</p>
+  </section>
+
+  <script>
+    import { initialiseStructureAssessment } from "../../scripts/structureAssessment.js";
+
+    initialiseStructureAssessment();
+  </script>
+</Base>
