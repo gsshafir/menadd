@@ -8,24 +8,12 @@ type Props = {
 
 const {
   sourcePage = Astro.url.pathname,
-  quiet = false,
-  description = "Periodic notes on diligence, cap tables, governance and structure in MENA. Sent when there is something worth sending.",
   libraryPlacement = false
 } = Astro.props;
 ---
 
 <section id={libraryPlacement ? "subscribe" : undefined} class="subscribe-block" aria-labelledby="subscribe-title">
   <h2 id="subscribe-title">Diligence Notes</h2>
-  {
-    libraryPlacement ? (
-      <>
-        <p>New material goes to this list before it appears in the library. Subscribers also get the Excel version of the assessment.</p>
-        <p>No fixed schedule. Notes go out when there is a mechanism worth explaining or a pattern worth naming.</p>
-      </>
-    ) : !quiet && (
-      <p>{description}</p>
-    )
-  }
   <form class="subscribe-form" action="/api/subscribe" method="post" data-subscribe-form>
     <input type="hidden" name="source_page" value={sourcePage} />
     <div class="hp-field" aria-hidden="true">
