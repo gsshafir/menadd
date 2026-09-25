@@ -1,0 +1,18 @@
+---
+type Props = {
+  current: "financial" | "structure";
+};
+
+const { current } = Astro.props;
+---
+
+<nav class="assessment-chooser" aria-label="Assessments">
+  <a class="assessment-choice" href="/assessment/" aria-current={current === "financial" ? "page" : undefined}>
+    <h2>Investor Readiness Assessment</h2>
+    <p>Twelve numbers and a business type. One verdict, and the questions investors will ask when they see your metrics.</p>
+  </a>
+  <a class="assessment-choice" href="/assessment/structure/" aria-current={current === "structure" ? "page" : undefined}>
+    <h2>Structure and Ownership Assessment</h2>
+    <p>Fourteen questions about the company investors will buy, the ownership record behind it, employee equity and control.</p>
+  </a>
+</nav>
