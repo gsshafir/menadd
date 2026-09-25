@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
+import SubscribeForm from "../components/SubscribeForm.astro";
 import { meta, sections } from "../data";
 
 const articles = (await getCollection("articles", ({ data }) => !data.draft)).sort(
@@ -38,4 +39,6 @@ const articles = (await getCollection("articles", ({ data }) => !data.draft)).so
       }
     </div>
   </section>
+
+  <SubscribeForm sourcePage="/library/" libraryPlacement />
 </Base>

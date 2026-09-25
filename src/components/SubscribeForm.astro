@@ -3,19 +3,26 @@ type Props = {
   sourcePage?: string;
   quiet?: boolean;
   description?: string;
+  libraryPlacement?: boolean;
 };
 
 const {
   sourcePage = Astro.url.pathname,
   quiet = false,
-  description = "Periodic notes on diligence, cap tables, governance and structure in MENA. Sent when there is something worth sending."
+  description = "Periodic notes on diligence, cap tables, governance and structure in MENA. Sent when there is something worth sending.",
+  libraryPlacement = false
 } = Astro.props;
 ---
 
-<section class="subscribe-block" aria-labelledby="subscribe-title">
+<section id={libraryPlacement ? "subscribe" : undefined} class="subscribe-block" aria-labelledby="subscribe-title">
   <h2 id="subscribe-title">Diligence Notes</h2>
   {
-    !quiet && (
+    libraryPlacement ? (
+      <>
+        <p>New material goes to this list before it appears in the library. Subscribers also get the Excel version of the assessment.</p>
+        <p>No fixed schedule. Notes go out when there is a mechanism worth explaining or a pattern worth naming.</p>
+      </>
+    ) : !quiet && (
       <p>{description}</p>
     )
   }
@@ -31,7 +38,13 @@ const {
     <input id={`email-${sourcePage}`} type="email" name="email" placeholder="Email address" autocomplete="email" required />
     <button type="submit">Subscribe</button>
   </form>
-  <p class="field-hint">By subscribing you agree to receive Diligence Notes. See <a href="/privacy/">Privacy</a>. Unsubscribe at any time.</p>
+  {
+    libraryPlacement ? (
+      <p class="field-hint">One address, no sharing, unsubscribe any time.</p>
+    ) : (
+      <p class="field-hint">By subscribing you agree to receive Diligence Notes. See <a href="/privacy/">Privacy</a>. Unsubscribe at any time.</p>
+    )
+  }
   <p class="form-message" aria-live="polite" data-subscribe-message></p>
 </section>
 
