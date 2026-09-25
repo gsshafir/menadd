@@ -236,7 +236,8 @@ export const findingLibrary = [
     title: "The receiving entity may need to change before an institutional round",
     diligence:
       "Institutional investors usually expect share classes, investor rights and transfer mechanics that this company's current form may not support. Whether a new holding company is needed depends on the licence, the constitutional documents and what the incoming investor requires. Where instruments or an option pool already exist, the question is sharper, because they have to land somewhere that can carry them.",
-    fixedBy: "A structuring decision taken before a term sheet, not during closing."
+    fixedBy: "A structuring decision taken before a term sheet, not during closing.",
+    action: "Test whether the current entity can carry the round, before a term sheet."
   },
   {
     id: "entity_undecided",
@@ -245,7 +246,8 @@ export const findingLibrary = [
     trigger: equals("entity_jurisdiction", "undecided"),
     title: "The receiving entity has not been chosen",
     diligence: "The jurisdiction question arrives with the term sheet instead of before it, and the investor prices the delay.",
-    fixedBy: "A structuring decision ahead of the first serious conversation."
+    fixedBy: "A structuring decision ahead of the first serious conversation.",
+    action: "Choose the receiving entity before the first serious investor conversation."
   },
   {
     id: "sarl_mechanics",
@@ -259,7 +261,8 @@ export const findingLibrary = [
     diligence:
       "A Luxembourg SARL can carry different rights, instruments and employee equity, but admitting new holders, amending the articles and issuing new units can require approvals and formal steps that an SA does not. With several instruments or an active plan, the corporate steps should be modelled before the round timetable is agreed.",
     fixedBy:
-      "Luxembourg counsel, including a decision on whether the SARL remains the right form for the expected financing and employee equity."
+      "Luxembourg counsel, including a decision on whether the SARL remains the right form for the expected financing and employee equity.",
+    action: "Have Luxembourg counsel confirm the SARL still fits the planned financing and option plan."
   },
   {
     id: "offshore_substance",
@@ -277,7 +280,8 @@ export const findingLibrary = [
     diligence:
       "The investor asks what the shares give a claim on, and whether the top company has enough substance to hold it. Standard for offshore holding structures, and it needs a prepared answer rather than an improvised one.",
     fixedBy:
-      "Counsel, and in some cases an intra-group transfer whose tax consequences should be modelled first."
+      "Counsel, and in some cases an intra-group transfer whose tax consequences should be modelled first.",
+    action: "Prepare the substance answer with counsel, and model any intra-group transfer before making it."
   },
   {
     id: "value_outside_entity_undocumented",
@@ -291,7 +295,8 @@ export const findingLibrary = [
     diligence:
       "A group where the product, the contracts and the shares sit in different companies is normal. A group where nothing records the relationship between them is not. Without those documents, the investor cannot trace what their shares have a claim on, and this is found in the first week.",
     fixedBy:
-      "Corporate counsel, drafting the ownership, licence or service arrangements that should already exist, before closing."
+      "Corporate counsel, drafting the ownership, licence or service arrangements that should already exist, before closing.",
+    action: "Have corporate counsel document the ownership, licence or service arrangements before closing."
   },
   {
     id: "group_explanation_needed",
@@ -302,7 +307,8 @@ export const findingLibrary = [
     diligence:
       "Not a defect. Diligence will still ask why each company exists, what moves between them and on what terms, and the answer should be written down once rather than assembled under time pressure.",
     fixedBy:
-      "You, with counsel, preparing the group explanation and the agreements as part of the data room."
+      "You, with counsel, preparing the group explanation and the agreements as part of the data room.",
+    action: "Prepare the group explanation and supporting agreements with counsel for the data room."
   },
   {
     id: "ip_outside_company",
@@ -312,7 +318,8 @@ export const findingLibrary = [
     title: "The core asset is not owned by any company",
     diligence:
       "Ownership of the product cannot be proven. Assignments have to be drafted and signed, sometimes by contractors or former colleagues over whom you no longer have leverage.",
-    fixedBy: "Counsel, plus signatures that can take weeks to collect."
+    fixedBy: "Counsel, plus signatures that can take weeks to collect.",
+    action: "Have counsel prepare the assignments and collect every required signature."
   },
   {
     id: "chain_not_evidenced",
@@ -325,7 +332,8 @@ export const findingLibrary = [
     title: "A multi-level structure that has never been reconciled",
     diligence:
       "The group chart in the deck is not proof of ownership. Each link needs its own register, resolutions and certificates, and in practice the gaps are in the middle layers nobody maintains.",
-    fixedBy: "Reconstruction at entity level, before anything is migrated anywhere."
+    fixedBy: "Reconstruction at entity level, before anything is migrated anywhere.",
+    action: "Reconstruct the ownership record at entity level before migrating anything."
   },
   {
     id: "group_shape_unknown",
@@ -335,7 +343,8 @@ export const findingLibrary = [
     title: "The chain itself is uncertain",
     diligence:
       "If the founders cannot draw the ownership chain from memory, diligence will draw it for them. That takes weeks and it usually produces at least one surprise.",
-    fixedBy: "A corporate map built from each entity's own register. This is the first step of any structuring work."
+    fixedBy: "A corporate map built from each entity's own register. This is the first step of any structuring work.",
+    action: "Build a corporate map from each entity's own register before any structuring work."
   },
   {
     id: "convenience_entities_behind",
@@ -346,7 +355,8 @@ export const findingLibrary = [
     diligence:
       "Holding a licence, visas or a bank account in a separate company is ordinary in the UAE. Overdue filings and unreconciled intercompany balances are not, and each one becomes a condition to closing.",
     fixedBy:
-      "A corporate services provider, bringing filings and accounts current, in parallel with the raise rather than during diligence."
+      "A corporate services provider, bringing filings and accounts current, in parallel with the raise rather than during diligence.",
+    action: "Bring every entity's filings and accounts current before diligence."
   },
   {
     id: "holder_mismatch",
@@ -357,7 +367,8 @@ export const findingLibrary = [
     diligence:
       "The register does not show who actually owns the company, and the official records do not resolve it. This collides with the investor's own onboarding checks, and it is one of the few findings capable of ending a round rather than delaying it.",
     fixedBy:
-      "Documenting the arrangement properly or unwinding it, and aligning the official records. Both take longer than founders expect."
+      "Documenting the arrangement properly or unwinding it, and aligning the official records. Both take longer than founders expect.",
+    action: "Document or unwind the ownership arrangement and align the official records."
   },
   {
     id: "holder_arrangement_consistency",
@@ -366,7 +377,8 @@ export const findingLibrary = [
     trigger: equals("nominee_trust", "documented_matched"),
     title: "An arrangement that has to stay consistent",
     diligence: "Not a defect. It becomes one when the agreement, the register and the official records say three different things.",
-    fixedBy: "A check that all three match. An hour now, a week of explanation later."
+    fixedBy: "A check that all three match. An hour now, a week of explanation later.",
+    action: "Check that the agreement, the register and the official records all match."
   },
   {
     id: "legal_register_unidentified",
@@ -377,7 +389,8 @@ export const findingLibrary = [
     diligence:
       "A cap table is a working model. The legal register is what records who holds the shares. If nobody can say which document is the register and who maintains it, investors reconcile every version against the underlying issuances and transfers, and they do it on their timetable.",
     fixedBy:
-      "Identifying the legal register, naming who maintains it, and reconciling it to the cap table and the signed documents."
+      "Identifying the legal register, naming who maintains it, and reconciling it to the cap table and the signed documents.",
+    action: "Identify the legal register, name its maintainer and reconcile it to the cap table and signed documents."
   },
   {
     id: "platform_as_register_check",
@@ -387,7 +400,8 @@ export const findingLibrary = [
     title: "Confirm the platform is the register in your jurisdiction",
     diligence:
       "Some jurisdictions accept a platform as the statutory register, others require the register to sit with the company or a licensed provider. Worth confirming once rather than discovering it during a transfer.",
-    fixedBy: "Your corporate services provider or counsel, in a single question."
+    fixedBy: "Your corporate services provider or counsel, in a single question.",
+    action: "Confirm with your provider or counsel that the platform is the legal register."
   },
   {
     id: "never_reconciled",
@@ -399,7 +413,8 @@ export const findingLibrary = [
     ],
     title: "The record has not been checked against the documents",
     diligence: "Every ownership number is treated as an estimate until it is tied back to signed instruments and resolutions.",
-    fixedBy: "A reconciliation exercise. Document work, not software work."
+    fixedBy: "A reconciliation exercise. Document work, not software work.",
+    action: "Reconcile the ownership record to the signed instruments and resolutions."
   },
   {
     id: "instrument_terms",
@@ -409,7 +424,8 @@ export const findingLibrary = [
     title: "Instruments whose combined effect has not been worked out",
     diligence:
       "Caps, discounts and most favoured nation terms interact with each other and with the new round. Three identical instruments are simple. Two different ones with a side letter are not, and the fully diluted outcome is frequently not the one founders assumed.",
-    fixedBy: "Modelling the conversion before agreeing a price, then documenting the result."
+    fixedBy: "Modelling the conversion before agreeing a price, then documenting the result.",
+    action: "Model every instrument's conversion before agreeing a price, then document the result."
   },
   {
     id: "off_register_promises",
@@ -419,7 +435,8 @@ export const findingLibrary = [
     title: "Equity promised outside the cap table",
     diligence:
       "The most common late surprise in a round. It surfaces when the person who was promised something hears that money is arriving.",
-    fixedBy: "Finding every promise, deciding which are real, then documenting or settling them. Before diligence, not during."
+    fixedBy: "Finding every promise, deciding which are real, then documenting or settling them. Before diligence, not during.",
+    action: "Find every equity promise, decide which are real, then document or settle them before diligence."
   },
   {
     id: "pool_without_documents",
@@ -429,7 +446,8 @@ export const findingLibrary = [
     title: "A pool with nothing behind it",
     diligence:
       "A line in the cap table that no document creates. Investors will either require it to be documented before closing or price it as larger than you intend.",
-    fixedBy: "A plan document, and a decision about which company in the group grants the options."
+    fixedBy: "A plan document, and a decision about which company in the group grants the options.",
+    action: "Put a plan document in place and decide which group company grants the options."
   },
   {
     id: "grants_not_signed",
@@ -445,7 +463,8 @@ export const findingLibrary = [
     title: "Options promised but never signed",
     diligence:
       "Employees who believe they own part of the company, with nothing stating vesting, exercise or what happens when they leave. Each is a potential claim, and they tend to raise it at the worst moment.",
-    fixedBy: "Individual grant agreements, issued from the entity legally able to grant them."
+    fixedBy: "Individual grant agreements, issued from the entity legally able to grant them.",
+    action: "Issue individual grant agreements from the entity legally able to grant them."
   },
   {
     id: "informal_control",
@@ -455,7 +474,8 @@ export const findingLibrary = [
     title: "Control rights agreed in conversation",
     diligence:
       "An investor believes they hold a veto and the founders believe they do not. That disagreement gets settled during the round, rarely on the founders' terms.",
-    fixedBy: "Counsel, and a conversation that is far cheaper before the next investor arrives."
+    fixedBy: "Counsel, and a conversation that is far cheaper before the next investor arrives.",
+    action: "Have counsel document the control rights before the next investor arrives."
   },
   {
     id: "no_founder_vesting",
@@ -465,7 +485,8 @@ export const findingLibrary = [
     title: "Founders' shares do not vest",
     diligence:
       "Not a defect. An incoming institutional investor is likely to reopen it, and the terms are better when you arrive with a position rather than react to theirs.",
-    fixedBy: "You, before the term sheet."
+    fixedBy: "You, before the term sheet.",
+    action: "Decide your position on founder vesting before the term sheet."
   }
 ];
 

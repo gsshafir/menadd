@@ -125,7 +125,7 @@ function buildCopyText(result) {
   if (result.actions.length) {
     lines.push("");
     lines.push(structureAssessmentCopy.actionsHeading + ":");
-    result.actions.forEach((finding, index) => lines.push(`${index + 1}. ${finding.fixedBy}`));
+    result.actions.forEach((finding, index) => lines.push(`${index + 1}. ${finding.action}`));
   }
 
   const date = new Intl.DateTimeFormat("en-GB", {
@@ -240,7 +240,7 @@ export function initialiseStructureAssessment() {
       actionsElement.innerHTML = "";
       actionsSection.hidden = result.actions.length === 0;
       for (const finding of result.actions) {
-        appendTextElement(actionsElement, "li", finding.fixedBy);
+        appendTextElement(actionsElement, "li", finding.action);
       }
     }
 
