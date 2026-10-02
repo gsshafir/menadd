@@ -1,0 +1,87 @@
+---
+import Base from "../layouts/Base.astro";
+import { assessmentLinks } from "../data/structureAssessment.js";
+
+const title = "Preparing an ADGM, DIFC or Luxembourg cap table for Carta | MENADD";
+const description =
+  "A platform records the ownership history it receives. What has to be reconstructed and reconciled in an ADGM, DIFC or Luxembourg cap table before it can be migrated to Carta.";
+---
+
+<Base title={title} description={description} canonical="/carta/" noindex>
+  <section>
+    <h1>Preparing an ADGM, DIFC or Luxembourg cap table for Carta</h1>
+    <p>A platform does not fix a cap table. It records one. MENADD reconstructs and reconciles the ownership history before it gets there.</p>
+  </section>
+
+  <section>
+    <h2>This is relevant if you have</h2>
+    <ul>
+      <li>Outstanding SAFEs or convertible instruments that have not been formally converted</li>
+      <li>A cap table that does not reconcile to signed documents and approvals</li>
+      <li>Employee options that were promised but never granted, or granted from an entity that cannot grant them</li>
+      <li>Investments made into different entities within the same group</li>
+      <li>A priced round or diligence process approaching</li>
+    </ul>
+    <p>If none of that applies, you may not need a platform yet. The distinction is set out below.</p>
+  </section>
+
+  <section>
+    <h2>What Carta does, and what stays outside it</h2>
+    <p>Carta records and manages cap tables, equity plans and investor information and, depending on the product and jurisdiction, provides additional valuation and reporting tools. It does not reconstruct the history behind those records.</p>
+    <p>Incorporation, statutory filings, corporate approvals and local formalities such as Luxembourg notarial deeds and RCS filings remain separate. The platform records the result of a legal act. It does not perform the act.</p>
+    <p>Carta has an office in ADGM and confirms it can act as the system of record, though not as transfer agent, for ADGM and DIFC companies and for Luxembourg SARL and SA cap tables. That is not the same as replacing a company's statutory register, and which document constitutes the register depends on the entity and the jurisdiction.</p>
+  </section>
+
+  <section>
+    <h2>What MENADD does</h2>
+    <p><strong>Diagnose.</strong> Compare the existing cap table against the instruments, resolutions and constitutional documents that are supposed to support it.</p>
+    <p><strong>Reconstruct.</strong> Rebuild the sequence of issuances, amendments, transfers, conversions and employee grants, and resolve the gaps between them.</p>
+    <p><strong>Migrate.</strong> Prepare the data set, agree it, and move it onto the platform.</p>
+    <p>This work is led by Gennady Shafir, a CFO and board advisor with a decade of operating experience inside venture-backed companies across finance, ownership and cross-border structures.</p>
+  </section>
+
+  <section>
+    <h2>What you receive</h2>
+    <p>A migration-ready ownership record:</p>
+    <ul>
+      <li>The current issued and fully diluted cap table</li>
+      <li>A transaction history covering issuances, transfers and conversions</li>
+      <li>A list of missing approvals and documents, with what is needed to cure each one</li>
+      <li>A reconciled ESOP and grant schedule, including any entity-level issues that need to be resolved</li>
+      <li>A data set ready for management, investor and platform confirmation</li>
+    </ul>
+    <p>Where a correction needs a legal opinion, a corporate approval, a filing or a notarial act, MENADD identifies it and coordinates the record with your counsel or corporate services provider. MENADD does not replace local counsel.</p>
+    <p>Whether or not you end up using Carta, that record is what diligence asks for. The platform is where it lives afterwards.</p>
+  </section>
+
+  <section>
+    <h2>When a spreadsheet is enough</h2>
+    <p>A company with one completed round, a simple ownership structure and properly documented grants may not need equity infrastructure. A controlled spreadsheet is enough, and I will say so rather than sell you a platform.</p>
+    <p>Companies with fewer than 25 stakeholders and less than one million dollars raised may be eligible for Carta Launch at no charge, through a MENADD introduction. Contact me before creating the account.</p>
+    {/* TODO: Add the URL for "a MENADD introduction" when it is provided. */}
+  </section>
+
+  <section>
+    <h2>When a platform earns its place</h2>
+    <p>Several instruments outstanding. Employee equity across multiple grants, vesting schedules or jurisdictions. More than one entity in the group. Regular investor reporting. A priced round approaching, which is when every unresolved item turns into a negotiating point rather than an admin task.</p>
+  </section>
+
+  <section>
+    <h2>The Carta relationship</h2>
+    <p>MENADD is a Carta partner. Companies introduced through MENADD may be eligible for Carta partner pricing, subject to Carta's current terms. The introduction has to come first, because pricing cannot be applied retroactively.</p>
+    <p>Where a client runs Carta, they can grant me advisor access to their account, so the work happens against the live cap table rather than a spreadsheet moving back and forth by email.</p>
+    <p>MENADD does not resell Carta and does not receive a revenue share. Nothing on this page is paid placement.</p>
+  </section>
+
+  <section class="verdict-cta">
+    <h2>Start with a readiness call</h2>
+    <p>Thirty minutes, no charge. We establish which entities, instruments and employee grants are in scope. You then receive a document request and a defined scope and fee for the written readiness review, before anything is sent.</p>
+    <p>If the record is already clean, MENADD can arrange the Carta introduction and partner pricing directly.</p>
+    <div class="assessment-cta-group">
+      <a class="button-link" href={assessmentLinks.calendar}>Book a readiness call</a>
+      <a href={assessmentLinks.email}>gennady@menadd.com</a>
+    </div>
+  </section>
+
+  <p class="assessment-caveat"><em>MENADD provides general information, not legal, tax or investment advice.</em></p>
+</Base>
