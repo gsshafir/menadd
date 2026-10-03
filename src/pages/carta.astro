@@ -5,9 +5,11 @@ import { assessmentLinks } from "../data/structureAssessment.js";
 const title = "Preparing an ADGM, DIFC or Luxembourg cap table for Carta | MENADD";
 const description =
   "A platform records the ownership history it receives. What has to be reconstructed and reconciled in an ADGM, DIFC or Luxembourg cap table before it can be migrated to Carta.";
+const partnerLink =
+  "https://carta.com/partners/referral/?utm_medium=ChannelReferral&utm_source=menadd&PID=menadd";
 ---
 
-<Base title={title} description={description} canonical="/carta/" noindex>
+<Base title={title} description={description} canonical="/carta/">
   <section>
     <h1>Preparing an ADGM, DIFC or Luxembourg cap table for Carta</h1>
     <p>A platform does not fix a cap table. It records one. MENADD reconstructs and reconciles the ownership history before it gets there.</p>
@@ -57,8 +59,7 @@ const description =
   <section>
     <h2>When a spreadsheet is enough</h2>
     <p>A company with one completed round, a simple ownership structure and properly documented grants may not need equity infrastructure. A controlled spreadsheet is enough, and I will say so rather than sell you a platform.</p>
-    <p>Companies with fewer than 25 stakeholders and less than one million dollars raised may be eligible for Carta Launch at no charge, through a MENADD introduction. Contact me before creating the account.</p>
-    {/* TODO: Add the URL for "a MENADD introduction" when it is provided. */}
+    <p>Companies with fewer than 25 stakeholders and less than one million dollars raised may be eligible for Carta Launch at no charge, through <a href={partnerLink}>a MENADD introduction</a>. Contact me before creating the account.</p>
   </section>
 
   <section>
@@ -68,7 +69,7 @@ const description =
 
   <section>
     <h2>The Carta relationship</h2>
-    <p>MENADD is a Carta partner. Companies introduced through MENADD may be eligible for Carta partner pricing, subject to Carta's current terms. The introduction has to come first, because pricing cannot be applied retroactively.</p>
+    <p>MENADD is a Carta partner. Companies introduced through MENADD may be eligible for <a href={partnerLink}>Carta partner pricing</a>, subject to Carta's current terms. The introduction has to come first, because pricing cannot be applied retroactively.</p>
     <p>Where a client runs Carta, they can grant me advisor access to their account, so the work happens against the live cap table rather than a spreadsheet moving back and forth by email.</p>
     <p>MENADD does not resell Carta and does not receive a revenue share. Nothing on this page is paid placement.</p>
   </section>
