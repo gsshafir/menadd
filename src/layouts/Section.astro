@@ -25,6 +25,7 @@ const { sectionKey, title, description, articles, intro } = Astro.props;
         {intro.map((paragraph) => <p>{paragraph}</p>)}
       </div>
     )}
+    <slot name="after-intro" />
     <div class="article-list">
       {
         articles.map((article) => (

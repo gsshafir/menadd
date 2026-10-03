@@ -180,6 +180,7 @@ export function initialiseStructureAssessment() {
   const actionsSection = document.querySelector("[data-actions-section]");
   const actionsElement = document.querySelector("[data-actions]");
   const ctaTextElement = document.querySelector("[data-cta-text]");
+  const cleanCartaExit = document.querySelector("[data-clean-carta-exit]");
   const copyButton = document.querySelector("[data-copy-structure]");
   const copyStatus = document.querySelector("[data-copy-structure-status]");
 
@@ -248,6 +249,11 @@ export function initialiseStructureAssessment() {
       ctaTextElement.textContent = result.highCount > 0 || result.mediumCount > 0
         ? outputStrings.issueCta
         : outputStrings.clearCta;
+    }
+    if (cleanCartaExit instanceof HTMLElement) {
+      const showCleanCartaExit = result.findings.length === 0;
+      cleanCartaExit.hidden = !showCleanCartaExit;
+      cleanCartaExit.style.display = showCleanCartaExit ? "" : "none";
     }
 
     resultsElement.hidden = false;
