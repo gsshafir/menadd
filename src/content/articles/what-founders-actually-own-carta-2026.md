@@ -92,3 +92,5 @@ Investors do not only price growth. They price uncertainty. The Carta chart show
 ---
 
 *Source: [Carta, Founder Ownership Report 2026](https://carta.com/data/founder-ownership-2026/). The ownership-by-stage chart draws on 9,334 U.S. startups fundraising in 2023–2025; medians measured after close of each round.*
+
+<p class="assessment-caveat">MENADD is a <a href="/carta/">Carta partner</a>. This analysis uses Carta's published data and was written independently of that relationship.</p>
