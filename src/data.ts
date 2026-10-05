@@ -7,6 +7,7 @@ export const site = {
 };
 
 export const nav = [
+  { href: "/financing-terms/", label: "Work with MENADD" },
   { href: "/library/", label: "Library" },
   { href: "/assessment/", label: "Assessment" },
   { href: "/carta/", label: "Cap table migration" },
@@ -63,9 +64,9 @@ export const sections = [
 
 export const meta = {
   home: {
-    title: "MENADD | Investor-Grade Structure for MENA Founders",
+    title: "MENADD | Financing Terms, Ownership and Control",
     description:
-      "What due diligence checks in a MENA company, section by section, and what an investor-grade answer looks like. Cap tables, governance, structure, cash."
+      "MENADD helps MENA founders evaluate financing terms, model dilution and control, and plan future rounds and cross-border structures."
   },
   library: {
     title: "The Diligence Library | MENADD",

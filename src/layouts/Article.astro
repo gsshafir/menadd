@@ -48,6 +48,20 @@ const articleHtml = (article.rendered?.html ?? "").replace(/<img\b([^>]*)>/g, (_
 
   return `<img loading="lazy" decoding="async"${sizeAttributes}${attributes}>`;
 });
+const financingTermsClosingIds = new Set([
+  "how-founders-lose-a-company-in-three-years",
+  "control-shifts-quietly",
+  "removing-a-founder-is-three-questions"
+]);
+const structureClosingIds = new Set([
+  "operational-is-not-investable",
+  "the-uae-raise-is-a-trust-process"
+]);
+const closingVariant = financingTermsClosingIds.has(article.id)
+  ? "financing-terms"
+  : structureClosingIds.has(article.id)
+    ? "structure"
+    : "default";
 ---
 
 <Base title={`${seoTitle} | MENADD`} description={article.data.description} canonical={href} ogType="article" ogImage={ogImage}>
@@ -61,11 +75,27 @@ const articleHtml = (article.rendered?.html ?? "").replace(/<img\b([^>]*)>/g, (_
     <div class="article-body">
       <Fragment set:html={articleHtml} />
     </div>
-    <section>
-      <h2>Before your next round</h2>
-      <p>Twelve numbers, one verdict, and the questions investors will ask.</p>
-      <a class="button-link" href="/assessment/">Run the assessment</a>
-    </section>
+    {
+      closingVariant === "financing-terms" ? (
+        <section>
+          <h2>What do these terms mean for your company?</h2>
+          <p>If you are evaluating a financing proposal, MENADD can model the ownership and financial consequences and map the control questions to discuss with your counsel. The scope starts with your actual instruments, proposed terms and the decision you need to make.</p>
+          <a class="button-link" href="/financing-terms/">See the work and outputs</a>
+        </section>
+      ) : closingVariant === "structure" ? (
+        <section>
+          <h2>Planning the financing your structure needs to support?</h2>
+          <p>MENADD works with founders on the proposed capital, ownership arrangements and structural dependencies of a financing. We define the business questions and coordinate the required work with the relevant advisers.</p>
+          <a class="button-link" href="/financing-terms/#start">See how an engagement works</a>
+        </section>
+      ) : (
+        <section>
+          <h2>Before your next round</h2>
+          <p>Twelve numbers, one verdict, and the questions investors will ask.</p>
+          <a class="button-link" href="/assessment/">Run the assessment</a>
+        </section>
+      )
+    }
     <SubscribeForm libraryPlacement />
   </article>
 </Base>

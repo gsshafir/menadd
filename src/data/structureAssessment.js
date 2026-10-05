@@ -24,7 +24,7 @@ export const structureAssessmentCopy = {
   copied: "Copied. Paste it into your notes or send it to the people working on the structure.",
   copyFailed: "Copy failed. Select the result and copy it manually.",
   disclaimer: "MENADD provides general information, not legal, tax or investment advice.",
-  calendarLabel: "Book a 30-minute call",
+  calendarLabel: "Discuss a financing decision",
   emailLabel: "gennady@menadd.com",
   libraryLabel: "Read the Ownership and Cap Table library"
 };
