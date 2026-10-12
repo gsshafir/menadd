@@ -63,6 +63,7 @@ export async function runAndSendReport(env, reportMonth) {
       rawVisits: report.current.rawVisits,
       rawPageViews: report.current.rawViews,
       realRecords: report.current.realRecords,
+      humanRealRecords: report.current.humanRealRecords,
       sampleInterval: report.current.sampleInterval,
       anomalies: report.current.anomalies.length,
       resendId,
@@ -94,6 +95,9 @@ export async function collectReport(env, currentRange) {
   const current = cleanDailyMetrics(currentDays, currentAnomalies);
   const previous = cleanDailyMetrics(previousDays, previousAnomalies);
   const automatedTraffic = detectAutomatedTraffic(current.rawVisits, currentProfiles.flatMap((item) => item.profiles));
+  const previousAutomatedTraffic = detectAutomatedTraffic(previous.rawVisits, previousProfiles.flatMap((item) => item.profiles));
+  current.humanRealRecords = humanRecordCount(currentProfiles, current.anomalyDates, automatedTraffic);
+  previous.humanRealRecords = humanRecordCount(previousProfiles, previous.anomalyDates, previousAutomatedTraffic);
 
   const cleanDays = current.days.filter((day) => !current.anomalyDates.has(day.date));
   const [allPages, allSources, allCountries, allDevices, anomalyDetails] = await Promise.all([
@@ -393,14 +397,37 @@ export function detectAutomatedTraffic(totalVisits, profiles) {
   for (const profile of profiles) {
     if (profile.referer !== "") continue;
     const key = JSON.stringify([profile.country, profile.browser, profile.os]);
-    const existing = combinations.get(key) ?? { country: profile.country, browser: profile.browser, os: profile.os, visits: 0 };
+    const existing = combinations.get(key) ?? { country: profile.country, browser: profile.browser, os: profile.os, visits: 0, realRecords: 0 };
     existing.visits += profile.visits;
+    existing.realRecords += profile.realRecords;
     combinations.set(key, existing);
   }
   const strongest = [...combinations.values()].sort((a, b) => b.visits - a.visits)[0];
   if (!strongest) return { detected: false };
   const share = strongest.visits / totalVisits;
   return share >= 0.8 ? { detected: true, share, ...strongest } : { detected: false };
+}
+
+/**
+ * Count stored sample records after excluding anomalous days and, when present,
+ * the dominant no-referer signature flagged as likely automated traffic.
+ * @param {{date:string, profiles:TrafficProfile[]}[]} profileDays
+ * @param {Set<string>} anomalyDates
+ * @param {{detected:boolean, country?:string, browser?:string, os?:string}} automatedTraffic
+ */
+export function humanRecordCount(profileDays, anomalyDates, automatedTraffic) {
+  let total = 0;
+  for (const day of profileDays) {
+    if (anomalyDates.has(day.date)) continue;
+    for (const profile of day.profiles) {
+      const isAutomated = automatedTraffic.detected && profile.referer === "" &&
+        profile.country === automatedTraffic.country &&
+        profile.browser === automatedTraffic.browser &&
+        profile.os === automatedTraffic.os;
+      if (!isAutomated) total += profile.realRecords;
+    }
+  }
+  return total;
 }
 
 /** @param {RankedMetric[]} rows */
@@ -411,11 +438,12 @@ function topNonZero(rows) {
 /** @param {ReturnType<typeof collectReport> extends Promise<infer T> ? T : never} report */
 export function renderReport(report) {
   const monthName = formatMonth(report.currentRange);
-  const change = percentChange(report.current.cleanVisits, report.previous.cleanVisits);
+  const comparison = comparisonText(report.current.humanRealRecords, report.previous.humanRealRecords);
   const subject = `menadd.com: посещаемость за ${monthName}`;
-  const anomalyRows = report.current.anomalyDetails.length
-    ? report.current.anomalyDetails.map((item) => `<tr><td>${escapeHtml(formatDate(item.date))}</td><td>${formatNumber(item.visits)}</td><td>${formatNumber(item.views)}</td><td>${formatNumber(item.realRecords)}</td><td>${escapeHtml(item.country)}</td><td>${escapeHtml(item.browser)} / ${escapeHtml(item.os)}</td><td><strong>${escapeHtml(item.page)}</strong></td></tr>`).join("")
-    : '<tr><td colspan="7">Аномальных дней нет</td></tr>';
+  const anomalyRows = report.current.anomalyDetails.map((item) => `<tr><td>${escapeHtml(formatDate(item.date))}</td><td>${formatNumber(item.visits)}</td><td>${formatNumber(item.views)}</td><td>${formatNumber(item.realRecords)}</td><td>${escapeHtml(item.country)}</td><td>${escapeHtml(item.browser)} / ${escapeHtml(item.os)}</td><td><strong>${escapeHtml(item.page)}</strong></td></tr>`).join("");
+  const anomalyHtml = report.current.anomalyDetails.length
+    ? `<h2 style="font-size:18px">Аномальные дни</h2><p>Критерий: не менее 3 реальных записей за день; все из одной страны, одного браузера и ОС, без referer.</p><table style="border-collapse:collapse"><thead>${tableHeader(["Дата", "Визиты", "Просмотры", "Реальные записи", "Топ-страна", "Топ-браузер / ОС", "Топ-страница"])}</thead><tbody>${anomalyRows}</tbody></table>`
+    : "";
   const samplingHtml = report.current.sampleInterval > 1
     ? `<p style="font-weight:bold;color:#8a4b00">Данные выборочные, коэффициент ${formatNumber(report.current.sampleInterval)}. Оценка Cloudflare: ${formatNumber(report.current.rawViews)}, реальных записей: ${formatNumber(report.current.realRecords)}.</p>`
     : "";
@@ -430,14 +458,13 @@ export function renderReport(report) {
     <h1 style="font-size:22px">menadd.com: посещаемость за ${escapeHtml(monthName)}</h1>
     ${automatedHtml}
     <table style="border-collapse:collapse"><tbody>
-      ${summaryRow("Визиты (без аномалий)", formatNumber(report.current.cleanVisits))}
-      ${summaryRow(`Изменение к ${formatMonth(report.previousRange)}`, change)}
+      ${summaryRow("Визиты людей (оценка)", formatNumber(report.current.humanRealRecords))}
+      ${summaryRow("Оценка Cloudflare", formatNumber(report.current.rawVisits))}
+      ${summaryRow(`Сравнение с ${formatMonth(report.previousRange)}`, comparison)}
       ${summaryRow("Просмотры страниц (без аномалий)", formatNumber(report.current.cleanViews))}
       ${summaryRow("Реальных записей (без учёта выборки)", formatNumber(report.current.realRecords))}
     </tbody></table>
-    <h2 style="font-size:18px">Аномальные дни</h2>
-    <p>Критерий: не менее 3 реальных записей за день; все из одной страны, одного браузера и ОС, без referer.</p>
-    <table style="border-collapse:collapse"><thead>${tableHeader(["Дата", "Визиты", "Просмотры", "Реальные записи", "Топ-страна", "Топ-браузер / ОС", "Топ-страница"])}</thead><tbody>${anomalyRows}</tbody></table>
+    ${anomalyHtml}
     ${keyPagesHtml(report.keyPages)}
     ${rankingHtml("Топ страниц", report.pages, true)}
     ${rankingHtml("Топ источников", report.sources, true)}
@@ -447,15 +474,16 @@ export function renderReport(report) {
   </body></html>`;
 
   const anomalyText = report.current.anomalyDetails.length
-    ? report.current.anomalyDetails.map((item) => `${formatDate(item.date)} — визиты: ${formatNumber(item.visits)}, просмотры: ${formatNumber(item.views)}, реальные записи: ${formatNumber(item.realRecords)}, страна: ${item.country}, браузер/ОС: ${item.browser} / ${item.os}, страница: ${item.page}`).join("\n")
-    : "Аномальных дней нет";
+    ? `Аномальные дни\nКритерий: не менее 3 реальных записей за день; все из одной страны, одного браузера и ОС, без referer.\n${report.current.anomalyDetails.map((item) => `${formatDate(item.date)} — визиты: ${formatNumber(item.visits)}, просмотры: ${formatNumber(item.views)}, реальные записи: ${formatNumber(item.realRecords)}, страна: ${item.country}, браузер/ОС: ${item.browser} / ${item.os}, страница: ${item.page}`).join("\n")}\n\n`
+    : "";
   const text = samplingText + `menadd.com: посещаемость за ${monthName}\n\n` +
     `${automatedText}\n\n` +
-    `Визиты (без аномалий): ${formatNumber(report.current.cleanVisits)}\n` +
-    `Изменение к ${formatMonth(report.previousRange)}: ${change}\n` +
+    `Визиты людей (оценка): ${formatNumber(report.current.humanRealRecords)}\n` +
+    `Оценка Cloudflare: ${formatNumber(report.current.rawVisits)}\n` +
+    `Сравнение с ${formatMonth(report.previousRange)}: ${comparison}\n` +
     `Просмотры страниц (без аномалий): ${formatNumber(report.current.cleanViews)}\n` +
     `Реальных записей (без учёта выборки): ${formatNumber(report.current.realRecords)}\n\n` +
-    `Аномальные дни\nКритерий: не менее 3 реальных записей за день; все из одной страны, одного браузера и ОС, без referer.\n${anomalyText}\n\n` +
+    anomalyText +
     `${rankingText("Ключевые страницы", report.keyPages)}\n\n` +
     `${rankingText("Топ страниц", report.pages)}\n\n${rankingText("Топ источников", report.sources)}\n\n` +
     `${rankingText("Топ стран", report.countries)}\n\n${rankingText("Устройства", report.devices)}\n\n${DASHBOARD_URL}`;
@@ -652,8 +680,10 @@ function normalizeDimension(value, dimension) {
 }
 
 /** @param {number} current @param {number} previous */
-function percentChange(current, previous) {
-  if (previous === 0) return "нет данных для сравнения";
+function comparisonText(current, previous) {
+  if (current < 10 || previous < 10) {
+    return `было ${formatNumber(previous)}, стало ${formatNumber(current)} записей`;
+  }
   const value = ((current - previous) / previous) * 100;
   return `${value > 0 ? "+" : ""}${new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 1 }).format(value)}%`;
 }

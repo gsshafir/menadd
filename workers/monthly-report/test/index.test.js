@@ -5,6 +5,7 @@ import {
   daysInRange,
   detectAnomalousDays,
   detectAutomatedTraffic,
+  humanRecordCount,
   monthRange,
   previousMonthInZone,
   renderReport,
@@ -66,6 +67,17 @@ test("automated traffic block triggers at 80 percent", () => {
   ]);
   assert.equal(automated.detected, true);
   assert.equal(automated.share, 0.8);
+  assert.equal(automated.realRecords, 8);
+});
+
+test("human record count excludes the detected signature and anomalous days", () => {
+  const automated = { detected: true, country: "China", browser: "Chrome", os: "Windows" };
+  const result = humanRecordCount([
+    { date: "2026-09-01", profiles: [{ country: "China", browser: "Chrome", os: "Windows", referer: "", visits: 20, views: 20, realRecords: 2 }] },
+    { date: "2026-09-02", profiles: [{ country: "US", browser: "Safari", os: "macOS", referer: "google.com", visits: 1, views: 1, realRecords: 1 }] },
+    { date: "2026-09-03", profiles: [{ country: "UK", browser: "Firefox", os: "Linux", referer: "", visits: 3, views: 3, realRecords: 3 }] },
+  ], new Set(["2026-09-03"]), automated);
+  assert.equal(result, 1);
 });
 
 test("report uses lowercase month without abbreviation and handles zero comparison", () => {
@@ -75,8 +87,8 @@ test("report uses lowercase month without abbreviation and handles zero comparis
   const email = renderReport({
     currentRange: range,
     previousRange,
-    current: { cleanVisits: 30, cleanViews: 30, rawVisits: 30, rawViews: 30, realRecords: 3, sampleInterval: 10, anomalyDetails: [] },
-    previous: { cleanVisits: 0 },
+    current: { cleanVisits: 30, cleanViews: 30, rawVisits: 30, rawViews: 30, realRecords: 3, humanRealRecords: 0, sampleInterval: 10, anomalyDetails: [] },
+    previous: { cleanVisits: 0, humanRealRecords: 0 },
     automatedTraffic: { detected: false },
     pages: emptyRankings,
     sources: emptyRankings,
@@ -86,6 +98,9 @@ test("report uses lowercase month without abbreviation and handles zero comparis
   });
   assert.equal(email.subject, "menadd.com: посещаемость за сентябрь 2026");
   assert.match(email.text, /^Данные выборочные, коэффициент 10\./);
-  assert.match(email.text, /нет данных для сравнения/);
+  assert.match(email.text, /Визиты людей \(оценка\): 0/);
+  assert.match(email.text, /Оценка Cloudflare: 30/);
+  assert.match(email.text, /было 0, стало 0 записей/);
+  assert.doesNotMatch(email.text, /Аномальные дни/);
   assert.doesNotMatch(email.text, /2026 г\./);
 });
