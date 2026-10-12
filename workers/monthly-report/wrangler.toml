@@ -1,0 +1,13 @@
+name = "menadd-monthly-report"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[triggers]
+crons = ["0 6 1 * *"]
+
+[vars]
+ACCOUNT_TAG = "f024204f80bd19142173a1637efa5229"
+SITE_TAG = "6b0cd2f4420b446eae10463f2ddad7fa"
+REPORT_TO = "gennady@menadd.com"
+REPORT_FROM = "reports@menadd.com"
