@@ -5,11 +5,13 @@ const DASHBOARD_URL =
 const REPORT_TIME_ZONE = "Europe/London";
 const TOP_LIMIT = 10;
 const GROUP_LIMIT = 5000;
+const KEY_PAGES = ["/financing-terms/", "/carta/", "/assessment/", "/assessment/structure/"];
 
 /** @typedef {{ ACCOUNT_TAG: string, SITE_TAG: string, REPORT_TO: string, REPORT_FROM: string, CF_API_TOKEN: string, RESEND_API_KEY: string, TRIGGER_KEY: string }} Env */
 /** @typedef {{ start: Date, end: Date, year: number, month: number, key: string }} MonthRange */
-/** @typedef {{ date: string, start: Date, end: Date, visits: number, views: number }} DailyMetric */
+/** @typedef {{ date: string, start: Date, end: Date, visits: number, views: number, realRecords: number, sampleInterval: number }} DailyMetric */
 /** @typedef {{ name: string, visits: number, views: number }} RankedMetric */
+/** @typedef {{ country: string, browser: string, os: string, referer: string, visits: number, views: number, realRecords: number }} TrafficProfile */
 
 export default {
   /** @param {ScheduledController} _controller @param {Env} env @param {ExecutionContext} ctx */
@@ -60,6 +62,8 @@ export async function runAndSendReport(env, reportMonth) {
       pageViewsWithoutAnomalies: report.current.cleanViews,
       rawVisits: report.current.rawVisits,
       rawPageViews: report.current.rawViews,
+      realRecords: report.current.realRecords,
+      sampleInterval: report.current.sampleInterval,
       anomalies: report.current.anomalies.length,
       resendId,
     };
@@ -79,31 +83,43 @@ export async function runAndSendReport(env, reportMonth) {
 export async function collectReport(env, currentRange) {
   await validateCloudflareSchema(env);
   const previousRange = previousMonthRange(currentRange, REPORT_TIME_ZONE);
-  const [currentDays, previousDays] = await Promise.all([
+  const [currentDays, previousDays, currentProfiles, previousProfiles] = await Promise.all([
     fetchDailyMetrics(env, currentRange),
     fetchDailyMetrics(env, previousRange),
+    fetchTrafficProfiles(env, currentRange),
+    fetchTrafficProfiles(env, previousRange),
   ]);
-  const current = cleanDailyMetrics(currentDays);
-  const previous = cleanDailyMetrics(previousDays);
+  const currentAnomalies = detectAnomalousDays(currentDays, currentProfiles);
+  const previousAnomalies = detectAnomalousDays(previousDays, previousProfiles);
+  const current = cleanDailyMetrics(currentDays, currentAnomalies);
+  const previous = cleanDailyMetrics(previousDays, previousAnomalies);
+  const automatedTraffic = detectAutomatedTraffic(current.rawVisits, currentProfiles.flatMap((item) => item.profiles));
 
   const cleanDays = current.days.filter((day) => !current.anomalyDates.has(day.date));
-  const [pages, sources, countries, devices, anomalyDetails] = await Promise.all([
+  const [allPages, allSources, allCountries, allDevices, anomalyDetails] = await Promise.all([
     fetchRankedMetric(env, cleanDays, "requestPath"),
     fetchRankedMetric(env, cleanDays, "refererHost"),
     fetchRankedMetric(env, cleanDays, "countryName"),
     fetchRankedMetric(env, cleanDays, "deviceType"),
     Promise.all(current.anomalies.map((day) => fetchAnomalyDetails(env, day))),
   ]);
+  const pages = topNonZero(allPages);
+  const sources = topNonZero(allSources);
+  const countries = topNonZero(allCountries);
+  const devices = topNonZero(allDevices);
+  const keyPages = KEY_PAGES.map((name) => allPages.find((item) => item.name === name) ?? { name, visits: 0, views: 0 });
 
   return {
     currentRange,
     previousRange,
     current: { ...current, anomalyDetails },
     previous,
+    automatedTraffic,
     pages,
     sources,
     countries,
     devices,
+    keyPages,
   };
 }
 
@@ -114,7 +130,7 @@ async function fetchDailyMetrics(env, range) {
     d${index}: rumPageloadEventsAdaptiveGroups(
       limit: 1
       filter: { siteTag: $siteTag, bot: 0, datetime_geq: "${day.start.toISOString()}", datetime_lt: "${day.end.toISOString()}" }
-    ) { count sum { visits } }`).join("\n");
+    ) { count avg { sampleInterval } sum { visits } }`).join("\n");
   const query = `query Daily($accountTag: string!, $siteTag: string!) {
     viewer { accounts(filter: { accountTag: $accountTag }) { ${selections} } }
   }`;
@@ -125,7 +141,55 @@ async function fetchDailyMetrics(env, range) {
   return days.map((day, index) => {
     const rows = account[`d${index}`];
     const row = requireSingleAggregate(rows, `день ${day.date}`);
-    return { ...day, views: numberMetric(row.count), visits: numberMetric(row.sum?.visits) };
+    const views = numberMetric(row.count);
+    const sampleInterval = positiveMetric(row.avg?.sampleInterval ?? 1, "sampleInterval");
+    return {
+      ...day,
+      views,
+      visits: numberMetric(row.sum?.visits),
+      sampleInterval,
+      realRecords: sampledRecordCount(views, sampleInterval),
+    };
+  });
+}
+
+/** @param {Env} env @param {MonthRange} range */
+async function fetchTrafficProfiles(env, range) {
+  const days = daysInRange(range, REPORT_TIME_ZONE);
+  const selections = days.map((day, index) => `
+    d${index}: rumPageloadEventsAdaptiveGroups(
+      limit: ${GROUP_LIMIT}
+      orderBy: [count_DESC]
+      filter: { siteTag: $siteTag, bot: 0, datetime_geq: "${day.start.toISOString()}", datetime_lt: "${day.end.toISOString()}" }
+    ) {
+      count
+      avg { sampleInterval }
+      sum { visits }
+      dimensions { countryName userAgentBrowser userAgentOS refererHost }
+    }`).join("\n");
+  const query = `query TrafficProfiles($accountTag: string!, $siteTag: string!) {
+    viewer { accounts(filter: { accountTag: $accountTag }) { ${selections} } }
+  }`;
+  const account = await cloudflareQuery(env, query);
+  return days.map((day, index) => {
+    const rows = requireRows(account[`d${index}`], `профили трафика, ${day.date}`);
+    if (rows.length >= GROUP_LIMIT) {
+      throw new Error(`Cloudflare вернул лимит ${GROUP_LIMIT} профилей трафика за ${day.date}; отчёт мог бы быть неполным`);
+    }
+    const profiles = rows.map((row) => {
+      const views = numberMetric(row.count);
+      const sampleInterval = positiveMetric(row.avg?.sampleInterval ?? 1, "sampleInterval");
+      return {
+        country: displayDimension(row.dimensions?.countryName, "countryName"),
+        browser: displayDimension(row.dimensions?.userAgentBrowser, "userAgentBrowser"),
+        os: displayDimension(row.dimensions?.userAgentOS, "userAgentOS"),
+        referer: String(row.dimensions?.refererHost ?? "").trim(),
+        visits: numberMetric(row.sum?.visits),
+        views,
+        realRecords: sampledRecordCount(views, sampleInterval),
+      };
+    });
+    return { date: day.date, profiles };
   });
 }
 
@@ -162,18 +226,8 @@ async function fetchRankedMetric(env, days, dimension) {
     }
   }
 
-  const sorted = [...totals.values()]
+  return [...totals.values()]
     .sort((a, b) => b.visits - a.visits || b.views - a.views || a.name.localeCompare(b.name));
-  const top = sorted.slice(0, TOP_LIMIT);
-  const required = dimension === "requestPath"
-    ? ["/financing-terms/", "/carta/", "/assessment/"]
-    : dimension === "refererHost" ? ["linkedin.com"] : [];
-  for (const name of required) {
-    if (!top.some((item) => item.name === name)) {
-      top.push(totals.get(name) ?? { name, visits: 0, views: 0 });
-    }
-  }
-  return top;
 }
 
 /** @param {Env} env @param {DailyMetric} day */
@@ -222,6 +276,7 @@ async function cloudflareQuery(env, query) {
 async function validateCloudflareSchema(env) {
   const query = `query SchemaCheck {
     group: __type(name: "AccountRumPageloadEventsAdaptiveGroups") { fields { name } }
+    avg: __type(name: "AccountRumPageloadEventsAdaptiveGroupsAvg") { fields { name } }
     dimensions: __type(name: "AccountRumPageloadEventsAdaptiveGroupsDimensions") { fields { name } }
     sum: __type(name: "AccountRumPageloadEventsAdaptiveGroupsSum") { fields { name } }
     filter: __type(name: "AccountRumPageloadEventsAdaptiveGroupsFilter_InputObject") { inputFields { name } }
@@ -229,11 +284,12 @@ async function validateCloudflareSchema(env) {
   }`;
   const payload = await cloudflareGraphql(env, query, {});
   const data = payload?.data;
-  requireSchemaNames(data?.group?.fields, ["count", "dimensions", "sum"], "поля группы");
+  requireSchemaNames(data?.group?.fields, ["count", "avg", "dimensions", "sum"], "поля группы");
+  requireSchemaNames(data?.avg?.fields, ["sampleInterval"], "avg");
   requireSchemaNames(data?.dimensions?.fields, ["requestPath", "refererHost", "countryName", "deviceType", "userAgentBrowser", "userAgentOS"], "dimensions");
   requireSchemaNames(data?.sum?.fields, ["visits"], "sum");
   requireSchemaNames(data?.filter?.inputFields, ["siteTag", "bot", "datetime_geq", "datetime_lt"], "filter");
-  requireSchemaNames(data?.orderBy?.enumValues, ["sum_visits_DESC"], "orderBy");
+  requireSchemaNames(data?.orderBy?.enumValues, ["count_DESC", "sum_visits_DESC"], "orderBy");
 }
 
 /** @param {Env} env @param {string} query @param {Record<string, unknown>} variables */
@@ -301,25 +357,55 @@ async function parseJsonResponse(response, service) {
   }
 }
 
-/** @param {DailyMetric[]} days */
-export function cleanDailyMetrics(days) {
+/** @param {DailyMetric[]} days @param {DailyMetric[]} anomalies */
+export function cleanDailyMetrics(days, anomalies = []) {
   if (days.length === 0) throw new Error("Cloudflare не вернул дневные данные");
-  const medianVisits = median(days.map((day) => day.visits));
-  const anomalyThreshold = Math.max(10, 5 * medianVisits);
-  const anomalies = days.filter((day) => day.visits > anomalyThreshold);
   const anomalyDates = new Set(anomalies.map((day) => day.date));
   const cleanDays = days.filter((day) => !anomalyDates.has(day.date));
+  const rawViews = sum(days.map((day) => day.views));
+  const realRecords = sum(days.map((day) => day.realRecords));
   return {
     days,
-    medianVisits,
-    anomalyThreshold,
     anomalies,
     anomalyDates,
     cleanVisits: sum(cleanDays.map((day) => day.visits)),
     cleanViews: sum(cleanDays.map((day) => day.views)),
     rawVisits: sum(days.map((day) => day.visits)),
-    rawViews: sum(days.map((day) => day.views)),
+    rawViews,
+    realRecords,
+    sampleInterval: realRecords > 0 ? rawViews / realRecords : 1,
   };
+}
+
+/** @param {DailyMetric[]} days @param {{date:string, profiles:TrafficProfile[]}[]} profileDays */
+export function detectAnomalousDays(days, profileDays) {
+  const profilesByDate = new Map(profileDays.map((item) => [item.date, item.profiles]));
+  return days.filter((day) => {
+    const profiles = (profilesByDate.get(day.date) ?? []).filter((profile) => profile.realRecords > 0);
+    return day.realRecords >= 3 && profiles.length === 1 && profiles[0].referer === "";
+  });
+}
+
+/** @param {number} totalVisits @param {TrafficProfile[]} profiles */
+export function detectAutomatedTraffic(totalVisits, profiles) {
+  if (totalVisits <= 0) return { detected: false };
+  const combinations = new Map();
+  for (const profile of profiles) {
+    if (profile.referer !== "") continue;
+    const key = JSON.stringify([profile.country, profile.browser, profile.os]);
+    const existing = combinations.get(key) ?? { country: profile.country, browser: profile.browser, os: profile.os, visits: 0 };
+    existing.visits += profile.visits;
+    combinations.set(key, existing);
+  }
+  const strongest = [...combinations.values()].sort((a, b) => b.visits - a.visits)[0];
+  if (!strongest) return { detected: false };
+  const share = strongest.visits / totalVisits;
+  return share >= 0.8 ? { detected: true, share, ...strongest } : { detected: false };
+}
+
+/** @param {RankedMetric[]} rows */
+function topNonZero(rows) {
+  return rows.filter((row) => row.visits > 0 || row.views > 0).slice(0, TOP_LIMIT);
 }
 
 /** @param {ReturnType<typeof collectReport> extends Promise<infer T> ? T : never} report */
@@ -328,19 +414,31 @@ export function renderReport(report) {
   const change = percentChange(report.current.cleanVisits, report.previous.cleanVisits);
   const subject = `menadd.com: посещаемость за ${monthName}`;
   const anomalyRows = report.current.anomalyDetails.length
-    ? report.current.anomalyDetails.map((item) => `<tr><td>${escapeHtml(formatDate(item.date))}</td><td>${formatNumber(item.visits)}</td><td>${formatNumber(item.views)}</td><td>${escapeHtml(item.country)}</td><td>${escapeHtml(item.browser)} / ${escapeHtml(item.os)}</td><td><strong>${escapeHtml(item.page)}</strong></td></tr>`).join("")
-    : '<tr><td colspan="6">Аномальных дней нет</td></tr>';
+    ? report.current.anomalyDetails.map((item) => `<tr><td>${escapeHtml(formatDate(item.date))}</td><td>${formatNumber(item.visits)}</td><td>${formatNumber(item.views)}</td><td>${formatNumber(item.realRecords)}</td><td>${escapeHtml(item.country)}</td><td>${escapeHtml(item.browser)} / ${escapeHtml(item.os)}</td><td><strong>${escapeHtml(item.page)}</strong></td></tr>`).join("")
+    : '<tr><td colspan="7">Аномальных дней нет</td></tr>';
+  const samplingHtml = report.current.sampleInterval > 1
+    ? `<p style="font-weight:bold;color:#8a4b00">Данные выборочные, коэффициент ${formatNumber(report.current.sampleInterval)}. Оценка Cloudflare: ${formatNumber(report.current.rawViews)}, реальных записей: ${formatNumber(report.current.realRecords)}.</p>`
+    : "";
+  const samplingText = report.current.sampleInterval > 1
+    ? `Данные выборочные, коэффициент ${formatNumber(report.current.sampleInterval)}. Оценка Cloudflare: ${formatNumber(report.current.rawViews)}, реальных записей: ${formatNumber(report.current.realRecords)}.\n\n`
+    : "";
+  const automatedHtml = automatedTrafficHtml(report.automatedTraffic);
+  const automatedText = automatedTrafficText(report.automatedTraffic);
 
   const html = `<!doctype html><html lang="ru"><body style="font-family:Arial,sans-serif;color:#222;line-height:1.45">
+    ${samplingHtml}
     <h1 style="font-size:22px">menadd.com: посещаемость за ${escapeHtml(monthName)}</h1>
+    ${automatedHtml}
     <table style="border-collapse:collapse"><tbody>
       ${summaryRow("Визиты (без аномалий)", formatNumber(report.current.cleanVisits))}
       ${summaryRow(`Изменение к ${formatMonth(report.previousRange)}`, change)}
       ${summaryRow("Просмотры страниц (без аномалий)", formatNumber(report.current.cleanViews))}
+      ${summaryRow("Реальных записей (без учёта выборки)", formatNumber(report.current.realRecords))}
     </tbody></table>
     <h2 style="font-size:18px">Аномальные дни</h2>
-    <p>Критерий: визиты за день &gt; max(10, 5 × медиана). Медиана: ${formatNumber(report.current.medianVisits)}, порог: ${formatNumber(report.current.anomalyThreshold)}.</p>
-    <table style="border-collapse:collapse"><thead>${tableHeader(["Дата", "Визиты", "Просмотры", "Топ-страна", "Топ-браузер / ОС", "Топ-страница"])}</thead><tbody>${anomalyRows}</tbody></table>
+    <p>Критерий: не менее 3 реальных записей за день; все из одной страны, одного браузера и ОС, без referer.</p>
+    <table style="border-collapse:collapse"><thead>${tableHeader(["Дата", "Визиты", "Просмотры", "Реальные записи", "Топ-страна", "Топ-браузер / ОС", "Топ-страница"])}</thead><tbody>${anomalyRows}</tbody></table>
+    ${keyPagesHtml(report.keyPages)}
     ${rankingHtml("Топ страниц", report.pages, true)}
     ${rankingHtml("Топ источников", report.sources, true)}
     ${rankingHtml("Топ стран", report.countries, false)}
@@ -349,16 +447,40 @@ export function renderReport(report) {
   </body></html>`;
 
   const anomalyText = report.current.anomalyDetails.length
-    ? report.current.anomalyDetails.map((item) => `${formatDate(item.date)} — визиты: ${formatNumber(item.visits)}, просмотры: ${formatNumber(item.views)}, страна: ${item.country}, браузер/ОС: ${item.browser} / ${item.os}, страница: ${item.page}`).join("\n")
+    ? report.current.anomalyDetails.map((item) => `${formatDate(item.date)} — визиты: ${formatNumber(item.visits)}, просмотры: ${formatNumber(item.views)}, реальные записи: ${formatNumber(item.realRecords)}, страна: ${item.country}, браузер/ОС: ${item.browser} / ${item.os}, страница: ${item.page}`).join("\n")
     : "Аномальных дней нет";
-  const text = `menadd.com: посещаемость за ${monthName}\n\n` +
+  const text = samplingText + `menadd.com: посещаемость за ${monthName}\n\n` +
+    `${automatedText}\n\n` +
     `Визиты (без аномалий): ${formatNumber(report.current.cleanVisits)}\n` +
     `Изменение к ${formatMonth(report.previousRange)}: ${change}\n` +
-    `Просмотры страниц (без аномалий): ${formatNumber(report.current.cleanViews)}\n\n` +
-    `Аномальные дни\nКритерий: визиты > max(10, 5 × медиана). Медиана: ${formatNumber(report.current.medianVisits)}, порог: ${formatNumber(report.current.anomalyThreshold)}.\n${anomalyText}\n\n` +
+    `Просмотры страниц (без аномалий): ${formatNumber(report.current.cleanViews)}\n` +
+    `Реальных записей (без учёта выборки): ${formatNumber(report.current.realRecords)}\n\n` +
+    `Аномальные дни\nКритерий: не менее 3 реальных записей за день; все из одной страны, одного браузера и ОС, без referer.\n${anomalyText}\n\n` +
+    `${rankingText("Ключевые страницы", report.keyPages)}\n\n` +
     `${rankingText("Топ страниц", report.pages)}\n\n${rankingText("Топ источников", report.sources)}\n\n` +
     `${rankingText("Топ стран", report.countries)}\n\n${rankingText("Устройства", report.devices)}\n\n${DASHBOARD_URL}`;
   return { subject, html, text };
+}
+
+/** @param {{detected:boolean, share?:number, country?:string, browser?:string, os?:string, visits?:number}} traffic */
+function automatedTrafficHtml(traffic) {
+  const content = traffic.detected
+    ? `${formatPercent(traffic.share)} визитов совпадают: ${escapeHtml(traffic.country)} · ${escapeHtml(traffic.browser)} · ${escapeHtml(traffic.os)} · без referer (${formatNumber(traffic.visits)} визитов).`
+    : "Комбинация страна + браузер + ОС + пустой referer не достигает 80% визитов месяца.";
+  return `<h2 style="font-size:18px">Похоже на автоматический трафик</h2><p>${content}</p>`;
+}
+
+/** @param {{detected:boolean, share?:number, country?:string, browser?:string, os?:string, visits?:number}} traffic */
+function automatedTrafficText(traffic) {
+  return traffic.detected
+    ? `Похоже на автоматический трафик\n${formatPercent(traffic.share)} визитов совпадают: ${traffic.country} · ${traffic.browser} · ${traffic.os} · без referer (${formatNumber(traffic.visits)} визитов).`
+    : "Похоже на автоматический трафик\nКомбинация страна + браузер + ОС + пустой referer не достигает 80% визитов месяца.";
+}
+
+/** @param {RankedMetric[]} rows */
+function keyPagesHtml(rows) {
+  const body = rows.map((row) => `<tr><td><strong>${escapeHtml(row.name)}</strong></td><td><strong>${formatNumber(row.visits)}</strong></td><td><strong>${formatNumber(row.views)}</strong></td></tr>`).join("");
+  return `<h2 style="font-size:18px">Ключевые страницы</h2><table style="border-collapse:collapse"><thead>${tableHeader(["Страница", "Визиты", "Просмотры"])}</thead><tbody>${body}</tbody></table>`;
 }
 
 /** @param {string} message */
@@ -391,7 +513,7 @@ function rankingText(title, rows) {
 /** @param {string} title @param {string} value */
 function shouldEmphasize(title, value) {
   if (title === "Топ источников") return value.toLowerCase() === "linkedin.com";
-  if (title === "Топ страниц") return ["/financing-terms/", "/carta/", "/assessment/"].includes(value);
+  if (title === "Топ страниц") return KEY_PAGES.includes(value);
   return false;
 }
 
@@ -471,13 +593,6 @@ function zonedParts(date, timeZone) {
 }
 
 /** @param {number[]} values */
-function median(values) {
-  const sorted = [...values].sort((a, b) => a - b);
-  const middle = Math.floor(sorted.length / 2);
-  return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
-}
-
-/** @param {number[]} values */
 function sum(values) { return values.reduce((total, value) => total + value, 0); }
 
 /** @param {unknown} value */
@@ -485,6 +600,18 @@ function numberMetric(value) {
   const number = Number(value ?? 0);
   if (!Number.isFinite(number)) throw new Error("Cloudflare вернул некорректное числовое значение");
   return number;
+}
+
+/** @param {unknown} value @param {string} name */
+function positiveMetric(value, name) {
+  const number = numberMetric(value);
+  if (number <= 0) throw new Error(`Cloudflare вернул некорректное значение ${name}`);
+  return number;
+}
+
+/** @param {number} estimatedCount @param {number} sampleInterval */
+function sampledRecordCount(estimatedCount, sampleInterval) {
+  return Math.round(estimatedCount / sampleInterval);
 }
 
 /** @param {unknown} rows @param {string} context */
@@ -526,14 +653,15 @@ function normalizeDimension(value, dimension) {
 
 /** @param {number} current @param {number} previous */
 function percentChange(current, previous) {
-  if (previous === 0) return current === 0 ? "0%" : "— (в прошлом месяце 0)";
+  if (previous === 0) return "нет данных для сравнения";
   const value = ((current - previous) / previous) * 100;
   return `${value > 0 ? "+" : ""}${new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 1 }).format(value)}%`;
 }
 
 /** @param {MonthRange} range */
 function formatMonth(range) {
-  return new Intl.DateTimeFormat("ru-RU", { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(Date.UTC(range.year, range.month - 1, 1))).replace(/^./u, (letter) => letter.toUpperCase());
+  const months = ["январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"];
+  return `${months[range.month - 1]} ${range.year}`;
 }
 
 /** @param {string} date */
@@ -543,6 +671,9 @@ function formatDate(date) {
 
 /** @param {number} value */
 function formatNumber(value) { return new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 1 }).format(value); }
+
+/** @param {number} value */
+function formatPercent(value) { return new Intl.NumberFormat("ru-RU", { style: "percent", maximumFractionDigits: 1 }).format(value); }
 
 /** @param {unknown} value */
 function escapeHtml(value) {
