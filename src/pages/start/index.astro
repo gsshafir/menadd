@@ -1,0 +1,272 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const title = "Start a Conversation | MENADD";
+const description = "A short form, two minutes. Tell me the company, the decision and the deadline.";
+---
+
+<Base title={title} description={description} canonical="/start/">
+  <section class="start-page">
+    <h1>Start a conversation</h1>
+    <p class="lede">A short form, two minutes. I read every enquiry myself. If I am not the right person, I will say so.</p>
+
+    <form class="enquiry-form" id="enquiry-form" action="/api/enquiry" method="post" hidden novalidate>
+      <fieldset class="enquiry-type">
+        <legend>I am</legend>
+        <label><input type="radio" name="type" value="founder" checked /> <span>A founder</span></label>
+        <label><input type="radio" name="type" value="investor" /> <span>An investor</span></label>
+        <label><input type="radio" name="type" value="other" /> <span>Someone else</span></label>
+        <span class="field-error" data-error-for="type"></span>
+      </fieldset>
+
+      <div class="form-field">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" autocomplete="name" required />
+        <span class="field-error" data-error-for="name"></span>
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required />
+        <span class="field-error" data-error-for="email"></span>
+      </div>
+
+      <div class="form-field">
+        <label for="company">Company and website</label>
+        <input id="company" name="company" type="text" autocomplete="organization" required />
+        <span class="field-error" data-error-for="company"></span>
+      </div>
+
+      <div class="form-field">
+        <label for="role">Your role</label>
+        <input id="role" name="role" type="text" autocomplete="organization-title" />
+        <span class="field-error" data-error-for="role"></span>
+      </div>
+
+      <div id="company-fields">
+        <div class="form-field">
+          <label for="stage">Stage</label>
+          <select id="stage" name="stage">
+            <option value=""></option>
+            <option>Pre-seed</option>
+            <option>Seed</option>
+            <option>Series A</option>
+            <option>Series B or later</option>
+            <option>Not raising</option>
+          </select>
+          <span class="field-error" data-error-for="stage"></span>
+        </div>
+
+        <div class="form-field">
+          <label for="capital">Capital raised to date</label>
+          <select id="capital" name="capital">
+            <option value=""></option>
+            <option>None</option>
+            <option>Under $1M</option>
+            <option>$1M to $5M</option>
+            <option>$5M to $20M</option>
+            <option>Over $20M</option>
+          </select>
+          <span class="field-error" data-error-for="capital"></span>
+        </div>
+
+        <div class="form-field">
+          <label for="revenue">Revenue, last 12 months</label>
+          <select id="revenue" name="revenue">
+            <option value=""></option>
+            <option>None yet</option>
+            <option>Under $1M</option>
+            <option>$1M to $5M</option>
+            <option>Over $5M</option>
+          </select>
+          <span class="field-error" data-error-for="revenue"></span>
+        </div>
+      </div>
+
+      <div id="investor-fields" hidden>
+        <div class="form-field">
+          <label for="fund">Fund or firm</label>
+          <input id="fund" name="fund" type="text" autocomplete="organization" disabled />
+          <span class="field-error" data-error-for="fund"></span>
+        </div>
+
+        <div class="form-field">
+          <label for="portfolio-need">The portfolio company and what it needs</label>
+          <textarea id="portfolio-need" name="portfolioNeed" rows="5" disabled></textarea>
+          <span class="field-error" data-error-for="portfolioNeed"></span>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="situation">What is in front of you, and by when</label>
+        <textarea id="situation" name="situation" rows="6" required></textarea>
+        <span class="field-error" data-error-for="situation"></span>
+      </div>
+
+      <div class="form-field">
+        <label for="entities">Entities and jurisdictions today</label>
+        <input id="entities" name="entities" type="text" />
+        <span class="field-error" data-error-for="entities"></span>
+      </div>
+
+      <div class="form-field">
+        <label for="looking-for">What you are looking for</label>
+        <select id="looking-for" name="lookingFor">
+          <option value=""></option>
+          <option>A defined review</option>
+          <option>An ongoing finance role</option>
+          <option>A board seat</option>
+          <option>Not sure yet</option>
+        </select>
+        <span class="field-error" data-error-for="lookingFor"></span>
+      </div>
+
+      <div class="form-field">
+        <label for="introduced-by">Introduced by</label>
+        <input id="introduced-by" name="introducedBy" type="text" />
+        <span class="field-error" data-error-for="introducedBy"></span>
+      </div>
+
+      <div class="hp-field" aria-hidden="true">
+        <label for="website">Website</label>
+        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div id="turnstile-widget"></div>
+      <p class="form-message" id="form-message" role="alert" aria-live="polite"></p>
+      <button type="submit" disabled>Send</button>
+    </form>
+
+    <noscript><p>This form needs JavaScript. Email me at <a href="mailto:gennady@menadd.com">gennady@menadd.com</a> instead.</p></noscript>
+
+    <div class="form-notes">
+      <p>Please leave confidential documents out. We agree a channel for those after the first call.</p>
+      <p>I use these answers only to reply to you. See <a href="/privacy/">Privacy</a>.</p>
+      <p>Introduced by someone? Email me at <a href="mailto:gennady@menadd.com">gennady@menadd.com</a> and mention their name.</p>
+    </div>
+  </section>
+
+  <script>
+    const form = document.querySelector<HTMLFormElement>("#enquiry-form");
+    const companyFields = document.querySelector<HTMLElement>("#company-fields");
+    const investorFields = document.querySelector<HTMLElement>("#investor-fields");
+    const message = document.querySelector<HTMLElement>("#form-message");
+
+    if (form && companyFields && investorFields && message) {
+      form.hidden = false;
+
+      const typeInputs = Array.from(form.querySelectorAll<HTMLInputElement>('input[name="type"]'));
+      const stage = form.elements.namedItem("stage") as HTMLSelectElement;
+      const capital = form.elements.namedItem("capital") as HTMLSelectElement;
+      const revenue = form.elements.namedItem("revenue") as HTMLSelectElement;
+      const fund = form.elements.namedItem("fund") as HTMLInputElement;
+      const portfolioNeed = form.elements.namedItem("portfolioNeed") as HTMLTextAreaElement;
+      const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      const turnstileWidget = document.querySelector<HTMLElement>("#turnstile-widget");
+
+      const selectedType = () => typeInputs.find((input) => input.checked)?.value || "founder";
+      const setVariant = (type: string) => {
+        const investor = type === "investor";
+        companyFields.hidden = investor;
+        investorFields.hidden = !investor;
+        stage.disabled = investor;
+        capital.disabled = investor;
+        revenue.disabled = investor;
+        stage.required = type === "founder";
+        capital.required = type === "founder";
+        revenue.required = type === "founder";
+        fund.disabled = !investor;
+        portfolioNeed.disabled = !investor;
+        fund.required = investor;
+        portfolioNeed.required = investor;
+      };
+
+      const requestedType = new URLSearchParams(location.search).get("type");
+      if (requestedType === "investor") {
+        const investorInput = typeInputs.find((input) => input.value === "investor");
+        if (investorInput) investorInput.checked = true;
+      }
+      setVariant(selectedType());
+
+      typeInputs.forEach((input) => input.addEventListener("change", () => setVariant(selectedType())));
+
+      const loadTurnstile = async () => {
+        if (!submit || !turnstileWidget) return;
+
+        try {
+          const response = await fetch("/api/turnstile-config");
+          const config = (await response.json()) as { siteKey?: string };
+          if (!response.ok || !config.siteKey) throw new Error("Missing Turnstile site key");
+
+          await new Promise<void>((resolve, reject) => {
+            const script = document.createElement("script");
+            script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+            script.async = true;
+            script.defer = true;
+            script.addEventListener("load", () => resolve());
+            script.addEventListener("error", () => reject(new Error("Turnstile failed to load")));
+            document.head.append(script);
+          });
+
+          const turnstile = (window as Window & {
+            turnstile?: { render: (target: HTMLElement, options: { sitekey: string }) => string };
+          }).turnstile;
+          if (!turnstile) throw new Error("Turnstile failed to initialise");
+          turnstile.render(turnstileWidget, { sitekey: config.siteKey });
+          submit.disabled = false;
+        } catch {
+          message.textContent = "The security check could not load. Please try again later.";
+          message.dataset.state = "error";
+        }
+      };
+
+      void loadTurnstile();
+
+      const clearErrors = () => {
+        form.querySelectorAll<HTMLElement>("[data-error-for]").forEach((element) => (element.textContent = ""));
+        form.querySelectorAll<HTMLElement>("[aria-invalid]").forEach((element) => element.removeAttribute("aria-invalid"));
+        message.textContent = "";
+        message.removeAttribute("data-state");
+      };
+
+      const showErrors = (errors: Record<string, string>) => {
+        Object.entries(errors).forEach(([name, error]) => {
+          const field = form.elements.namedItem(name);
+          const target = form.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+          if (field instanceof HTMLElement) field.setAttribute("aria-invalid", "true");
+          if (target) target.textContent = error;
+        });
+        const firstInvalid = form.querySelector<HTMLElement>('[aria-invalid="true"]');
+        firstInvalid?.focus();
+      };
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        clearErrors();
+
+        if (!form.reportValidity()) return;
+
+        if (submit) submit.disabled = true;
+
+        try {
+          const response = await fetch(form.action, { method: "POST", body: new FormData(form) });
+          const result = (await response.json()) as { ok?: boolean; message?: string; errors?: Record<string, string> };
+
+          if (response.ok && result.ok) {
+            location.assign("/start/thanks/");
+            return;
+          }
+
+          if (result.errors) showErrors(result.errors);
+          message.textContent = result.message || "The form could not be sent. Please try again.";
+          message.dataset.state = "error";
+        } catch {
+          message.textContent = "The form could not be sent. Please try again.";
+          message.dataset.state = "error";
+        } finally {
+          if (submit) submit.disabled = false;
+        }
+      });
+    }
+  </script>
+</Base>

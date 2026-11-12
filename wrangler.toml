@@ -2,7 +2,15 @@ name = "menadd"
 compatibility_date = "2026-07-09"
 pages_build_output_dir = "dist"
 
+[vars]
+PUBLIC_TURNSTILE_SITE_KEY = "0x4AAAAAAAF-XyPWNdolk-M04"
+
 [[kv_namespaces]]
 binding = "SUBSCRIBERS"
 id = "af74c0abcbea4bf2b2afaab25308aaec"
 preview_id = "d4187f9778c6416facc8982a89deedf8"
+
+[[kv_namespaces]]
+binding = "ENQUIRIES"
+id = "aae0be501bbc499192ca5e540e918e7b"
+preview_id = "44dc6e56897d49e9b6dca4d42ed53694"

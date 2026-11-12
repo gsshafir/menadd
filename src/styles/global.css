@@ -585,6 +585,105 @@ button {
   font: inherit;
 }
 
+input[type="text"],
+select,
+textarea {
+  background: #fffefb;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  color: var(--text);
+  font: inherit;
+  min-width: 0;
+  padding: 0.62rem 0.7rem;
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.enquiry-form {
+  margin-top: 2.2rem;
+}
+
+.enquiry-form fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.enquiry-form legend,
+.form-field > label {
+  display: block;
+  font-weight: 600;
+}
+
+.enquiry-type {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.25rem;
+}
+
+.enquiry-type legend {
+  flex-basis: 100%;
+}
+
+.enquiry-type label {
+  align-items: center;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.enquiry-type input {
+  margin: 0;
+}
+
+.form-field {
+  margin-top: 1.25rem;
+}
+
+.form-field > input,
+.form-field > select,
+.form-field > textarea {
+  margin-top: 0.35rem;
+}
+
+.field-error {
+  color: #8c2f20;
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  min-height: 1.15rem;
+  margin-top: 0.2rem;
+}
+
+.enquiry-form [aria-invalid="true"] {
+  border-color: #8c2f20;
+}
+
+.enquiry-form .cf-turnstile {
+  margin-top: 1.25rem;
+}
+
+.enquiry-form button[type="submit"] {
+  margin-top: 0.75rem;
+}
+
+.form-notes {
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+}
+
+.thanks-page .button-link {
+  margin-top: 1.5rem;
+}
+
 input[type="email"] {
   background: #fffefb;
   border: 1px solid var(--rule);
