@@ -50,7 +50,7 @@ Nov 12, 2026 · @Gennady
 | /assessment/structure/ | Structure check | Остаётся, пункт меню. Результат ведёт на /start/ | Да |
 | /assessment/ | Investor readiness | Остаётся, из меню убрать | Нет |
 | /carta/ | Cap table migration | Остаётся, noindex, из меню убрать | Нет |
-| /notes/ | Diligence Notes | Не трогаем | Футер |
+| /notes/ | Diligence Notes | Существующий 301 на /library/ оставить | Нет |
 | /privacy/ | Privacy | Дописать абзац про анкету | Футер |
 
 **Шапка.** Одинаковая на всех страницах, включая статьи. Слева словесный знак «MENADD» и рядом мельче «Gennady Shafir». Справа: Work · For investors · Library · Structure check · About и кнопка «Start a conversation». На мобильном видны знак и кнопка, остальное в меню.
@@ -58,7 +58,7 @@ Nov 12, 2026 · @Gennady
 **Футер.** Одинаковый на всех страницах:
 
 - Строка: MENADD. Written by Gennady Shafir. Built from the diligence backwards.
-- Ссылки: Library · Structure check · Diligence Notes · LinkedIn · Privacy · gennady@menadd.com
+- Ссылки: Library · Structure check · Diligence Notes (/library/#subscribe) · LinkedIn · Privacy · gennady@menadd.com
 - Оговорка, один раз: General information, not legal, tax or investment advice.
 - Copyright 2026 MENADD
 
@@ -137,7 +137,7 @@ Nov 12, 2026 · @Gennady
 
 **IP in several jurisdictions, investors wanted one owner.** An early-stage industrial technology company. Its patents were spread across several jurisdictions. Investors would not fund a company that did not hold its core asset in one place. I consolidated the portfolio into a single holding entity in the jurisdiction the investors required and aligned the documents with their terms. The round closed.
 
-**No founder vesting, no decisions.** The founders held their equity outright. Every important question turned into a deadlock, and the investors saw it. I led the introduction of founder vesting. Once the founders were bound to the company on the same terms, the negotiation unlocked. The Series A closed.
+**No founder vesting, no decisions.** The founders held their equity outright. Every important question turned into a deadlock, and the investors saw it. I led the introduction of founder vesting. Once the founders were bound to the company on the same terms, the deadlock broke. The Series A closed.
 
 **From grants to venture capital.** A technology company had lived on public grants for years and could not raise venture capital. The structure was built for grant compliance, not for investors. I ran the relocation of the headquarters and the restructuring of the group around a new holding. A seven-figure round closed.
 
@@ -400,12 +400,12 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 ### Техника
 
 1. Сайт статический, Astro на Cloudflare Pages. Анкета отправляется через fetch на Pages Function `/api/enquiry`. При любой ошибке введённые данные остаются на странице.
-2. Функция проверяет поля и токен Turnstile, сохраняет заявку в Cloudflare KV со сроком жизни 30 дней и отправляет письмо через Resend на gennady@menadd.com. При успехе страница переходит на /start/thanks/.
+2. Функция проверяет поля и токен Turnstile, сохраняет заявку в отдельный Cloudflare KV binding `ENQUIRIES` со сроком жизни 30 дней и отправляет письмо через Resend на gennady@menadd.com. При успехе страница переходит на /start/thanks/.
 3. Если письмо не ушло, заявка уже лежит в KV, а посетитель видит успех. Ошибка доставки пишется в лог функции без содержимого заявки.
 4. Тема письма: `[MENADD] {founder|investor|other} · {Company} · {Stage} · raised {Capital} · revenue {Revenue} · intro: {Introduced by}`. По теме заявку можно оценить, не открывая письмо.
-5. Reply-To письма равен email посетителя.
-6. Защита от спама: скрытое поле-ловушка, Cloudflare Turnstile, ограничение частоты отправок с одного IP.
-7. Ключи Resend и Turnstile хранятся в переменных окружения Cloudflare Pages и не попадают в репозиторий. Codex даёт пошаговую инструкцию: аккаунт Resend, DNS-записи домена, ключи.
+5. From: MENADD Enquiries (enquiries@menadd.com). To: gennady@menadd.com. Reply-To письма равен email посетителя.
+6. Защита от спама: скрытое поле-ловушка, Cloudflare Turnstile, ограничение частоты отправок с одного IP. Ключи ограничения частоты хранятся в `ENQUIRIES` с TTL один час.
+7. Ключи Resend и Turnstile хранятся в переменных окружения Cloudflare Pages и не попадают в репозиторий. `RESEND_API_KEY` добавляется в Cloudflare Pages отдельно. Codex даёт пошаговую инструкцию: аккаунт Resend, DNS-записи домена, ключи.
 8. Обязательные поля проверяются и в браузере, и в функции. Ошибка показывается рядом с полем.
 9. Автоматических отказов нет. Все заявки доходят до почты, решение принимает Геннадий.
 10. На этапе аудита Codex подтверждает, что Resend и KV ложатся на репозиторий. Если в существующей инфраструктуре есть путь проще, он предлагает его до начала этапа 3.
@@ -558,7 +558,7 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 
 **Аналитика**
 
-- Cloudflare Web Analytics, без cookies и без баннера согласия. Если аналитика уже стоит, оставить существующую.
+- Cloudflare Web Analytics включена в панели Cloudflare, без cookies и без баннера согласия. Ничего в код не добавлять.
 - Два числа, ради которых всё делается: просмотры /start/ и просмотры /start/thanks/ (это число отправленных анкет). Клики по календарю не отслеживаются, звонки видны в самом календаре.
 
 **Производительность и доступность**
@@ -643,7 +643,7 @@ I have attached two files: the site specification and a portrait photo.
 You are rebuilding menadd.com (Astro, Cloudflare Pages). The single source of truth is docs/SPEC.md. Read it before doing anything.
 
 Rules:
-- Work on the branch `rebuild`. Never commit to main. At the end of every stage from Stage 1 on, push `rebuild` to the remote so Cloudflare Pages builds a preview, and give me the preview URL.
+- Work on the branch `rebuild`. Never commit to main. At the end of every stage from Stage 1 on, push `rebuild` to the remote so Cloudflare Pages builds a preview, and give me the preview URL. Assume branch preview deployments are on. If the first push of `rebuild` produces no preview URL, tell me.
 - Use the English copy from the spec verbatim. Do not rewrite, shorten or improve it.
 - Do not edit article bodies under /library/.
 - Do not add copy, numbers, sections, icons or dependencies that are not in the spec.
