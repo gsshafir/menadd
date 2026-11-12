@@ -23,7 +23,9 @@ const canonicalUrl = new URL(canonical, site.url).toString();
 const ogImageUrl = new URL(ogImage, site.url).toString();
 const currentPath = Astro.url.pathname;
 const isCurrentNavItem = (href: string) =>
-  href === "/library/" ? currentPath.startsWith("/library") : currentPath === href;
+  href === "/library/"
+    ? currentPath.startsWith("/library")
+    : currentPath === href || currentPath.startsWith(href);
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -82,8 +84,11 @@ const personJsonLd = {
   </head>
   <body>
     <header class="site-header">
-      <a class="wordmark" href="/">{site.name}</a>
-      <nav class="site-nav" aria-label="Main navigation">
+      <a class="wordmark" href="/" aria-label="MENADD home">
+        <span>{site.name}</span>
+        <span class="wordmark-author">Gennady Shafir</span>
+      </a>
+      <nav class="site-nav site-nav-desktop" aria-label="Main navigation">
         {
           nav.map((item) => (
             <a href={item.href} aria-current={isCurrentNavItem(item.href) ? "page" : undefined}>
@@ -92,19 +97,35 @@ const personJsonLd = {
           ))
         }
       </nav>
+      <a class="button-link header-cta" href="/start/">Start a conversation</a>
+      <details class="mobile-menu">
+        <summary>Menu</summary>
+        <nav class="site-nav site-nav-mobile" aria-label="Mobile navigation">
+          {
+            nav.map((item) => (
+              <a href={item.href} aria-current={isCurrentNavItem(item.href) ? "page" : undefined}>
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </details>
     </header>
     <main>
       <slot />
     </main>
     <footer class="site-footer">
-      <div>{site.positioning}</div>
-      <div>MENADD provides general information, not legal, tax or investment advice. Take advice for your own company and jurisdiction before acting.</div>
+      <p class="footer-statement">MENADD. Written by Gennady Shafir. Built from the diligence backwards.</p>
       <div class="footer-links">
+        <a href="/library/">Library</a>
+        <a href="/assessment/structure/">Structure check</a>
+        <a href="/library/#subscribe">Diligence Notes</a>
         <a href={site.linkedIn}>LinkedIn</a>
-        <a href="/library/#subscribe">Subscribe</a>
         <a href="/privacy/">Privacy</a>
-        <span>Copyright {new Date().getFullYear()} MENADD</span>
+        <a href="mailto:gennady@menadd.com">gennady@menadd.com</a>
       </div>
+      <p>General information, not legal, tax or investment advice.</p>
+      <p>Copyright 2026 MENADD</p>
     </footer>
   </body>
 </html>

@@ -1,17 +1,15 @@
 export const site = {
   name: "MENADD",
   url: "https://menadd.com",
-  positioning:
-    "MENADD. Investor-grade structure for MENA founders. Built from the diligence backwards.",
   linkedIn: "https://www.linkedin.com/in/gennadyshafir"
 };
 
 export const nav = [
-  { href: "/financing-terms/", label: "Work with MENADD" },
+  { href: "/work/", label: "Work" },
+  { href: "/investors/", label: "For investors" },
   { href: "/library/", label: "Library" },
-  { href: "/assessment/", label: "Assessment" },
-  { href: "/carta/", label: "Cap table migration" },
-  { href: "/about/", label: "About" },
+  { href: "/assessment/structure/", label: "Structure check" },
+  { href: "/about/", label: "About" }
 ];
 
 export const sections = [
