@@ -3,7 +3,7 @@ compatibility_date = "2026-07-09"
 pages_build_output_dir = "dist"
 
 [vars]
-PUBLIC_TURNSTILE_SITE_KEY = "0x4AAAAAAAF-XyPWNdolk-M04"
+PUBLIC_TURNSTILE_SITE_KEY = "0x4AAAAAAF-XyPWNdolk-M04"
 
 [[kv_namespaces]]
 binding = "SUBSCRIBERS"
