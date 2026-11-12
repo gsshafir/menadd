@@ -37,11 +37,6 @@ a {
   text-underline-offset: 0.18em;
 }
 
-a:hover {
-  color: var(--accent-hover);
-  text-decoration-thickness: 2px;
-}
-
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -95,10 +90,6 @@ main {
   text-decoration: none;
 }
 
-.wordmark:hover {
-  color: var(--text);
-}
-
 .wordmark-author {
   color: var(--muted);
   font-size: 0.72rem;
@@ -124,7 +115,6 @@ main {
   text-decoration: none;
 }
 
-.site-nav a:hover,
 .site-nav a[aria-current="page"] {
   color: var(--text);
 }
@@ -161,6 +151,10 @@ main.wide-main {
 .home-hero-copy {
   align-self: center;
   grid-column: 1 / span 7;
+}
+
+.hero-eyebrow span + span::before {
+  content: " ";
 }
 
 .home-hero h1 {
@@ -250,14 +244,28 @@ main.wide-main {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.case-grid {
+  column-gap: 32px;
+  row-gap: 0;
+}
+
 .situation-card:last-child {
   grid-column: 1 / -1;
 }
 
 .situation-card,
-.case-card,
 .library-card {
   padding: 24px;
+}
+
+.situation-card h3::after {
+  color: var(--accent);
+  content: " →";
+}
+
+.case-card {
+  border-top: 1px solid var(--rule);
+  padding: 24px 0;
 }
 
 .situation-card h3,
@@ -437,12 +445,6 @@ a.card {
   text-decoration: none;
 }
 
-.card:hover,
-a.card:hover {
-  border-color: var(--text);
-  color: var(--text);
-}
-
 .section-entry h3,
 .article-entry h2,
 .artifact-entry h3 {
@@ -545,22 +547,10 @@ a.card:hover {
   text-decoration: none;
 }
 
-.button-link:hover {
-  background: var(--accent-hover);
-  border-color: var(--accent-hover);
-  color: var(--bg);
-}
-
 .button-link-secondary {
   background: transparent;
   border-color: var(--text);
   color: var(--text);
-}
-
-.button-link-secondary:hover {
-  background: var(--text);
-  border-color: var(--text);
-  color: var(--bg);
 }
 
 .quiet-link {
@@ -640,11 +630,6 @@ button:disabled {
   display: block;
   padding: 1rem;
   text-decoration: none;
-}
-
-.assessment-choice:hover {
-  border-color: var(--text);
-  color: var(--text);
 }
 
 .assessment-choice[aria-current="page"] {
@@ -875,6 +860,44 @@ button:disabled {
   color: var(--accent);
 }
 
+@media (hover: hover) {
+  a:hover {
+    color: var(--accent-hover);
+    text-decoration-thickness: 2px;
+  }
+
+  .wordmark:hover {
+    color: var(--text);
+  }
+
+  .site-nav a:hover {
+    color: var(--text);
+  }
+
+  .card:hover,
+  a.card:hover {
+    border-color: var(--text);
+    color: var(--text);
+  }
+
+  .button-link:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: var(--bg);
+  }
+
+  .button-link-secondary:hover {
+    background: var(--text);
+    border-color: var(--text);
+    color: var(--bg);
+  }
+
+  .assessment-choice:hover {
+    border-color: var(--text);
+    color: var(--text);
+  }
+}
+
 @media (min-width: 621px) {
   :root {
     --section-space: 96px;
@@ -935,18 +958,13 @@ button:disabled {
   }
 
   main.wide-main {
-    padding-top: 24px;
+    padding-top: 16px;
   }
 
   .home-hero {
-    gap: 12px;
-    grid-template-columns: 1fr;
-  }
-
-  .home-hero-copy,
-  .home-portrait,
-  .home-hero-actions {
-    grid-column: 1;
+    column-gap: 16px;
+    grid-template-columns: 96px minmax(0, 1fr);
+    row-gap: 10px;
   }
 
   .home-hero-copy {
@@ -954,37 +972,55 @@ button:disabled {
   }
 
   .home-hero .eyebrow {
+    align-self: center;
+    grid-column: 2;
     grid-row: 1;
     margin: 0;
   }
 
+  .hero-eyebrow span {
+    display: block;
+  }
+
+  .hero-eyebrow span + span::before {
+    content: none;
+  }
+
   .home-hero h1 {
-    font-size: clamp(2rem, 10.5vw, 2.5rem);
+    font-size: 35px;
+    grid-column: 1 / -1;
     grid-row: 2;
-    max-width: 12ch;
+    line-height: 1.05;
+    max-width: none;
   }
 
   .home-hero-lede {
-    font-size: 0.84rem;
+    font-size: 17px;
+    grid-column: 1 / -1;
     grid-row: 3;
-    line-height: 1.4;
+    line-height: 1.32;
     margin-top: 0;
   }
 
   .home-portrait {
-    grid-row: 4;
-    height: min(45vw, 180px);
-    justify-self: start;
-    width: min(36vw, 144px);
+    grid-column: 1;
+    grid-row: 1;
+    height: 120px;
+    width: 96px;
   }
 
   .home-hero-actions {
-    grid-row: 5;
+    display: flex;
+    gap: 10px;
+    grid-column: 1 / -1;
+    grid-row: 4;
   }
 
   .home-hero-actions .button-link {
-    font-size: 0.78rem;
-    padding-inline: 0.65rem;
+    flex: 1 1 0;
+    font-size: 0.7rem;
+    min-width: 0;
+    padding-inline: 0.35rem;
     width: auto;
   }
 }
@@ -992,7 +1028,6 @@ button:disabled {
 @media (max-width: 400px) {
   .site-header {
     gap: 4px;
-    padding-inline: 12px;
   }
 
   .wordmark {
@@ -1072,9 +1107,12 @@ button:disabled {
   }
 
   .situation-card,
-  .case-card,
   .library-card {
     padding: 18px;
+  }
+
+  .case-card {
+    padding: 20px 0;
   }
 
   .term-sheet-pattern {

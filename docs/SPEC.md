@@ -493,6 +493,14 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 
 **Карточки.** Рамка 1 px цветом линий, без теней. При наведении рамка темнеет до #171717. Карточка ситуации кликабельна целиком.
 
+### Home: mobile and interaction
+
+- Below 768 px, the hero starts with a row: a 96×120 px photo on the left and the eyebrow on the right, broken into three lines: “Gennady Shafir.”, “CFO and board advisor.”, “UAE.” Then the H1 is 34–36 px, the subtitle is 17 px, and the two buttons sit side by side at half width each. In a 375×640 px visible area both buttons are fully visible without scrolling.
+- The header horizontal padding on Home matches all other pages and the content below it.
+- All hover styles are wrapped in `@media (hover: hover)` so borders do not stay dark after a tap.
+- Each situation card title ends with an accent-coloured “→”.
+- Cases have no boxes. Thin rules separate them. Case titles have no trailing full stop. The cases remain a 2×2 grid on desktop.
+
 ### Фото
 
 - Первый экран: вертикальный кадр 4:5, плотная обрезка по голове и плечам. Колонка фото занимает 5 из 12 колонок.

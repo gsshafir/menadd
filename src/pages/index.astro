@@ -17,10 +17,10 @@ const situations = [
 ];
 
 const cases = [
-  { title: "IP in several jurisdictions, investors wanted one owner.", body: "An early-stage industrial technology company. Its patents were spread across several jurisdictions. Investors would not fund a company that did not hold its core asset in one place. I consolidated the portfolio into a single holding entity in the jurisdiction the investors required and aligned the documents with their terms. The round closed." },
-  { title: "No founder vesting, no decisions.", body: "The founders held their equity outright. Every important question turned into a deadlock, and the investors saw it. I led the introduction of founder vesting. Once the founders were bound to the company on the same terms, the deadlock broke. The Series A closed." },
-  { title: "From grants to venture capital.", body: "A technology company had lived on public grants for years and could not raise venture capital. The structure was built for grant compliance, not for investors. I ran the relocation of the headquarters and the restructuring of the group around a new holding. A seven-figure round closed." },
-  { title: "A company that could not continue where it was.", body: "The existing structure had no way forward. I ran the wind-down and the rebuild of the business in a new entity in another region. It has since closed four rounds." }
+  { title: "IP in several jurisdictions, investors wanted one owner", body: "An early-stage industrial technology company. Its patents were spread across several jurisdictions. Investors would not fund a company that did not hold its core asset in one place. I consolidated the portfolio into a single holding entity in the jurisdiction the investors required and aligned the documents with their terms. The round closed." },
+  { title: "No founder vesting, no decisions", body: "The founders held their equity outright. Every important question turned into a deadlock, and the investors saw it. I led the introduction of founder vesting. Once the founders were bound to the company on the same terms, the deadlock broke. The Series A closed." },
+  { title: "From grants to venture capital", body: "A technology company had lived on public grants for years and could not raise venture capital. The structure was built for grant compliance, not for investors. I ran the relocation of the headquarters and the restructuring of the group around a new holding. A seven-figure round closed." },
+  { title: "A company that could not continue where it was", body: "The existing structure had no way forward. I ran the wind-down and the rebuild of the business in a new entity in another region. It has since closed four rounds." }
 ];
 
 const wantedTitles = ["How Founders Lose a Company in Three Years", "Which Entity a Round Actually Closes Into", "The UAE Raise Is a Trust Process"];
@@ -32,7 +32,7 @@ const featuredArticles = wantedTitles.map((articleTitle) => articles.find(({ dat
   <div class="home-page">
     <section class="home-hero" aria-labelledby="home-title">
       <div class="home-hero-copy">
-        <p class="eyebrow">Gennady Shafir. CFO and board advisor. UAE.</p>
+        <p class="eyebrow hero-eyebrow"><span>Gennady Shafir.</span><span>CFO and board advisor.</span><span>UAE.</span></p>
         <h1 id="home-title">I read the cap table before I read the plan.</h1>
         <p class="home-hero-lede">I work with founders and investors on the questions that decide whether a round closes and what the founders keep after it. Finance, ownership, control and cross-border structure. UAE, MENA, and the routes through ADGM, DIFC and Luxembourg.</p>
       </div>
@@ -62,7 +62,7 @@ const featuredArticles = wantedTitles.map((articleTitle) => articles.find(({ dat
       <h2>Four structures. Four closed rounds.</h2>
       <p class="section-lede">None of these companies had a growth problem. Each had a structure an investor could not fund.</p>
       <div class="case-grid">
-        {cases.map((item) => <article class="card case-card"><h3>{item.title}</h3><p>{item.body}</p></article>)}
+        {cases.map((item) => <article class="case-card"><h3>{item.title}</h3><p>{item.body}</p></article>)}
       </div>
       <article class="term-sheet-pattern">
         <p class="eyebrow">Across many term sheets</p>
