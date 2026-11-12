@@ -137,6 +137,55 @@ main.wide-main {
   width: min(var(--page-width), calc(100% - (2 * var(--page-gutter))));
 }
 
+.work-intro,
+.work-sections {
+  grid-column: 1 / span 8;
+}
+
+.work-intro h1 {
+  font-size: clamp(2.5rem, 5.2vw, 4.25rem);
+  margin-bottom: 0.45em;
+}
+
+.work-sections > section {
+  border-top: 1px solid var(--rule);
+  padding-top: 32px;
+  scroll-margin-top: 24px;
+}
+
+.work-sections > section + section {
+  margin-top: var(--section-space);
+}
+
+.work-sections h2 {
+  font-size: clamp(1.75rem, 3.4vw, 2.4rem);
+  margin-top: 0;
+}
+
+.work-sections ol {
+  padding-left: 1.4em;
+}
+
+.work-sections li + li {
+  margin-top: 0.7em;
+}
+
+.work-limits {
+  color: var(--muted);
+}
+
+.work-limits p {
+  margin-bottom: 0;
+}
+
+.work-cta .button-link {
+  margin-top: 8px;
+}
+
+.work-reading p {
+  margin: 0.75em 0;
+}
+
 .home-page > .home-section,
 .home-page > .subscribe-block {
   margin-top: var(--section-space);
@@ -1182,6 +1231,11 @@ button:disabled {
 
   .twelve-column-grid {
     grid-template-columns: 1fr;
+  }
+
+  .work-intro,
+  .work-sections {
+    grid-column: auto;
   }
 
   .home-stats,

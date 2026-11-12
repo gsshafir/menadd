@@ -10,7 +10,7 @@ export async function GET() {
     "/assessment/",
     "/assessment/structure/",
     "/carta/",
-    "/financing-terms/",
+    "/work/",
     "/about/",
     "/privacy/"
   ];
