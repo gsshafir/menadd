@@ -13,7 +13,6 @@
     "@astrojs/check": "latest",
     "astro": "latest",
     "cross-env": "latest",
-    "sharp": "^0.35.5",
     "typescript": "latest",
     "wrangler": "latest",
     "zod": "latest"
