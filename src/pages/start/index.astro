@@ -194,7 +194,7 @@ const description = "A short form, two minutes. Tell me the company, the decisio
         if (!submit || !turnstileWidget) return;
 
         try {
-          const response = await fetch("/api/turnstile-config");
+          const response = await fetch("/api/turnstile-config", { cache: "no-store" });
           const config = (await response.json()) as { siteKey?: string };
           if (!response.ok || !config.siteKey) throw new Error("Missing Turnstile site key");
 

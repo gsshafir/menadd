@@ -5,6 +5,6 @@ export const onRequestGet: PagesFunction<PagesEnv> = async ({ env }) => {
 
   return Response.json(
     { siteKey: env.PUBLIC_TURNSTILE_SITE_KEY },
-    { headers: { "Cache-Control": "public, max-age=3600" } }
+    { headers: { "Cache-Control": "no-store" } }
   );
 };
