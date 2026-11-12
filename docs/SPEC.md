@@ -263,7 +263,7 @@ The objective is to find the gaps before an investor does.
 
 **H2:** A move across borders
 
-A holding in ADGM, DIFC or Luxembourg. A headquarters that moves. Assets that have to follow it.
+A holding in ADGM, DIFC, Luxembourg or the BVI. A headquarters that moves. Assets that have to follow it.
 
 The structure has to work for banking, for tax and for the next investor at the same time. I design it from the capital stack backwards and coordinate the advisers in each jurisdiction until it is in place.
 
@@ -634,6 +634,10 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 - [ ] Главная, надстрочник первого экрана: «UAE.» заменить на «UAE, London and Luxembourg.» На мобильном это по-прежнему третья строка. About: первый абзац и абзац «Introducing me to someone» привести к той же формулировке, вместо «based in Abu Dhabi» и «based in the UAE».
 - [ ] Главная, блок «Where I fit», колонка «Not a fit»: текст заменить на «An idea that needs a financial model to raise on. A request for investor introductions alone. Work paid only if the round closes.»
 - [ ] Главная, карточка «The company is crossing a border»: первое предложение заменить на «Into ADGM or DIFC, under a Luxembourg holding or a BVI holdco.»
+- [ ] Страница 404: ссылку «Run the assessment» заменить на «Run the structure check» со ссылкой на /assessment/structure/.
+- [ ] Work, блок #border: первое предложение заменить на «A holding in ADGM, DIFC, Luxembourg or the BVI.» Так он совпадает с карточкой на главной.
+- [ ] Главная, график «Founders' combined ownership», мобильная версия: подписи оси X налезают друг на друга. Ниже 768 px показывать короткие подписи в одну строку: Split · Pre-seed · Seed · Series A · Recap. Полные подписи с годом оставить на десктопе.
+- [ ] Главная, заголовок графика: на телефоне он занимает три строки крупным шрифтом. Оформить его так же, как заголовок графика на Work, тем же размером. Апостроф заменить на типографский: Founders’.
 
 ## 12. Что нужно от тебя до старта
 
