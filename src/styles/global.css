@@ -112,7 +112,7 @@ main {
   font-family: var(--sans);
 }
 
-.site-nav-desktop {
+.site-nav {
   gap: 8px 18px;
   justify-content: flex-end;
   margin-left: auto;
@@ -135,7 +135,7 @@ main {
   white-space: nowrap;
 }
 
-.mobile-menu {
+.menu-toggle {
   display: none;
 }
 
@@ -687,44 +687,55 @@ button:disabled {
   }
 }
 
-@media (max-width: 920px) {
+@media (width < 768px) {
   .site-header {
-    flex-wrap: wrap;
-    gap: 12px 16px;
+    gap: 8px;
+    padding: 8px var(--page-gutter);
+    position: relative;
+    width: 100%;
   }
 
-  .site-nav-desktop {
-    display: none;
+  .wordmark {
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.2;
   }
 
   .header-cta {
+    font-size: 0.75rem;
+    padding-inline: 0.65rem;
+  }
+
+  .menu-toggle {
+    background: transparent;
+    border: 0;
+    color: var(--text);
+    display: inline-flex;
+    font-size: 0.75rem;
     margin-left: auto;
+    padding-inline: 0.4rem;
   }
 
-  .mobile-menu {
-    flex: 0 0 100%;
-    display: block;
-    font-family: var(--sans);
-    font-size: 0.78rem;
-  }
-
-  .mobile-menu summary {
-    color: var(--muted);
-    cursor: pointer;
-    list-style-position: inside;
-    min-height: 44px;
-    padding: 10px 0;
-  }
-
-  .site-nav-mobile {
-    border-top: 1px solid var(--rule);
+  .site-nav {
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+    display: none;
     flex-direction: column;
     gap: 0;
+    inset-inline: 0;
+    margin: 0;
+    padding-inline: var(--page-gutter);
+    position: absolute;
+    top: calc(100% + 1px);
+    z-index: 1;
   }
 
-  .site-nav-mobile a {
+  .menu-toggle[aria-expanded="true"] + .site-nav {
+    display: flex;
+  }
+
+  .site-nav a {
     align-items: center;
-    border-bottom: 1px solid var(--rule);
     display: flex;
     min-height: 44px;
   }
@@ -733,10 +744,6 @@ button:disabled {
 @media (max-width: 620px) {
   html {
     font-size: 17px;
-  }
-
-  .wordmark {
-    gap: 6px;
   }
 
   .wordmark-author {
@@ -759,11 +766,6 @@ button:disabled {
   main .button-link {
     text-align: center;
     width: 100%;
-  }
-
-  .header-cta {
-    font-size: 0.7rem;
-    padding-inline: 0.65rem;
   }
 
   .footer-links {

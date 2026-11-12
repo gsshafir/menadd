@@ -88,7 +88,8 @@ const personJsonLd = {
         <span>{site.name}</span>
         <span class="wordmark-author">Gennady Shafir</span>
       </a>
-      <nav class="site-nav site-nav-desktop" aria-label="Main navigation">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
         {
           nav.map((item) => (
             <a href={item.href} aria-current={isCurrentNavItem(item.href) ? "page" : undefined}>
@@ -98,18 +99,6 @@ const personJsonLd = {
         }
       </nav>
       <a class="button-link header-cta" href="/start/">Start a conversation</a>
-      <details class="mobile-menu">
-        <summary>Menu</summary>
-        <nav class="site-nav site-nav-mobile" aria-label="Mobile navigation">
-          {
-            nav.map((item) => (
-              <a href={item.href} aria-current={isCurrentNavItem(item.href) ? "page" : undefined}>
-                {item.label}
-              </a>
-            ))
-          }
-        </nav>
-      </details>
     </header>
     <main>
       <slot />
@@ -127,5 +116,34 @@ const personJsonLd = {
       <p>General information, not legal, tax or investment advice.</p>
       <p>Copyright 2026 MENADD</p>
     </footer>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+      const nav = document.querySelector<HTMLElement>("#site-nav");
+
+      if (toggle && nav) {
+        const setExpanded = (expanded: boolean) => {
+          toggle.setAttribute("aria-expanded", String(expanded));
+        };
+
+        toggle.addEventListener("click", () => {
+          setExpanded(toggle.getAttribute("aria-expanded") !== "true");
+        });
+
+        nav.addEventListener("click", (event) => {
+          if (event.target instanceof Element && event.target.closest("a")) {
+            setExpanded(false);
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+            setExpanded(false);
+            toggle.focus();
+          }
+        });
+
+        matchMedia("(width < 768px)").addEventListener("change", () => setExpanded(false));
+      }
+    </script>
   </body>
 </html>
