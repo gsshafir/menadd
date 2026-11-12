@@ -1,12 +1,27 @@
 ---
+import { Picture } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import { meta } from "../data";
+import portrait from "../assets/gennady-shafir.jpg";
 ---
 
 <Base title={meta.about.title} description={meta.about.description} canonical="/about/">
   <section>
     <h1>About</h1>
-    <p>MENADD is the advisory practice of Gennady Shafir, an Abu Dhabi-based CFO and independent board advisor. I work with founders on financing terms, ownership, control and the structure needed to execute a financing.</p>
+    <div class="about-intro">
+      <Picture
+        src={portrait}
+        alt="Gennady Shafir"
+        class="about-portrait"
+        widths={[240, 480]}
+        formats={["avif", "webp"]}
+        sizes="240px"
+        width={240}
+        height={240}
+        loading="eager"
+      />
+      <p>I am Gennady Shafir, a CFO and board advisor working between the UAE, London and Luxembourg. MENADD is where I write down what I have learned.</p>
+    </div>
     <p>Over the past decade I have held operating roles as CEO, co-founder, COO and CFO in venture-backed companies. This work draws on those responsibilities for capital, corporate structure and international operations across the UAE, MENA and Europe.</p>
 
     <h2>Track record</h2>
@@ -32,9 +47,13 @@ import { meta } from "../data";
     <p>Financing terms and capital planning. Founder ownership and control. Cap tables, investor preferences and governance. Cross-border structure supporting financing and exit. UAE, MENA and European corridors.</p>
     <p>Structure is not admin. It is strategy.</p>
 
+    <h2>Introducing me to someone</h2>
+    <p>A short version you can copy.</p>
+    <p>Gennady Shafir is a CFO and board advisor working between the UAE, London and Luxembourg. He has been CEO, COO and CFO in venture-backed companies, including a B2B e-commerce business built to over $50M in annual revenue and a hardware company scaled through a Series B at a valuation above $100M. He works with founders and investors on finance, ownership and cross-border structure, usually before a financing round. menadd.com</p>
+
     <h2>Contact</h2>
     <p>Email: <a href="mailto:gennady@menadd.com">gennady@menadd.com</a></p>
-    <p>Book a call: <a href="https://calendar.app.google/NHdtM4bGDWJgMDi16">Schedule a conversation</a></p>
     <p>LinkedIn: <a href="https://linkedin.com/in/gennadyshafir">linkedin.com/in/gennadyshafir</a></p>
+    <a class="button-link" href="/start/">Start a conversation</a>
   </section>
 </Base>

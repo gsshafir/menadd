@@ -23,8 +23,7 @@ export const structureAssessmentCopy = {
   copyButton: "Copy this result",
   copied: "Copied. Paste it into your notes or send it to the people working on the structure.",
   copyFailed: "Copy failed. Select the result and copy it manually.",
-  disclaimer: "MENADD provides general information, not legal, tax or investment advice.",
-  calendarLabel: "Discuss a financing decision",
+  startLabel: "Start a conversation",
   emailLabel: "gennady@menadd.com",
   libraryLabel: "Read the Ownership and Cap Table library"
 };
@@ -503,15 +502,15 @@ export const outputStrings = {
     'You answered "not sure" to {unknowns} of 14 questions. In diligence, an unknown stays an open item until a document or a register closes it. Closing it now is faster than explaining it after the investor asks.',
   noUnknowns: "You answered every question. That alone puts you ahead of most companies at this stage.",
   issueCta:
-    "Review the result with me. Thirty minutes, no charge. We work out which finding matters first, which documents would confirm it, and whether a written review is worth doing. No documents are reviewed on the call.",
+    "Review the result with me. Thirty minutes, no charge. I work out which finding matters first, which documents would confirm it, and whether a written review is worth doing. No documents are reviewed on the call.",
   clearCta:
     "Nothing here looks like a blocker. The remaining risk is in the documents behind your answers. Thirty minutes, no charge, to identify which ones are worth checking before the round. You leave with a defined scope and no obligation to proceed.",
   generated: "Generated from self-reported answers on {date}. No documents were reviewed.",
-  attribution: "MENADD, menadd.com. MENADD provides general information, not legal, tax or investment advice."
+  attribution: "MENADD, menadd.com."
 };
 
 export const assessmentLinks = {
-  calendar: "https://calendar.app.google/NHdtM4bGDWJgMDi16",
+  start: "/start/",
   email: "mailto:gennady@menadd.com",
   ownership: "/library/ownership/"
 };

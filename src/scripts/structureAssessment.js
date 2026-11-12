@@ -1,5 +1,4 @@
 import {
-  assessmentLinks,
   findingLibrary,
   outputStrings,
   questionGroups,
@@ -283,9 +282,6 @@ export function initialiseStructureAssessment() {
       copyStatus.textContent = copied ? structureAssessmentCopy.copied : structureAssessmentCopy.copyFailed;
     }
   });
-
-  const calendarLink = document.querySelector("[data-calendar-link]");
-  if (calendarLink instanceof HTMLAnchorElement) calendarLink.href = assessmentLinks.calendar;
 
   updateProgress();
 }

@@ -64,7 +64,7 @@ export const meta = {
   home: {
     title: "MENADD | Financing Terms, Ownership and Control",
     description:
-      "MENADD helps MENA founders evaluate financing terms, model dilution and control, and plan future rounds and cross-border structures."
+      "CFO and board advisor in the UAE. I work with founders and investors on the finance, ownership and structure questions that decide whether a round closes."
   },
   library: {
     title: "The Diligence Library | MENADD",

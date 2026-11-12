@@ -1,6 +1,5 @@
 ---
 import Base from "../layouts/Base.astro";
-import { assessmentLinks } from "../data/structureAssessment.js";
 
 const title = "Preparing an ADGM, DIFC or Luxembourg cap table for Carta | MENADD";
 const description =
@@ -9,10 +8,10 @@ const partnerLink =
   "https://carta.com/partners/referral/?utm_medium=ChannelReferral&utm_source=menadd&PID=menadd";
 ---
 
-<Base title={title} description={description} canonical="/carta/">
+<Base title={title} description={description} canonical="/carta/" noindex>
   <section>
     <h1>Preparing an ADGM, DIFC or Luxembourg cap table for Carta</h1>
-    <p>A platform does not fix a cap table. It records one. MENADD reconstructs and reconciles the ownership history before it gets there.</p>
+    <p>A platform does not fix a cap table. It records one. I reconstruct and reconcile the ownership history before it gets there.</p>
   </section>
 
   <section>
@@ -35,11 +34,11 @@ const partnerLink =
   </section>
 
   <section>
-    <h2>What MENADD does</h2>
+    <h2>What I do</h2>
     <p><strong>Diagnose.</strong> Compare the existing cap table against the instruments, resolutions and constitutional documents that are supposed to support it.</p>
     <p><strong>Reconstruct.</strong> Rebuild the sequence of issuances, amendments, transfers, conversions and employee grants, and resolve the gaps between them.</p>
     <p><strong>Migrate.</strong> Prepare the data set, agree it, and move it onto the platform.</p>
-    <p>This work is led by Gennady Shafir, a CFO and board advisor with a decade of operating experience inside venture-backed companies across finance, ownership and cross-border structures.</p>
+    <p>I am a CFO and board advisor with a decade of operating experience inside venture-backed companies across finance, ownership and cross-border structures.</p>
   </section>
 
   <section>
@@ -52,13 +51,13 @@ const partnerLink =
       <li>A reconciled ESOP and grant schedule, including any entity-level issues that need to be resolved</li>
       <li>A data set ready for management, investor and platform confirmation</li>
     </ul>
-    <p>Where a correction needs a legal opinion, a corporate approval, a filing or a notarial act, MENADD identifies it and coordinates the record with your counsel or corporate services provider. MENADD does not replace local counsel.</p>
+    <p>Where a correction needs a legal opinion, a corporate approval, a filing or a notarial act, I identify it and coordinate the record with your counsel or corporate services provider. I do not replace local counsel.</p>
     <p>Whether or not you end up using Carta, that record is what diligence asks for. The platform is where it lives afterwards.</p>
   </section>
 
   <section>
     <h2>Preparing the record and modelling the decision</h2>
-    <p>A reconciled ownership record establishes the starting point. If you are also preparing a financing, MENADD can use it to model proposed terms, option-pool changes, future dilution and exit distributions, and to identify control questions for counsel.</p>
+    <p>A reconciled ownership record establishes the starting point. If you are also preparing a financing, I can use it to model proposed terms, option-pool changes, future dilution and exit distributions, and to identify control questions for counsel.</p>
     <p>This is a separate agreed scope. It can be commissioned with the record work or independently where the source records are already reliable.</p>
     <p><a href="/work/">Explore financing terms, ownership and control</a></p>
   </section>
@@ -66,7 +65,7 @@ const partnerLink =
   <section>
     <h2>When a spreadsheet is enough</h2>
     <p>A company with one completed round, a simple ownership structure and properly documented grants may not need equity infrastructure. A controlled spreadsheet is enough, and I will say so rather than sell you a platform.</p>
-    <p>Companies with fewer than 25 stakeholders and less than one million dollars raised may be eligible for Carta Launch at no charge, through <a href={partnerLink}>a MENADD introduction</a>. Contact me before creating the account.</p>
+    <p>Companies with fewer than 25 stakeholders and less than one million dollars raised may be eligible for Carta Launch at no charge, through <a href={partnerLink}>an introduction from me</a>. Contact me before creating the account.</p>
   </section>
 
   <section>
@@ -76,20 +75,18 @@ const partnerLink =
 
   <section>
     <h2>The Carta relationship</h2>
-    <p>MENADD is a Carta partner. Companies introduced through MENADD may be eligible for <a href={partnerLink}>Carta partner pricing</a>, subject to Carta's current terms. The introduction has to come first, because pricing cannot be applied retroactively.</p>
+    <p>I am a Carta partner. Companies I introduce may be eligible for <a href={partnerLink}>Carta partner pricing</a>, subject to Carta's current terms. The introduction has to come first, because pricing cannot be applied retroactively.</p>
     <p>Where a client runs Carta, they can grant me advisor access to their account, so the work happens against the live cap table rather than a spreadsheet moving back and forth by email.</p>
-    <p>MENADD does not resell Carta and does not receive a revenue share. Nothing on this page is paid placement.</p>
+    <p>I do not resell Carta and do not receive a revenue share. Nothing on this page is paid placement.</p>
   </section>
 
   <section class="verdict-cta">
-    <h2>Start with a readiness call</h2>
+    <h2>Start with the ownership record</h2>
     <p>Thirty minutes, no charge. We establish which entities, instruments and employee grants are in scope. You then receive a document request and a defined scope and fee for the written readiness review, before anything is sent.</p>
-    <p>If the record is already clean, MENADD can arrange the Carta introduction and partner pricing directly.</p>
+    <p>If the record is already clean, I can arrange the Carta introduction and partner pricing directly.</p>
     <div class="assessment-cta-group">
-      <a class="button-link" href={assessmentLinks.calendar}>Book a readiness call</a>
-      <a href={assessmentLinks.email}>gennady@menadd.com</a>
+      <a class="button-link" href="/start/">Start a conversation</a>
+      <a href="mailto:gennady@menadd.com">gennady@menadd.com</a>
     </div>
   </section>
-
-  <p class="assessment-caveat"><em>MENADD provides general information, not legal, tax or investment advice.</em></p>
 </Base>
