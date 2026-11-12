@@ -9,6 +9,7 @@ type Props = {
   ogType?: "website" | "article";
   ogImage?: string;
   noindex?: boolean;
+  wide?: boolean;
 };
 
 const {
@@ -17,7 +18,8 @@ const {
   canonical = Astro.url.pathname,
   ogType = "website",
   ogImage = "/og-default.png",
-  noindex = false
+  noindex = false,
+  wide = false
 } = Astro.props;
 const canonicalUrl = new URL(canonical, site.url).toString();
 const ogImageUrl = new URL(ogImage, site.url).toString();
@@ -100,7 +102,7 @@ const personJsonLd = {
       </nav>
       <a class="button-link header-cta" href="/start/">Start a conversation</a>
     </header>
-    <main>
+    <main class:list={{ "wide-main": wide }}>
       <slot />
     </main>
     <footer class="site-footer">

@@ -1,80 +1,116 @@
 ---
-import Base from "../layouts/Base.astro";
+import { Picture } from "astro:assets";
+import { getCollection } from "astro:content";
+import portrait from "../assets/gennady-shafir.jpg";
 import SubscribeForm from "../components/SubscribeForm.astro";
-import { meta, sections } from "../data";
+import Base from "../layouts/Base.astro";
+
+const title = "Gennady Shafir | Finance, Ownership and Structure | MENADD";
+const description = "CFO and board advisor in the UAE. I work with founders and investors on the finance, ownership and structure questions that decide whether a round closes.";
+
+const situations = [
+  { title: "A term sheet is on the table.", body: "The headline valuation is the easy part. I model what the terms do to ownership, control and the next round, before you sign.", href: "/work/#financing" },
+  { title: "The company has outgrown its finance.", body: "Revenue is real. Cash planning, reporting and investor conversations still sit with the founder. You need a senior operator in the team, and a full-time CFO is a year away.", href: "/work/#finance" },
+  { title: "The structure will not survive diligence.", body: "The round closes into the wrong entity. The IP sits somewhere else. Equity was promised and never issued. By the time this shows up in diligence, it is already expensive.", href: "/work/#structure" },
+  { title: "The company is crossing a border.", body: "Into ADGM, DIFC or under a Luxembourg holding. The structure has to work for banking, for tax and for the next investor at the same time.", href: "/work/#border" },
+  { title: "You are an investor.", body: "A portfolio company is growing faster than its finance and governance. You want someone on the operating side who reports the way an investor expects.", href: "/investors/" }
+];
+
+const cases = [
+  { title: "IP in several jurisdictions, investors wanted one owner.", body: "An early-stage industrial technology company. Its patents were spread across several jurisdictions. Investors would not fund a company that did not hold its core asset in one place. I consolidated the portfolio into a single holding entity in the jurisdiction the investors required and aligned the documents with their terms. The round closed." },
+  { title: "No founder vesting, no decisions.", body: "The founders held their equity outright. Every important question turned into a deadlock, and the investors saw it. I led the introduction of founder vesting. Once the founders were bound to the company on the same terms, the deadlock broke. The Series A closed." },
+  { title: "From grants to venture capital.", body: "A technology company had lived on public grants for years and could not raise venture capital. The structure was built for grant compliance, not for investors. I ran the relocation of the headquarters and the restructuring of the group around a new holding. A seven-figure round closed." },
+  { title: "A company that could not continue where it was.", body: "The existing structure had no way forward. I ran the wind-down and the rebuild of the business in a new entity in another region. It has since closed four rounds." }
+];
+
+const wantedTitles = ["How Founders Lose a Company in Three Years", "Which Entity a Round Actually Closes Into", "The UAE Raise Is a Trust Process"];
+const articles = await getCollection("articles", ({ data }) => !data.draft && wantedTitles.includes(data.title));
+const featuredArticles = wantedTitles.map((articleTitle) => articles.find(({ data }) => data.title === articleTitle)).filter(Boolean);
 ---
 
-<Base title={meta.home.title} description={meta.home.description} canonical="/">
-  <section>
-    <p class="eyebrow">Capital, ownership and control for MENA founders.</p>
-    <h1>Understand what your next round changes.</h1>
-    <p>A financing round changes your ownership, the decisions you can make, and what you receive when the company is sold. Its terms also shape the next round.</p>
-    <p>MENADD helps founders compare financing proposals, model dilution across successive rounds, understand investor rights with counsel, and prepare alternatives if the capital plan changes. For cross-border companies, we also examine the structure the financing needs to work through.</p>
-    <p>Start with the decision in front of you: a term sheet, a new convertible instrument, a bridge, or the next priced round.</p>
-    <div class="assessment-cta-group">
-      <a class="button-link" href="/financing-terms/#start">Discuss your financing decision</a>
-      <a class="quiet-link" href="/library/">Explore the diligence library</a>
-    </div>
-  </section>
+<Base title={title} description={description} canonical="/" wide>
+  <div class="home-page">
+    <section class="home-hero" aria-labelledby="home-title">
+      <div class="home-hero-copy">
+        <p class="eyebrow">Gennady Shafir. CFO and board advisor. UAE.</p>
+        <h1 id="home-title">I read the cap table before I read the plan.</h1>
+        <p class="home-hero-lede">I work with founders and investors on the questions that decide whether a round closes and what the founders keep after it. Finance, ownership, control and cross-border structure. UAE, MENA, and the routes through ADGM, DIFC and Luxembourg.</p>
+      </div>
+      <div class="home-portrait">
+        <Picture src={portrait} alt="Gennady Shafir" widths={[480, 800, 1200]} formats={["avif", "webp"]} sizes="(max-width: 767px) 144px, (max-width: 1200px) 38vw, 443px" loading="eager" fetchpriority="high" />
+      </div>
+      <div class="home-hero-actions">
+        <a class="button-link" href="/start/">Start a conversation</a>
+        <a class="button-link button-link-secondary" href="/library/">Read the library</a>
+      </div>
+    </section>
 
-  <section>
-    <h2>When to work with MENADD</h2>
-    <div class="assessment-chooser">
-      <a class="assessment-choice" href="/financing-terms/#financing-terms">
-        <h2>You have financing terms to evaluate</h2>
-        <p>Compare the proposed terms, model their financial consequences and prepare the issues you want to negotiate before signing.</p>
-        <p>See the work</p>
-      </a>
-      <a class="assessment-choice" href="/financing-terms/#ownership-and-control">
-        <h2>You need to see beyond this round</h2>
-        <p>Model existing instruments, new investment and option pools together. See how ownership, control and exit distributions change through later financings.</p>
-        <p>See the work</p>
-      </a>
-      <a class="assessment-choice" href="/financing-terms/#next-financing">
-        <h2>The capital plan has changed</h2>
-        <p>Compare additional funding, bridge and down-round scenarios, including the dilution, consent requirements and implications for the next financing.</p>
-        <p>See the work</p>
-      </a>
-    </div>
-  </section>
+    <section class="home-stats" aria-label="Operating experience">
+      <div><strong>$50M+</strong><p>Annual revenue, 200+ people. B2B e-commerce. CEO and co-founder.</p></div>
+      <div><strong>$100M+</strong><p>Valuation at Series B, 30+ countries. 3D-printing hardware. COO and CFO.</p></div>
+      <div><strong>$10M+</strong><p>Raised, with licensing across MENA and the EU. Deep-tech energy. CFO.</p></div>
+    </section>
 
-  <section>
-    <h2>Checks you can run before a conversation</h2>
-    <div class="assessment-chooser">
-      <a class="assessment-choice" href="/assessment/structure/">
-        <h2>Structure and ownership</h2>
-        <p>Check the ownership record, employee equity and entity structure behind your financing.</p>
-        <p>Run the structure check</p>
-      </a>
-      <a class="assessment-choice" href="/assessment/">
-        <h2>Financial metrics</h2>
-        <p>See the questions your recurring or repeatable B2B revenue metrics may raise during investor diligence.</p>
-        <p>Run the financial check</p>
-      </a>
-    </div>
-  </section>
+    <section class="home-section">
+      <h2>When people call me</h2>
+      <div class="situation-grid">
+        {situations.map((situation) => <a class="card situation-card" href={situation.href}><h3>{situation.title}</h3><p>{situation.body}</p></a>)}
+      </div>
+    </section>
 
-  <section>
-    <h2>Library Sections</h2>
-    <div class="section-list">
-      {
-        sections.map((section) => (
-          <div class="section-entry">
-            <h3><a href={section.href}>{section.title}</a></h3>
-            <p>{section.short}</p>
-          </div>
-        ))
-      }
-    </div>
-  </section>
+    <section class="home-section">
+      <h2>Four structures. Four closed rounds.</h2>
+      <p class="section-lede">None of these companies had a growth problem. Each had a structure an investor could not fund.</p>
+      <div class="case-grid">
+        {cases.map((item) => <article class="card case-card"><h3>{item.title}</h3><p>{item.body}</p></article>)}
+      </div>
+      <article class="term-sheet-pattern">
+        <p class="eyebrow">Across many term sheets</p>
+        <h3>And the term sheets.</h3>
+        <p>In the term sheets I have worked on, the valuation was rarely the problem. The same four clauses were. Veto rights wider than the investor's stake. Board seats that move control before the ownership does. Down-round protection that lands entirely on the founders. Drag-along that lets someone else decide when the company is sold. I model what each clause costs and put a number next to it, so the founders negotiate the clause and not the headline.</p>
+      </article>
+      <p class="case-note">Details are withheld to protect the companies. I can go through them on a call.</p>
+    </section>
 
-  <section>
-    <h2>Why "built from the diligence backwards"</h2>
-    <p>A standard diligence process starts from the investor and works into the company. This library runs the same route in reverse: it starts from the questions diligence will ask and works back to how the company should have been built.</p>
-    <p>The same logic applies to the structure itself. It should be designed from the capital stack backwards. Before the first entity is opened. Not after the first term sheet.</p>
-    <p>The material comes from operating experience, not theory. A decade inside venture-backed companies, on the founder and CFO side of the table, in the UAE and across borders.</p>
-    <a class="cta-link" href="/about/">About →</a>
-  </section>
+    <section class="home-section prose-section">
+      <h2>Why I start with structure</h2>
+      <p>I have been on the operating side of a transaction that did not close. The business was working. The corporate structure could not take the investment.</p>
+      <p>Since then I look at the same four things first, in every company. Who owns what. Who can block what. Which entity holds the value. Where the cash is.</p>
+      <p>Structure is not admin. It is strategy.</p>
+    </section>
 
-  <SubscribeForm sourcePage="/" />
+    <section class="home-section prose-section">
+      <h2>How the work takes shape</h2>
+      <p>It depends on the company. Sometimes it is one defined piece of work around a financing decision. Sometimes it is a seat in the team or on the board. We work that out after the first conversation, once I have seen the company.</p>
+      <p>I work alongside your counsel. I do not replace them.</p>
+    </section>
+
+    <section class="home-section">
+      <h2>Where I fit</h2>
+      <div class="fit-grid">
+        <div><h3>A fit.</h3><p>A team that can build and a product that exists. Revenue or committed capital. A decision with a date on it.</p></div>
+        <div><h3>Not a fit.</h3><p>An idea that needs a financial model to raise on. A request for investor introductions. Work paid only on success, or only in equity.</p></div>
+      </div>
+    </section>
+
+    <section class="home-section">
+      <h2>From the library</h2>
+      <p class="section-lede">MENADD is where I write this down. Built from the diligence backwards.</p>
+      <div class="library-card-grid">
+        {featuredArticles.map((article) => article && <a class="card library-card" href={`/library/${article.data.section}/${article.id}/`}><h3>{article.data.title}</h3><p>{article.data.description}</p></a>)}
+      </div>
+      <div class="home-link-row">
+        <a href="/library/">All articles →</a>
+        <a href="/assessment/structure/">Not ready to talk. Run the structure check first. →</a>
+      </div>
+    </section>
+
+    <section class="home-section final-cta">
+      <h2>Tell me what is in front of you.</h2>
+      <p>A short form, two minutes. I read every enquiry myself. If I am not the right person, I will say so.</p>
+      <a class="button-link" href="/start/">Start a conversation</a>
+    </section>
+
+    <SubscribeForm sourcePage="/" />
+  </div>
 </Base>
