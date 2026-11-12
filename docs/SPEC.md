@@ -643,7 +643,7 @@ I have attached two files: the site specification and a portrait photo.
 You are rebuilding menadd.com (Astro, Cloudflare Pages). The single source of truth is docs/SPEC.md. Read it before doing anything.
 
 Rules:
-- Work on the branch `rebuild`. Never commit to main.
+- Work on the branch `rebuild`. Never commit to main. At the end of every stage from Stage 1 on, push `rebuild` to the remote so Cloudflare Pages builds a preview, and give me the preview URL.
 - Use the English copy from the spec verbatim. Do not rewrite, shorten or improve it.
 - Do not edit article bodies under /library/.
 - Do not add copy, numbers, sections, icons or dependencies that are not in the spec.
