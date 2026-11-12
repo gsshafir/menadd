@@ -19,10 +19,10 @@ Nov 12, 2026 · @Gennady
 | Секторы | Не называем. Критерий отбора: команда и продукт |
 | Цены, ставки, доля, число компаний | Не публикуем нигде |
 | Главное действие | Одна кнопка «Start a conversation». Она ведёт на анкету. Календарь показывается только после отправки анкеты |
-| Фильтр входящих | Блок «Where I fit» на главной и анкета. Платные разовые заказы не отсекаем. Отсекаем работу только за success fee или только за долю |
+| Фильтр входящих | Блок «Where I fit» на главной и анкета. Платные разовые заказы не отсекаем. Отсекаем работу только за success fee. Доля вместе с оплатой допустима и желательна, публично это не обсуждается |
 | Кейсы | Четыре обезличенных кейса и одна карточка-паттерн по term sheets. Без юрисдикций, названий и точных сумм. Порядок величины допустим |
 | Занятость | Сайт исходит из того, что время есть. Работодатель не упоминается |
-| Локация | «UAE» на главной, «Abu Dhabi» на About |
+| Локация | «UAE, London and Luxembourg» везде, где указано, где работает Геннадий |
 | Что не трогаем | Тексты статей, URL библиотеки, механизм подписки Diligence Notes |
 
 Ещё четыре решения, принятые после двух внешних разборов:
@@ -50,19 +50,15 @@ Nov 12, 2026 · @Gennady
 | /assessment/structure/ | Structure check | Остаётся, пункт меню. Результат ведёт на /start/ | Да |
 | /assessment/ | Investor readiness | Остаётся, из меню убрать | Нет |
 | /carta/ | Cap table migration | Остаётся, noindex, из меню убрать | Нет |
-| /notes/ | Diligence Notes | Существующий 301 на /library/ оставить | Нет |
+| /notes/ | Diligence Notes | Страницы нет, 301 на /library/ остаётся. Ссылка «Diligence Notes» в футере ведёт на /library/#subscribe | Футер |
 | /privacy/ | Privacy | Дописать абзац про анкету | Футер |
 
-**Шапка.** Одинаковая на всех страницах, включая статьи. На ширине от 768 px слева словесный знак «MENADD» и рядом мельче «Gennady Shafir». Справа: Work · For investors · Library · Structure check · About и кнопка «Start a conversation».
-
-На ширине меньше 768 px шапка в одну строку, высотой не более 64 px. Слева «MENADD», прямо под ним мелким текстом «Gennady Shafir». Справа текстовая кнопка «Menu» с `aria-expanded` и главная кнопка «Start a conversation». У «Menu» нет треугольника или отдельной строки.
-
-Меню открывается панелью на всю ширину прямо под шапкой поверх содержимого. Пункты по порядку: Work · For investors · Library · Structure check · About. Без пустых строк и дополнительных разделителей. Меню закрывается повторным нажатием «Menu», клавишей Escape или выбором ссылки. Проверить на 360 и 375 px. Если строка не помещается, уменьшить горизонтальные отступы кнопки, сохранив подпись полностью.
+**Шапка.** Одинаковая на всех страницах, включая статьи. Слева словесный знак «MENADD» и рядом мельче «Gennady Shafir». Справа: Work · For investors · Library · Structure check · About и кнопка «Start a conversation». На мобильном, до 768 px, шапка одной строкой высотой не больше 64 px. Слева знак MENADD, под ним мелко «Gennady Shafir». Справа текстовая кнопка «Menu» и главная кнопка «Start a conversation». Меню открывается панелью на всю ширину прямо под шапкой, поверх контента: Work, For investors, Library, Structure check, About, без пустых строк. Закрывается повторным нажатием, клавишей Escape и при выборе пункта. Системный треугольник details не используется. Если строка не помещается на 360 px, уменьшается горизонтальный отступ кнопки, а не её подпись.
 
 **Футер.** Одинаковый на всех страницах:
 
 - Строка: MENADD. Written by Gennady Shafir. Built from the diligence backwards.
-- Ссылки: Library · Structure check · Diligence Notes (/library/#subscribe) · LinkedIn · Privacy · gennady@menadd.com
+- Ссылки: Library · Structure check · Diligence Notes (ведёт на /library/#subscribe) · LinkedIn · Privacy · gennady@menadd.com
 - Оговорка, один раз: General information, not legal, tax or investment advice.
 - Copyright 2026 MENADD
 
@@ -97,11 +93,11 @@ Nov 12, 2026 · @Gennady
 
 Две колонки на десктопе: текст слева, фото справа. На мобильном фото под подзаголовком, над кнопками.
 
-**Надстрочник:** Gennady Shafir. CFO and board advisor. UAE.
+**Надстрочник:** Gennady Shafir. CFO and board advisor. UAE, London and Luxembourg.
 
 **H1:** I read the cap table before I read the plan.
 
-**Подзаголовок:** I work with founders and investors on the questions that decide whether a round closes and what the founders keep after it. Finance, ownership, control and cross-border structure. UAE, MENA, and the routes through ADGM, DIFC and Luxembourg.
+**Подзаголовок:** I work with founders and investors on the questions that decide whether a round closes and what the founders keep after it. Finance, ownership, control and cross-border structure. UAE, MENA and Europe, and the routes between them through ADGM, DIFC and Luxembourg.
 
 **Кнопки:** Start a conversation (ведёт на /start/) · Read the library (ведёт на /library/)
 
@@ -113,7 +109,7 @@ Nov 12, 2026 · @Gennady
 | --- | --- |
 | $50M+ | Annual revenue, 200+ people. B2B e-commerce. CEO and co-founder. |
 | $100M+ | Valuation at Series B, 30+ countries. 3D-printing hardware. COO and CFO. |
-| $10M+ | Raised, with licensing across MENA and the EU. Deep-tech energy. CFO. |
+| $10M+ | Raised. Deep-tech energy, MENA and the EU. CFO. |
 
 ### Блок 3. Ситуации
 
@@ -127,7 +123,7 @@ Nov 12, 2026 · @Gennady
 
 **The structure will not survive diligence.** The round closes into the wrong entity. The IP sits somewhere else. Equity was promised and never issued. By the time this shows up in diligence, it is already expensive. → /work/#structure
 
-**The company is crossing a border.** Into ADGM, DIFC or under a Luxembourg holding. The structure has to work for banking, for tax and for the next investor at the same time. → /work/#border
+**The company is crossing a border.** Into ADGM or DIFC, under a Luxembourg holding or a BVI holdco. The structure has to work for banking, for tax and for the next investor at the same time. → /work/#border
 
 **You are an investor.** A portfolio company is growing faster than its finance and governance. You want someone on the operating side who reports the way an investor expects. → /investors/
 
@@ -187,7 +183,7 @@ I work alongside your counsel. I do not replace them.
 
 **A fit.** A team that can build and a product that exists. Revenue or committed capital. A decision with a date on it.
 
-**Not a fit.** An idea that needs a financial model to raise on. A request for investor introductions. Work paid only on success, or only in equity.
+**Not a fit.** An idea that needs a financial model to raise on. A request for investor introductions alone. Work paid only if the round closes.
 
 ### Блок 9. Библиотека
 
@@ -404,15 +400,22 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 ### Техника
 
 1. Сайт статический, Astro на Cloudflare Pages. Анкета отправляется через fetch на Pages Function `/api/enquiry`. При любой ошибке введённые данные остаются на странице.
-2. Функция проверяет поля и токен Turnstile, сохраняет заявку в отдельный Cloudflare KV binding `ENQUIRIES` со сроком жизни 30 дней и отправляет письмо через Resend на gennady@menadd.com. При успехе страница переходит на /start/thanks/.
+2. Функция проверяет поля и токен Turnstile, сохраняет заявку в Cloudflare KV со сроком жизни 30 дней и отправляет письмо через Resend на gennady@menadd.com. При успехе страница переходит на /start/thanks/.
 3. Если письмо не ушло, заявка уже лежит в KV, а посетитель видит успех. Ошибка доставки пишется в лог функции без содержимого заявки.
 4. Тема письма: `[MENADD] {founder|investor|other} · {Company} · {Stage} · raised {Capital} · revenue {Revenue} · intro: {Introduced by}`. По теме заявку можно оценить, не открывая письмо.
-5. From: MENADD Enquiries (enquiries@menadd.com). To: gennady@menadd.com. Reply-To письма равен email посетителя.
-6. Защита от спама: скрытое поле-ловушка, Cloudflare Turnstile, ограничение частоты отправок с одного IP. Ключи ограничения частоты хранятся в `ENQUIRIES` с TTL один час.
-7. Ключи Resend и Turnstile хранятся в переменных окружения Cloudflare Pages и не попадают в репозиторий. `RESEND_API_KEY` добавляется в Cloudflare Pages отдельно. Codex даёт пошаговую инструкцию: аккаунт Resend, DNS-записи домена, ключи.
+5. Reply-To письма равен email посетителя.
+6. Защита от спама: скрытое поле-ловушка, Cloudflare Turnstile, ограничение частоты отправок с одного IP.
+7. Ключи Resend и Turnstile хранятся в переменных окружения Cloudflare Pages и не попадают в репозиторий. Codex даёт пошаговую инструкцию: аккаунт Resend, DNS-записи домена, ключи.
 8. Обязательные поля проверяются и в браузере, и в функции. Ошибка показывается рядом с полем.
 9. Автоматических отказов нет. Все заявки доходят до почты, решение принимает Геннадий.
 10. На этапе аудита Codex подтверждает, что Resend и KV ложатся на репозиторий. Если в существующей инфраструктуре есть путь проще, он предлагает его до начала этапа 3.
+
+**Решения после аудита:**
+
+- Функция `functions/api/enquiry.ts`. Turnstile и Resend вызываются обычным fetch, без SDK и новых зависимостей. Образец вызова Resend есть в workers/monthly-report.
+- Отдельный KV binding `ENQUIRIES`. `SUBSCRIBERS` для заявок не использовать. Ключи ограничения частоты хранятся в `ENQUIRIES` с TTL один час.
+- Письмо: From `MENADD Enquiries <enquiries@menadd.com>`, To `gennady@menadd.com`, Reply-To равен email посетителя. Домен menadd.com уже подтверждён в Resend, на нём работает месячный отчёт.
+- Секрет `RESEND_API_KEY` нужно отдельно добавить в Cloudflare Pages. Секрет Worker'а туда не переходит.
 
 ## 8. Остальные страницы
 
@@ -421,7 +424,7 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 ### About
 
 - Вверху добавить фото, квадратная версия, слева от первого абзаца.
-- Первый абзац заменить на: «I am Gennady Shafir, a CFO and board advisor based in Abu Dhabi. MENADD is where I write down what I have learned.»
+- Первый абзац заменить на: «I am Gennady Shafir, a CFO and board advisor working between the UAE, London and Luxembourg. MENADD is where I write down what I have learned.»
 - Разделы Track record, Board Work, Why this site exists, Focus оставить дословно.
 - Удалить строку «Seats are taken on a fee, equity or combined basis.» Форму сделки сайт не объявляет.
 - Раздел Contact: убрать ссылку на календарь. Оставить email и LinkedIn, добавить кнопку «Start a conversation».
@@ -432,7 +435,7 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 
 **Вводная строка:** A short version you can copy.
 
-**Текст:** Gennady Shafir is a CFO and board advisor based in the UAE. He has been CEO, COO and CFO in venture-backed companies, including a B2B e-commerce business built to over $50M in annual revenue and a hardware company scaled through a Series B at a valuation above $100M. He works with founders and investors on finance, ownership and cross-border structure, usually before a financing round. menadd.com
+**Текст:** Gennady Shafir is a CFO and board advisor working between the UAE, London and Luxembourg. He has been CEO, COO and CFO in venture-backed companies, including a B2B e-commerce business built to over $50M in annual revenue and a hardware company scaled through a Series B at a valuation above $100M. He works with founders and investors on finance, ownership and cross-border structure, usually before a financing round. menadd.com
 
 ### Library и разделы библиотеки
 
@@ -472,6 +475,14 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 
 **Телефон первым.** Главный сценарий: ссылку переслали в мессенджере и открыли с телефона. Каждый блок сначала проектируется на 375 px, потом расширяется до десктопа. На телефоне первый экран показывает имя, первую строку, фото и кнопку без прокрутки.
 
+**Мобильные правила после проверки этапа 2:**
+
+- Первый экран на телефоне: сверху строка с фото 96×120 px слева и надстрочником справа в три строки. Ниже H1 34–36 px, подзаголовок 17 px, две кнопки рядом по половине ширины. На видимой области 375×640 px кнопки видны целиком без прокрутки.
+- Горизонтальный отступ шапки равен отступу контента на всех страницах.
+- Стили hover применяются только внутри `@media (hover: hover)`, чтобы после касания рамки не залипали.
+- У карточек ситуаций после заголовка стоит стрелка «→» цветом акцента: это показывает, что карточка ведёт дальше.
+- Кейсы не в рамках. Они разделены тонкими линиями, заголовки кейсов без точки в конце. Так кейсы отличаются от карточек ситуаций, и страница не превращается в столбик одинаковых коробок.
+
 ### Токены
 
 | Токен | Значение | Где используется |
@@ -492,14 +503,6 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 **Кнопки.** Высота 44 px минимум, скругление 4 px. Любой призыв к действию это кнопка, а не строка текста.
 
 **Карточки.** Рамка 1 px цветом линий, без теней. При наведении рамка темнеет до #171717. Карточка ситуации кликабельна целиком.
-
-### Home: mobile and interaction
-
-- Below 768 px, the hero starts with a row: a 96×120 px photo on the left and the eyebrow on the right, broken into three lines: “Gennady Shafir.”, “CFO and board advisor.”, “UAE.” Then the H1 is 34–36 px, the subtitle is 17 px, and the two buttons sit side by side at half width each. In a 375×640 px visible area both buttons are fully visible without scrolling.
-- The header horizontal padding on Home matches all other pages and the content below it.
-- All hover styles are wrapped in `@media (hover: hover)` so borders do not stay dark after a tap.
-- Each situation card title ends with an accent-coloured “→”.
-- Cases have no boxes. Thin rules separate them. Case titles have no trailing full stop. The cases remain a 2×2 grid on desktop.
 
 ### Фото
 
@@ -570,7 +573,7 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 
 **Аналитика**
 
-- Cloudflare Web Analytics включена в панели Cloudflare, без cookies и без баннера согласия. Ничего в код не добавлять.
+- Cloudflare Web Analytics уже включена через панель Cloudflare: по ней работает месячный отчёт из workers/monthly-report. В код ничего не добавлять.
 - Два числа, ради которых всё делается: просмотры /start/ и просмотры /start/thanks/ (это число отправленных анкет). Клики по календарю не отслеживаются, звонки видны в самом календаре.
 
 **Производительность и доступность**
@@ -617,6 +620,21 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 - [ ] Lighthouse на мобильном: Performance от 95, Accessibility от 95
 - [ ] Нет горизонтальной прокрутки на 375, 768, 1280, 1440 px
 
+### Накопленные правки для этапа 8
+
+Мелочи, найденные при проверке этапов. Они не ломают сайт и исправляются одним заходом на этапе 8.
+
+- [ ] Главная, мобильная версия: под кнопкой финального блока две линии-разделителя подряд с пустым местом между ними. Оставить одну.
+- [ ] Главная, блок подписки: слишком большие пустые отступы между формой, строкой «New material goes to this list…» и футером. Сократить примерно вдвое.
+- [ ] Проверить зависимости: в package.json нет новых пакетов относительно main. Единственное допустимое изменение — `publicHoistPattern: sharp` в pnpm-workspace.yaml.
+- [ ] Заменить ключ Resend у месячного отчёта (workers/monthly-report) на новый. Старый ключ засвечен, после замены Геннадий отзывает его в Resend.
+- [ ] Главная, десктоп: блок «And the term sheets» сдвинут вправо примерно на 40 px относительно сетки кейсов. Левый край выровнять по кейсам, сверху поставить такую же тонкую линию, как между кейсами.
+- [ ] Главная, полоса с цифрами: подпись под $10M+ заменить на «Raised. Deep-tech energy, MENA and the EU. CFO.» Слова «with licensing» убрать.
+- [ ] Главная, подзаголовок первого экрана: последнее предложение заменить на «UAE, MENA and Europe, and the routes between them through ADGM, DIFC and Luxembourg.»
+- [ ] Главная, надстрочник первого экрана: «UAE.» заменить на «UAE, London and Luxembourg.» На мобильном это по-прежнему третья строка. About: первый абзац и абзац «Introducing me to someone» привести к той же формулировке, вместо «based in Abu Dhabi» и «based in the UAE».
+- [ ] Главная, блок «Where I fit», колонка «Not a fit»: текст заменить на «An idea that needs a financial model to raise on. A request for investor introductions alone. Work paid only if the round closes.»
+- [ ] Главная, карточка «The company is crossing a border»: первое предложение заменить на «Into ADGM or DIFC, under a Luxembourg holding or a BVI holdco.»
+
 ## 12. Что нужно от тебя до старта
 
 Четыре действия. Все остальные решения приняты и записаны выше.
@@ -655,7 +673,7 @@ I have attached two files: the site specification and a portrait photo.
 You are rebuilding menadd.com (Astro, Cloudflare Pages). The single source of truth is docs/SPEC.md. Read it before doing anything.
 
 Rules:
-- Work on the branch `rebuild`. Never commit to main. At the end of every stage from Stage 1 on, push `rebuild` to the remote so Cloudflare Pages builds a preview, and give me the preview URL. Assume branch preview deployments are on. If the first push of `rebuild` produces no preview URL, tell me.
+- Work on the branch `rebuild`. Never commit to main. At the end of every stage from Stage 1 on, push `rebuild` to the remote so Cloudflare Pages builds a preview, and give me the preview URL.
 - Use the English copy from the spec verbatim. Do not rewrite, shorten or improve it.
 - Do not edit article bodies under /library/.
 - Do not add copy, numbers, sections, icons or dependencies that are not in the spec.
