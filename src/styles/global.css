@@ -297,6 +297,10 @@ main.wide-main {
   font-size: 24px;
 }
 
+.chart-stage-labels-mobile {
+  display: none;
+}
+
 .ownership-line {
   fill: none;
   stroke: var(--text);
@@ -499,9 +503,10 @@ main.wide-main {
 }
 
 .term-sheet-pattern {
+  border-top: 1px solid var(--rule);
   margin-top: 40px;
   max-width: 900px;
-  padding: 0 24px;
+  padding-top: 24px;
 }
 
 .term-sheet-pattern .eyebrow {
@@ -545,7 +550,6 @@ main.wide-main {
 }
 
 .final-cta {
-  border-bottom: 1px solid var(--rule);
   border-top: 1px solid var(--rule);
   padding: 48px 0;
 }
@@ -774,6 +778,18 @@ a.card {
   border-top: 1px solid var(--rule);
   margin-top: 3rem;
   padding-top: 1.4rem;
+}
+
+.home-page > .subscribe-block {
+  margin-top: calc(var(--section-space) / 2);
+}
+
+.home-page > .subscribe-block .field-hint {
+  margin-top: 0.2rem;
+}
+
+.home-page > .subscribe-block .form-message:empty {
+  display: none;
 }
 
 .subscribe-form {
@@ -1217,6 +1233,18 @@ button:disabled {
 }
 
 @media (width < 768px) {
+  .chart-stage-labels-desktop {
+    display: none;
+  }
+
+  .chart-stage-labels-mobile {
+    display: block;
+  }
+
+  .chart-section > h2 {
+    font-size: 1.25rem;
+  }
+
   .site-header {
     gap: 8px;
     padding: 8px var(--page-gutter);
@@ -1443,7 +1471,7 @@ button:disabled {
   }
 
   .term-sheet-pattern {
-    padding: 0;
+    padding-top: 20px;
   }
 
   .fit-grid {

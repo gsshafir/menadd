@@ -5,7 +5,7 @@ const DASHBOARD_URL =
 const REPORT_TIME_ZONE = "Europe/London";
 const TOP_LIMIT = 10;
 const GROUP_LIMIT = 5000;
-const KEY_PAGES = ["/financing-terms/", "/carta/", "/assessment/", "/assessment/structure/"];
+const KEY_PAGES = ["/start/", "/start/thanks/"];
 
 /** @typedef {{ ACCOUNT_TAG: string, SITE_TAG: string, REPORT_TO: string, REPORT_FROM: string, CF_API_TOKEN: string, RESEND_API_KEY: string, TRIGGER_KEY: string }} Env */
 /** @typedef {{ start: Date, end: Date, year: number, month: number, key: string }} MonthRange */

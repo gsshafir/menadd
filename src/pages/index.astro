@@ -13,7 +13,7 @@ const situations = [
   { title: "A term sheet is on the table.", body: "The headline valuation is the easy part. I model what the terms do to ownership, control and the next round, before you sign.", href: "/work/#financing" },
   { title: "The company has outgrown its finance.", body: "Revenue is real. Cash planning, reporting and investor conversations still sit with the founder. You need a senior operator in the team, and a full-time CFO is a year away.", href: "/work/#finance" },
   { title: "The structure will not survive diligence.", body: "The round closes into the wrong entity. The IP sits somewhere else. Equity was promised and never issued. By the time this shows up in diligence, it is already expensive.", href: "/work/#structure" },
-  { title: "The company is crossing a border.", body: "Into ADGM, DIFC or under a Luxembourg holding. The structure has to work for banking, for tax and for the next investor at the same time.", href: "/work/#border" },
+  { title: "The company is crossing a border.", body: "Into ADGM or DIFC, under a Luxembourg holding or a BVI holdco. The structure has to work for banking, for tax and for the next investor at the same time.", href: "/work/#border" },
   { title: "You are an investor.", body: "A portfolio company is growing faster than its finance and governance. You want someone on the operating side who reports the way an investor expects.", href: "/investors/" }
 ];
 
@@ -29,13 +29,13 @@ const articles = await getCollection("articles", ({ data }) => !data.draft && wa
 const featuredArticles = wantedTitles.map((articleTitle) => articles.find(({ data }) => data.title === articleTitle)).filter(Boolean);
 ---
 
-<Base title={title} description={description} canonical="/" ogTitle="Gennady Shafir | CFO and Board Advisor" ogImage="/og/shared.png" ogImageAlt="Gennady Shafir, CFO and board advisor" wide>
+<Base title={title} description={description} canonical="/" ogTitle="Gennady Shafir | CFO and Board Advisor" ogImage="/og/shared.png" ogImageAlt="Gennady Shafir, CFO and board advisor" personJsonLd wide>
   <div class="home-page">
     <section class="home-hero" aria-labelledby="home-title">
       <div class="home-hero-copy">
-        <p class="eyebrow hero-eyebrow"><span>Gennady Shafir.</span><span>CFO and board advisor.</span><span>UAE.</span></p>
+        <p class="eyebrow hero-eyebrow"><span>Gennady Shafir.</span><span>CFO and board advisor.</span><span>UAE, London and Luxembourg.</span></p>
         <h1 id="home-title">I read the cap table before I read the plan.</h1>
-        <p class="home-hero-lede">I work with founders and investors on the questions that decide whether a round closes and what the founders keep after it. Finance, ownership, control and cross-border structure. UAE, MENA, and the routes through ADGM, DIFC and Luxembourg.</p>
+        <p class="home-hero-lede">I work with founders and investors on the questions that decide whether a round closes and what the founders keep after it. Finance, ownership, control and cross-border structure. UAE, MENA and Europe, and the routes between them through ADGM, DIFC and Luxembourg.</p>
       </div>
       <div class="home-portrait">
         <Picture src={portrait} alt="Gennady Shafir" widths={[480, 800, 1200]} formats={["avif", "webp"]} sizes="(max-width: 767px) 144px, (max-width: 1200px) 38vw, 443px" loading="eager" fetchpriority="high" />
@@ -49,7 +49,7 @@ const featuredArticles = wantedTitles.map((articleTitle) => articles.find(({ dat
     <section class="home-stats" aria-label="Operating experience">
       <div><strong>$50M+</strong><p>Annual revenue, 200+ people. B2B e-commerce. CEO and co-founder.</p></div>
       <div><strong>$100M+</strong><p>Valuation at Series B, 30+ countries. 3D-printing hardware. COO and CFO.</p></div>
-      <div><strong>$10M+</strong><p>Raised, with licensing across MENA and the EU. Deep-tech energy. CFO.</p></div>
+      <div><strong>$10M+</strong><p>Raised. Deep-tech energy, MENA and the EU. CFO.</p></div>
     </section>
 
     <section class="home-section">
@@ -92,7 +92,7 @@ const featuredArticles = wantedTitles.map((articleTitle) => articles.find(({ dat
       <h2>Where I fit</h2>
       <div class="fit-grid">
         <div><h3>A fit.</h3><p>A team that can build and a product that exists. Revenue or committed capital. A decision with a date on it.</p></div>
-        <div><h3>Not a fit.</h3><p>An idea that needs a financial model to raise on. A request for investor introductions. Work paid only on success, or only in equity.</p></div>
+        <div><h3>Not a fit.</h3><p>An idea that needs a financial model to raise on. A request for investor introductions alone. Work paid only if the round closes.</p></div>
       </div>
     </section>
 

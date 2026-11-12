@@ -94,7 +94,7 @@ test("report uses lowercase month without abbreviation and handles zero comparis
     sources: emptyRankings,
     countries: emptyRankings,
     devices: emptyRankings,
-    keyPages: ["/financing-terms/", "/carta/", "/assessment/", "/assessment/structure/"].map((name) => ({ name, visits: 0, views: 0 })),
+    keyPages: ["/start/", "/start/thanks/"].map((name) => ({ name, visits: 0, views: 0 })),
   });
   assert.equal(email.subject, "menadd.com: посещаемость за сентябрь 2026");
   assert.match(email.text, /^Данные выборочные, коэффициент 10\./);

@@ -11,6 +11,7 @@ type Props = {
   ogImageAlt?: string;
   ogTitle?: string;
   noindex?: boolean;
+  personJsonLd?: boolean;
   wide?: boolean;
 };
 
@@ -23,6 +24,7 @@ const {
   ogImageAlt = "MENADD. Investor-grade structure for MENA founders.",
   ogTitle = title,
   noindex = false,
+  personJsonLd = false,
   wide = false
 } = Astro.props;
 const canonicalUrl = new URL(canonical, site.url).toString();
@@ -38,27 +40,14 @@ const websiteJsonLd = {
   name: "MENADD",
   url: "https://menadd.com"
 };
-const personJsonLd = {
+const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": "https://menadd.com/about/#gennady",
   name: "Gennady Shafir",
-  jobTitle: "CFO & Board Advisor",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Abu Dhabi",
-    addressCountry: "AE"
-  },
-  url: "https://menadd.com/about/",
-  sameAs: ["https://www.linkedin.com/in/gennadyshafir"],
-  knowsAbout: [
-    "cap tables",
-    "corporate governance",
-    "cross-border structuring",
-    "capital readiness",
-    "investor due diligence",
-    "startup finance"
-  ]
+  jobTitle: "CFO and Board Advisor",
+  url: "https://menadd.com/",
+  sameAs: ["https://www.linkedin.com/in/gennadyshafir"]
 };
 ---
 
@@ -85,7 +74,7 @@ const personJsonLd = {
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+    {personJsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />}
     <slot name="head" />
   </head>
   <body>

@@ -9,8 +9,9 @@ export async function GET() {
     ...sections.map((section) => section.href),
     "/assessment/",
     "/assessment/structure/",
-    "/carta/",
     "/work/",
+    "/investors/",
+    "/start/",
     "/about/",
     "/privacy/"
   ];
