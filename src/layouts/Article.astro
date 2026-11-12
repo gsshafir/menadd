@@ -13,7 +13,7 @@ const section = sections.find((item) => item.key === article.data.section);
 const href = `/library/${article.data.section}/${article.id}/`;
 const canonicalUrl = new URL(href, "https://menadd.com").toString();
 const seoTitle = article.data.seoTitle ?? article.data.title;
-const ogImage = "/og-default.png";
+const ogImage = `/og/articles/${article.id}.png`;
 const ogImageUrl = new URL(ogImage, "https://menadd.com").toString();
 const modifiedDate = article.data.updated ?? article.data.date;
 const formattedDate = article.data.date.toLocaleDateString("en", {
@@ -50,7 +50,7 @@ const articleHtml = (article.rendered?.html ?? "").replace(/<img\b([^>]*)>/g, (_
 });
 ---
 
-<Base title={`${seoTitle} | MENADD`} description={article.data.description} canonical={href} ogType="article" ogImage={ogImage}>
+<Base title={`${seoTitle} | MENADD`} description={article.data.description} canonical={href} ogType="article" ogImage={ogImage} ogImageAlt={`${section?.title}: ${article.data.title}`}>
   <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
   <article>
     <p class="eyebrow"><a href={`/library/${article.data.section}/`}>{section?.title}</a></p>

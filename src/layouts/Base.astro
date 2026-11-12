@@ -8,6 +8,8 @@ type Props = {
   canonical?: string;
   ogType?: "website" | "article";
   ogImage?: string;
+  ogImageAlt?: string;
+  ogTitle?: string;
   noindex?: boolean;
   wide?: boolean;
 };
@@ -18,6 +20,8 @@ const {
   canonical = Astro.url.pathname,
   ogType = "website",
   ogImage = "/og-default.png",
+  ogImageAlt = "MENADD. Investor-grade structure for MENA founders.",
+  ogTitle = title,
   noindex = false,
   wide = false
 } = Astro.props;
@@ -68,14 +72,14 @@ const personJsonLd = {
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content={ogType} />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="MENADD. Investor-grade structure for MENA founders." />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
