@@ -14,3 +14,11 @@ preview_id = "d4187f9778c6416facc8982a89deedf8"
 binding = "ENQUIRIES"
 id = "aae0be501bbc499192ca5e540e918e7b"
 preview_id = "44dc6e56897d49e9b6dca4d42ed53694"
+
+[[env.preview.kv_namespaces]]
+binding = "SUBSCRIBERS"
+id = "d4187f9778c6416facc8982a89deedf8"
+
+[[env.preview.kv_namespaces]]
+binding = "ENQUIRIES"
+id = "44dc6e56897d49e9b6dca4d42ed53694"
