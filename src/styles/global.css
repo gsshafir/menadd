@@ -215,8 +215,8 @@ main.wide-main {
   width: 240px;
 }
 
-.investors-intro {
-  grid-column: 1 / span 5;
+.investors-page {
+  max-width: 720px;
 }
 
 .investors-intro h1 {
@@ -225,7 +225,7 @@ main.wide-main {
 }
 
 .investors-sections {
-  grid-column: 7 / -1;
+  margin-top: 40px;
 }
 
 .investors-sections > section {
@@ -262,6 +262,7 @@ main.wide-main {
 
 .chart-figure {
   margin: 28px 0 0;
+  max-width: 720px;
 }
 
 .chart-figure svg {
@@ -290,15 +291,46 @@ main.wide-main {
 }
 
 .chart-axis-labels,
-.chart-stage-labels,
 .recap-legend {
   fill: var(--muted);
   font-family: var(--sans);
   font-size: 24px;
 }
 
-.chart-stage-labels-mobile {
+.chart-x-labels {
+  display: grid;
+  font-family: var(--sans);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: 8px;
+  text-align: center;
+}
+
+.chart-x-labels > div,
+.chart-stage,
+.chart-year {
+  display: block;
+  min-width: 0;
+}
+
+.chart-stage {
+  font-size: 14px;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.chart-year {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.25;
+  margin-top: 3px;
+}
+
+.mobile-label {
   display: none;
+}
+
+.home-section.chart-section > h2 {
+  font-size: 1.25rem;
 }
 
 .ownership-line {
@@ -1233,16 +1265,13 @@ button:disabled {
 }
 
 @media (width < 768px) {
-  .chart-stage-labels-desktop {
+  .chart-year,
+  .desktop-label {
     display: none;
   }
 
-  .chart-stage-labels-mobile {
-    display: block;
-  }
-
-  .chart-section > h2 {
-    font-size: 1.25rem;
+  .mobile-label {
+    display: inline;
   }
 
   .site-header {
@@ -1430,14 +1459,8 @@ button:disabled {
   }
 
   .work-intro,
-  .work-sections,
-  .investors-intro,
-  .investors-sections {
+  .work-sections {
     grid-column: auto;
-  }
-
-  .investors-sections {
-    margin-top: 40px;
   }
 
   .home-stats,
