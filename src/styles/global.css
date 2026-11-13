@@ -238,8 +238,8 @@ main.wide-main {
 .about-intro {
   align-items: flex-start;
   display: flex;
-  gap: 24px;
-  margin-top: 1rem;
+  gap: 32px;
+  margin-top: 2rem;
 }
 
 .about-intro p {
@@ -247,11 +247,18 @@ main.wide-main {
 }
 
 .about-portrait {
-  aspect-ratio: 1;
-  flex: 0 0 240px;
-  height: 240px;
+  aspect-ratio: 4 / 5;
+  flex: 0 0 280px;
+  height: 350px;
   object-fit: cover;
-  width: 240px;
+  object-position: center 42%;
+  width: 280px;
+}
+
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
 }
 
 .investors-page {
@@ -329,8 +336,7 @@ main.wide-main {
   stroke-width: 1;
 }
 
-.chart-axis-labels,
-.recap-legend {
+.chart-axis-labels {
   fill: var(--muted);
   font-family: var(--sans);
   font-size: 24px;
@@ -395,14 +401,15 @@ main.wide-main {
 }
 
 .recap-chart-figure {
-  border-bottom: 1px solid var(--rule);
-  border-top: 1px solid var(--rule);
-  margin: 32px 0;
-  padding: 28px 0;
+  margin: 32px 0 24px;
 }
 
 .recap-chart-figure h3 {
   font-size: 1.25rem;
+  margin-top: 0;
+}
+
+.recap-chart-figure .eyebrow {
   margin-top: 0;
 }
 
@@ -415,8 +422,39 @@ main.wide-main {
   stroke-width: 2;
 }
 
-.recap-legend {
-  font-size: 24px;
+.recap-html-legend {
+  display: grid;
+  font-family: var(--sans);
+  font-size: 14px;
+  gap: 8px 32px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 12px;
+}
+
+.recap-html-legend > div {
+  align-items: center;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 10px minmax(0, 1fr) auto;
+}
+
+.legend-swatch {
+  display: block;
+  height: 10px;
+  width: 10px;
+}
+
+.legend-swatch.segment-founder { background: var(--accent); }
+.legend-swatch.segment-grey-1 { background: #4d4b47; }
+.legend-swatch.segment-grey-2 { background: #6c6963; }
+.legend-swatch.segment-grey-3 { background: #85817a; }
+.legend-swatch.segment-grey-4 { background: #9b978f; }
+.legend-swatch.segment-grey-5 { background: #b2aea6; }
+.legend-swatch.segment-grey-6 { background: #cbc7bf; }
+
+.recap-scenario-link {
+  display: inline-block;
+  margin-top: 16px;
 }
 
 .segment-founder {

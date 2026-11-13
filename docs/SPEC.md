@@ -643,6 +643,7 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 
 - [ ] График «Founders’ combined ownership»: подписи оси X вынести из SVG в HTML под графиком. Две строки на точку: название стадии (system-ui, 14 px) и год (12 px, вторичный цвет). Ниже 768 px строка с годом скрыта. Контейнер графика не шире 720 px. Заголовок графика того же размера, что на Work. Подписи не налезают друг на друга на 375, 768, 1280 и 1440 px.
 - [ ] For investors, десктоп: убрать две колонки. Страница одноколоночная, как Work: H1, вводный абзац, затем разделы в ширину чтения до 720 px.
+- [ ] Work, график в блоке #financing: убрать разделитель перед графиком. Порядок внутри блока: список, надстрочник «Example», заголовок графика размером H3, график, существующая подпись, ссылка «Read the full scenario →» на /library/ownership/how-founders-lose-a-company-in-three-years/, затем строка «You get». Легенду вынести из SVG в HTML-текст размером 14 px. Контейнер графика не шире 720 px, как график на главной.
 
 ## 12. Что нужно от тебя до старта
 
@@ -876,3 +877,37 @@ The terms look reasonable one by one. Their combined effect shows up two rounds 
 **Оговорка**, мелким вторичным текстом перед финальным призывом: I provide financial and commercial analysis and run the process. Legal drafting, opinions and filings stay with counsel. Nothing here promises a financing, a valuation or an investor introduction.
 
 Финальный призыв и Further reading без изменений. Блок «One fixed-scope option: Financing Terms Review» удаляется.
+
+## 15. About после запуска
+
+Принято 13 ноября 2026. Страница /about/ пересобирается целиком, кроме разделов «Introducing me to someone» и «Contact», которые остаются без изменений.
+
+**Meta description и og:description:** Gennady Shafir, CFO and board advisor working between the UAE, London and Luxembourg. Finance, ownership and structure for founders from pre-seed to Series A.
+
+**Фото:** формат 4:5, как на первом экране главной, не квадрат. На десктопе слева от вводного текста, на мобильном над ним.
+
+**Вводный текст:** I am Gennady Shafir, a CFO and board advisor working between the UAE, London and Luxembourg. I have spent the past decade on the operating side of venture-backed companies, as CEO, co-founder, COO and CFO. Now I work with founders between pre-seed and Series A on finance, ownership and structure.
+
+### Track record
+
+As CEO and co-founder, built a B2B e-commerce company to over $50 million in annual revenue and more than 200 employees across multiple markets.
+
+As COO and CFO, scaled a 3D-printing hardware company operating in over 30 countries through its Series B, at a valuation above $100 million.
+
+As CFO of a deep-tech energy company, led finance and capital raising, with more than $10 million secured across MENA and the EU.
+
+Across these roles: PE and VC transactions, cross-border structures involving the UAE, Europe and Central Asia, and diligence work on both sides of the table.
+
+### Why I start with structure
+
+I have been on the operating side of a transaction that did not close. The business was working. The corporate structure could not take the investment.
+
+Since then I start every company with the same four questions. Who owns what. Who can block what. Which entity holds the value. Where the cash is.
+
+### How I work
+
+Inside the team, on the board, or one defined piece of work to start. The situations and what each involves are on the Work page. What I have learned along the way is in the library.
+
+Две ссылки: «See the work →» на /work/ и «Read the library →» на /library/.
+
+Разделы «Founder and board advisory», «Why this site exists», «Focus» и ссылка «Discuss the work and outputs» удаляются.
