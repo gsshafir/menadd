@@ -163,7 +163,6 @@ main.wide-main {
 }
 
 .work-stage-map table {
-  border-bottom: 1px solid var(--rule);
   border-collapse: collapse;
   border-top: 1px solid var(--rule);
   font-size: 0.9rem;
@@ -689,11 +688,19 @@ main.wide-main {
   margin-top: 0;
 }
 
+.site-footer .footer-legal {
+  font-size: 0.72rem;
+}
+
 .footer-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 0;
+  gap: 0;
   margin-top: 12px;
+}
+
+.footer-links a {
+  text-decoration: none;
 }
 
 .footer-links a + a::before {
@@ -701,6 +708,10 @@ main.wide-main {
   content: "·";
   margin: 0 10px;
   text-decoration: none;
+}
+
+.library-intro-line {
+  margin-top: 1rem;
 }
 
 h1,
@@ -1303,6 +1314,11 @@ button:disabled {
     text-decoration-thickness: 2px;
   }
 
+  .footer-links a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+
   .wordmark:hover {
     color: var(--text);
   }
@@ -1520,15 +1536,6 @@ button:disabled {
   main .button-link {
     text-align: center;
     width: 100%;
-  }
-
-  .footer-links {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .footer-links a + a::before {
-    content: none;
   }
 
   .twelve-column-grid {

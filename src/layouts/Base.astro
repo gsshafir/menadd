@@ -101,17 +101,16 @@ const personSchema = {
       <slot />
     </main>
     <footer class="site-footer">
-      <p class="footer-statement">MENADD. Written by Gennady Shafir. Built from the diligence backwards.</p>
-      <div class="footer-links">
+      <p class="footer-statement"><strong>Gennady Shafir.</strong> CFO and board advisor. UAE, London and Luxembourg.</p>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/work/">Work</a>
         <a href="/library/">Library</a>
-        <a href="/assessment/structure/">Structure check</a>
-        <a href="/library/#subscribe">Diligence Notes</a>
+        <a href="/about/">About</a>
         <a href={site.linkedIn}>LinkedIn</a>
         <a href="/privacy/">Privacy</a>
-        <a href="mailto:gennady@menadd.com">gennady@menadd.com</a>
-      </div>
-      <p>General information, not legal, tax or investment advice.</p>
-      <p>Copyright 2026 MENADD</p>
+      </nav>
+      <p class="footer-email"><a href="mailto:gennady@menadd.com">gennady@menadd.com</a></p>
+      <p class="footer-legal">General information, not legal, tax or investment advice. © 2026 MENADD</p>
     </footer>
     <script>
       const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");

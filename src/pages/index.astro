@@ -98,7 +98,7 @@ const featuredArticles = wantedTitles.map((articleTitle) => articles.find(({ dat
 
     <section class="home-section">
       <h2>From the library</h2>
-      <p class="section-lede">MENADD is where I write this down. Built from the diligence backwards.</p>
+      <p class="section-lede">MENADD is where I write this down.</p>
       <div class="library-card-grid">
         {featuredArticles.map((article) => article && <a class="card library-card" href={`/library/${article.data.section}/${article.id}/`}><h3>{article.data.title}</h3><p>{article.data.description}</p></a>)}
       </div>
