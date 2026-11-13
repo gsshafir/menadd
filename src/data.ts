@@ -64,7 +64,7 @@ export const meta = {
   home: {
     title: "MENADD | Financing Terms, Ownership and Control",
     description:
-      "CFO and board advisor in the UAE. I work with founders and investors on the finance, ownership and structure questions that decide whether a round closes."
+      "CFO and board advisor working between the UAE, London and Luxembourg. I work with founders and investors on the finance, ownership and structure questions that decide whether a round closes."
   },
   library: {
     title: "The Diligence Library | MENADD",

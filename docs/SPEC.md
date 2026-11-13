@@ -87,7 +87,7 @@ Nov 12, 2026 · @Gennady
 
 **Title:** Gennady Shafir | Finance, Ownership and Structure | MENADD
 
-**Meta description:** CFO and board advisor in the UAE. I work with founders and investors on the finance, ownership and structure questions that decide whether a round closes.
+**Meta description:** CFO and board advisor working between the UAE, London and Luxembourg. I work with founders and investors on the finance, ownership and structure questions that decide whether a round closes.
 
 ### Блок 1. Первый экран
 
@@ -547,8 +547,8 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 
 ### OG-картинки
 
-- Для каждой статьи картинка 1200×630 генерируется при сборке: название раздела, заголовок статьи, внизу «Gennady Shafir · MENADD». Светлый фон, сериф, без фото.
-- Для Home, Work, For investors, About, Start: одна общая картинка. Слева фото, справа имя «Gennady Shafir», строка «CFO and board advisor» и первая строка «I read the cap table before I read the plan.» Получатель ссылки в WhatsApp или LinkedIn должен понять, кто это, не открывая сайт. og:title главной: «Gennady Shafir | CFO and Board Advisor».
+- Для каждой статьи JPEG-картинка 1200×630 размером меньше 200 KB генерируется при сборке: название раздела, заголовок статьи, внизу «Gennady Shafir · MENADD». Светлый фон, сериф, без фото.
+- Для Home, Work, For investors, About, Start: одна общая JPEG-картинка 1200×630 размером меньше 200 KB. Слева фото, справа имя «Gennady Shafir», строка «CFO and board advisor» и первая строка «I read the cap table before I read the plan.» Получатель ссылки в WhatsApp или LinkedIn должен понять, кто это, не открывая сайт. og:title главной: «Gennady Shafir | CFO and Board Advisor».
 
 ### Чего не делаем
 

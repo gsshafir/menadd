@@ -52,7 +52,7 @@ export async function createSharedOg() {
       { input: portrait, left: 0, top: 0 },
       { input: overlay, left: 0, top: 0 }
     ])
-    .png()
+    .jpeg({ quality: 78, chromaSubsampling: "4:2:0", mozjpeg: true })
     .toBuffer();
 }
 
@@ -69,5 +69,5 @@ export async function createArticleOg(section: string, titleValue: string) {
       <text x="78" y="579" fill="${muted}" font-family="Arial, sans-serif" font-size="25">Gennady Shafir · MENADD</text>
     </svg>`);
 
-  return sharp(svg).png().toBuffer();
+  return sharp(svg).jpeg({ quality: 78, chromaSubsampling: "4:2:0", mozjpeg: true }).toBuffer();
 }

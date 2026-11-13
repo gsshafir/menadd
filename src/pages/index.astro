@@ -7,7 +7,7 @@ import SubscribeForm from "../components/SubscribeForm.astro";
 import Base from "../layouts/Base.astro";
 
 const title = "Gennady Shafir | Finance, Ownership and Structure | MENADD";
-const description = "CFO and board advisor in the UAE. I work with founders and investors on the finance, ownership and structure questions that decide whether a round closes.";
+const description = "CFO and board advisor working between the UAE, London and Luxembourg. I work with founders and investors on the finance, ownership and structure questions that decide whether a round closes.";
 
 const situations = [
   { title: "A term sheet is on the table.", body: "The headline valuation is the easy part. I model what the terms do to ownership, control and the next round, before you sign.", href: "/work/#financing" },
@@ -29,7 +29,7 @@ const articles = await getCollection("articles", ({ data }) => !data.draft && wa
 const featuredArticles = wantedTitles.map((articleTitle) => articles.find(({ data }) => data.title === articleTitle)).filter(Boolean);
 ---
 
-<Base title={title} description={description} canonical="/" ogTitle="Gennady Shafir | CFO and Board Advisor" ogImage="/og/shared.png" ogImageAlt="Gennady Shafir, CFO and board advisor" personJsonLd wide>
+<Base title={title} description={description} canonical="/" ogTitle="Gennady Shafir | CFO and Board Advisor" ogImage="/og/shared.jpg" ogImageAlt="Gennady Shafir, CFO and board advisor" personJsonLd wide>
   <div class="home-page">
     <section class="home-hero" aria-labelledby="home-title">
       <div class="home-hero-copy">

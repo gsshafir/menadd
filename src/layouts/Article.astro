@@ -13,7 +13,7 @@ const section = sections.find((item) => item.key === article.data.section);
 const href = `/library/${article.data.section}/${article.id}/`;
 const canonicalUrl = new URL(href, "https://menadd.com").toString();
 const seoTitle = article.data.seoTitle ?? article.data.title;
-const ogImage = `/og/articles/${article.id}.png`;
+const ogImage = `/og/articles/${article.id}.jpg`;
 const ogImageUrl = new URL(ogImage, "https://menadd.com").toString();
 const modifiedDate = article.data.updated ?? article.data.date;
 const formattedDate = article.data.date.toLocaleDateString("en", {

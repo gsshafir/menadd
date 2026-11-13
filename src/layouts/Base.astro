@@ -29,6 +29,7 @@ const {
 } = Astro.props;
 const canonicalUrl = new URL(canonical, site.url).toString();
 const ogImageUrl = new URL(ogImage, site.url).toString();
+const ogImageType = /\.jpe?g$/i.test(ogImage) ? "image/jpeg" : "image/png";
 const currentPath = Astro.url.pathname;
 const isCurrentNavItem = (href: string) =>
   href === "/library/"
@@ -66,6 +67,7 @@ const personSchema = {
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:type" content={ogImageType} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={ogImageAlt} />
