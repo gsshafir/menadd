@@ -31,28 +31,34 @@ export async function createSharedOg() {
   const runtime = globalThis as typeof globalThis & { process: { cwd: () => string } };
   const portraitPath = `${runtime.process.cwd().replaceAll("\\", "/")}/src/assets/gennady-shafir.jpg`;
   const portrait = await sharp(portraitPath)
-    .resize(520, 630, { fit: "cover", position: "attention" })
-    .png()
+    .resize(630, 630, { fit: "cover", position: "top" })
+    .jpeg({ quality: 84, chromaSubsampling: "4:2:0", mozjpeg: true })
     .toBuffer();
   const overlay = encode(`
     <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-      <rect x="520" width="680" height="630" fill="${background}"/>
-      <text x="590" y="92" fill="${accent}" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="3">MENADD</text>
-      <text x="590" y="230" fill="${text}" font-family="Georgia, serif" font-size="64" font-weight="600">Gennady Shafir</text>
-      <text x="590" y="278" fill="${muted}" font-family="Arial, sans-serif" font-size="28">CFO and board advisor</text>
-      <line x1="590" y1="335" x2="1110" y2="335" stroke="#e4e1da" stroke-width="2"/>
-      <text x="590" y="405" fill="${text}" font-family="Georgia, serif" font-size="38">
-        <tspan x="590">I read the cap table before</tspan>
-        <tspan x="590" dy="52">I read the plan.</tspan>
+      <text x="34" y="210" fill="${accent}" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="3">MENADD</text>
+      <text x="34" y="278" fill="${text}" font-family="Georgia, serif" font-size="45" font-weight="600">
+        <tspan x="34">Gennady</tspan>
+        <tspan x="34" dy="52">Shafir</tspan>
+      </text>
+      <text x="947" y="174" fill="${muted}" font-family="Arial, sans-serif" font-size="22">
+        <tspan x="947">CFO and board</tspan>
+        <tspan x="947" dy="30">advisor</tspan>
+      </text>
+      <text x="947" y="282" fill="${text}" font-family="Georgia, serif" font-size="31" font-weight="600">
+        <tspan x="947">I read the</tspan>
+        <tspan x="947" dy="40">cap table</tspan>
+        <tspan x="947" dy="40">before I read</tspan>
+        <tspan x="947" dy="40">the plan.</tspan>
       </text>
     </svg>`);
 
   return sharp({ create: { width: 1200, height: 630, channels: 3, background } })
     .composite([
-      { input: portrait, left: 0, top: 0 },
+      { input: portrait, left: 285, top: 0 },
       { input: overlay, left: 0, top: 0 }
     ])
-    .jpeg({ quality: 78, chromaSubsampling: "4:2:0", mozjpeg: true })
+    .jpeg({ quality: 74, chromaSubsampling: "4:2:0", mozjpeg: true })
     .toBuffer();
 }
 
