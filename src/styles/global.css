@@ -157,6 +157,41 @@ main.wide-main {
   margin-bottom: 0.45em;
 }
 
+.work-stage-map {
+  margin-top: 40px;
+  overflow-x: auto;
+}
+
+.work-stage-map table {
+  border-bottom: 1px solid var(--rule);
+  border-collapse: collapse;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
+  text-align: left;
+  width: 100%;
+}
+
+.work-stage-map thead {
+  border-bottom: 1px solid var(--rule);
+}
+
+.work-stage-map th,
+.work-stage-map td {
+  padding: 0.7rem 0.9rem 0.7rem 0;
+  vertical-align: top;
+}
+
+.work-stage-map th:first-child,
+.work-stage-map td:first-child {
+  width: 20%;
+}
+
+.work-stage-map th:last-child,
+.work-stage-map td:last-child {
+  padding-right: 0;
+  width: 21%;
+}
+
 .work-sections > section {
   border-top: 1px solid var(--rule);
   padding-top: 32px;
@@ -173,6 +208,10 @@ main.wide-main {
 }
 
 .work-sections ol {
+  padding-left: 1.4em;
+}
+
+.work-sections ul {
   padding-left: 1.4em;
 }
 

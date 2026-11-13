@@ -87,7 +87,7 @@ Nov 12, 2026 · @Gennady
 
 **Title:** Gennady Shafir | Finance, Ownership and Structure | MENADD
 
-**Meta description:** CFO and board advisor working between the UAE, London and Luxembourg. I work with founders and investors on the finance, ownership and structure questions that decide whether a round closes.
+**Meta description:** CFO and board advisor in the UAE. I work with founders and investors on the finance, ownership and structure questions that decide whether a round closes.
 
 ### Блок 1. Первый экран
 
@@ -217,7 +217,7 @@ I work alongside your counsel. I do not replace them.
 
 ## 5. Страница Work
 
-Заменяет /financing-terms/ и втрое короче неё. Четыре ситуации с якорями, потом как начинается работа.
+Тексты этого раздела заменены разделом 14 от 13 ноября 2026. URL, якоря и редирект остаются в силе. Четыре ситуации с якорями, потом как начинается работа.
 
 **URL:** /work/
 
@@ -547,8 +547,8 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 
 ### OG-картинки
 
-- Для каждой статьи JPEG-картинка 1200×630 размером меньше 200 KB генерируется при сборке: название раздела, заголовок статьи, внизу «Gennady Shafir · MENADD». Светлый фон, сериф, без фото.
-- Для Home, Work, For investors, About, Start: одна общая JPEG-картинка 1200×630 размером меньше 200 KB. Слева фото, справа имя «Gennady Shafir», строка «CFO and board advisor» и первая строка «I read the cap table before I read the plan.» Получатель ссылки в WhatsApp или LinkedIn должен понять, кто это, не открывая сайт. og:title главной: «Gennady Shafir | CFO and Board Advisor».
+- Для каждой статьи картинка 1200×630 генерируется при сборке: название раздела, заголовок статьи, внизу «Gennady Shafir · MENADD». Светлый фон, сериф, без фото.
+- Для Home, Work, For investors, About, Start: одна общая картинка. Слева фото, справа имя «Gennady Shafir», строка «CFO and board advisor» и первая строка «I read the cap table before I read the plan.» Получатель ссылки в WhatsApp или LinkedIn должен понять, кто это, не открывая сайт. og:title главной: «Gennady Shafir | CFO and Board Advisor».
 
 ### Чего не делаем
 
@@ -775,3 +775,104 @@ Stage 8: QA. Spec sections 10 and 11.
 
 Implement the SEO, structured data, sitemap and analytics items from section 10 that are not done yet. Then go through the acceptance checklist in section 11 item by item and report pass or fail for each, with evidence. Fix every failure and report again. Run a diff on the article content folder against main and confirm only the end-of-article block changed. Do not merge into main.
 ```
+
+## 14. Правки текстов после запуска
+
+Принято 13 ноября 2026. Этот раздел имеет приоритет над разделами 4, 5 и 7 там, где они расходятся. Цель: сайт не должен сводить работу Геннадия к одному ревью. Названия «Financing Terms Review» на сайте больше нет.
+
+### Главная
+
+- Блок кейсов: заголовок «And the term sheets.» заменить на «The same four clauses», без точки. Надстрочник «Across many term sheets» остаётся.
+- Блок «How the work takes shape», первый абзац: «It depends on the company. Sometimes it is a seat in the team or on the board. Sometimes it starts with one defined piece of work. We work that out after the first conversation, once I have seen the company.»
+
+### Анкета
+
+Поле «What you are looking for», варианты в этом порядке: A senior finance person in the team · A board member or advisor · Help with one specific problem · Not sure yet.
+
+### Work, новый текст страницы
+
+Порядок блоков по пути фаундера: структура, финансы, раунд, переезд. Якоря прежние: #structure, #finance, #financing, #border. У каждого блока одна форма: строка «When», вводная фраза где есть, список, строка «You get».
+
+**Meta description:** What I work on with founders between pre-seed and Series A: structure and ownership, finance, a financing decision, a move across borders.
+
+**H1:** What I work on
+
+**Вводный абзац:** Founders usually come to me in one of four situations between pre-seed and Series A. The work starts with the documents and the numbers. It ends with a decision you can defend to an investor.
+
+**Карта стадий**, таблица из трёх колонок. В колонке Where ссылки на якоря.
+
+| Stage | What usually needs fixing | Where |
+| --- | --- | --- |
+| Pre-seed | Founder split and vesting. First SAFEs. Which entity to raise into. | Structure |
+| Seed | ESOP. IP ownership. A cap table that matches the documents. Cash reporting. | Structure, Finance |
+| Towards Series A | The model. The data room. The term sheet and board terms. | Finance, Financing |
+| Any stage | A holding or a headquarters that has to move. | Borders |
+
+**Якорь #structure. H2:** Structure and ownership
+
+**When:** Before the first priced round, or when diligence is close.
+
+Operational is not the same as investable. A structure built for licensing, banking and invoicing rarely answers an investor's questions.
+
+- Founder equity: the split, vesting, and what happens when a founder leaves.
+- Employee equity: an ESOP investors accept, options promised but never granted, phantom equity where a plan was expected.
+- SAFEs and convertibles: what they convert into, together, at the next round.
+- The entity and the IP: which company the round closes into, and whether it owns what it sells.
+- The cap table record: reconciled to signed documents and, where it helps, moved to Carta.
+
+**You get:** A short memo with what has to change and in what order, and the change run with your counsel until it is done.
+
+**Якорь #finance. H2:** Finance the company has outgrown
+
+**When:** Revenue is real and the founder still runs cash in a spreadsheet.
+
+- Reporting that runs without a finance team: bank and accounting data, with simple AI tools on top that produce weekly cash and runway.
+- The metrics an investor will recalculate anyway.
+- The financial model, the part of this work I have done most: assumptions an investor can test, scenarios the board can run the company on.
+- Board and investor reporting on a fixed rhythm.
+- The data room and the diligence answers.
+
+**You get:** Numbers produced every week, not rebuilt for every investor meeting. This is ongoing work inside the team, not a report.
+
+**Якорь #financing. H2:** A financing decision
+
+**When:** A term sheet, a new convertible, a bridge or a down round is on the table.
+
+The terms look reasonable one by one. Their combined effect shows up two rounds later.
+
+- Ownership round by round, issued and fully diluted.
+- Control: board seats, veto rights, voting thresholds, drag-along.
+- Down-round protection, and who it lands on.
+- Exit distributions at several sale values, under the preference terms in the documents.
+- Competing proposals, side by side.
+
+**You get:** An editable model, a short memo with the points to negotiate, and a walkthrough.
+
+График «Who owns the company after the recapitalisation» стоит после строки «You get».
+
+**Якорь #border. H2:** A move across borders
+
+**When:** The holding, the headquarters or the investors sit in a different country from the business.
+
+- The target structure, designed from the capital stack backwards: ADGM, DIFC, Luxembourg or the BVI.
+- What moves and in what order: IP, contracts, people, cash.
+- Banking and tax, checked with advisers in each jurisdiction.
+- The advisers themselves, coordinated until the structure is in place.
+
+**You get:** A structure that works for banking, for tax and for the next investor at the same time.
+
+**H2:** How it starts
+
+Четыре шага без изменений.
+
+**H2:** Ways to work together
+
+**Inside the team.** A senior finance role alongside the founder, for as long as the company needs it.
+
+**On the board.** A board or advisory seat, with ownership and control kept in the room at every decision.
+
+**One defined piece of work.** A structure audit, a finance setup or a term sheet analysis. Scope and fee agreed before you commit.
+
+**Оговорка**, мелким вторичным текстом перед финальным призывом: I provide financial and commercial analysis and run the process. Legal drafting, opinions and filings stay with counsel. Nothing here promises a financing, a valuation or an investor introduction.
+
+Финальный призыв и Further reading без изменений. Блок «One fixed-scope option: Financing Terms Review» удаляется.

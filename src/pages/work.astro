@@ -4,43 +4,82 @@ import RecapChart from "../components/RecapChart.astro";
 
 const title = "Work | Financing, Finance, Structure | MENADD";
 const description =
-  "Four situations I work on with founders: a financing decision, a finance function the company has outgrown, a structure ahead of diligence, a move across borders.";
+  "What I work on with founders between pre-seed and Series A: structure and ownership, finance, a financing decision, a move across borders.";
 ---
 
 <Base title={title} description={description} canonical="/work/" ogImage="/og/shared.jpg" ogImageAlt="Gennady Shafir, CFO and board advisor" wide>
   <div class="work-page twelve-column-grid">
     <section class="work-intro">
       <h1>What I work on</h1>
-      <p class="lede">Four situations bring founders to me. The work starts with the documents and the numbers. It ends with a decision you can defend to an investor.</p>
+      <p class="lede">Founders usually come to me in one of four situations between pre-seed and Series A. The work starts with the documents and the numbers. It ends with a decision you can defend to an investor.</p>
+      <div class="work-stage-map">
+        <table>
+          <thead>
+            <tr><th>Stage</th><th>What usually needs fixing</th><th>Where</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Pre-seed</td><td>Founder split and vesting. First SAFEs. Which entity to raise into.</td><td><a href="#structure">Structure</a></td></tr>
+            <tr><td>Seed</td><td>ESOP. IP ownership. A cap table that matches the documents. Cash reporting.</td><td><a href="#structure">Structure</a>, <a href="#finance">Finance</a></td></tr>
+            <tr><td>Towards Series A</td><td>The model. The data room. The term sheet and board terms.</td><td><a href="#finance">Finance</a>, <a href="#financing">Financing</a></td></tr>
+            <tr><td>Any stage</td><td>A holding or a headquarters that has to move.</td><td><a href="#border">Borders</a></td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <div class="work-sections">
-      <section id="financing">
-        <h2>A financing decision</h2>
-        <p>A term sheet, a new convertible, a bridge, a down round. The terms look reasonable one by one. Their combined effect shows up two rounds later.</p>
-        <p>I bring the cap table, the existing instruments and the proposed terms into one model. It shows ownership round by round, issued and fully diluted. A control map sets out board seats, voting thresholds and the decisions that need investor consent. Exit distributions show who receives what at several sale values, under the preference terms in the documents.</p>
-        <RecapChart />
-        <p>You end up with an editable model, a short memo with the points to negotiate, and a walkthrough.</p>
+      <section id="structure">
+        <h2>Structure and ownership</h2>
+        <p><strong>When:</strong> Before the first priced round, or when diligence is close.</p>
+        <p>Operational is not the same as investable. A structure built for licensing, banking and invoicing rarely answers an investor's questions.</p>
+        <ul>
+          <li>Founder equity: the split, vesting, and what happens when a founder leaves.</li>
+          <li>Employee equity: an ESOP investors accept, options promised but never granted, phantom equity where a plan was expected.</li>
+          <li>SAFEs and convertibles: what they convert into, together, at the next round.</li>
+          <li>The entity and the IP: which company the round closes into, and whether it owns what it sells.</li>
+          <li>The cap table record: reconciled to signed documents and, where it helps, moved to Carta.</li>
+        </ul>
+        <p><strong>You get:</strong> A short memo with what has to change and in what order, and the change run with your counsel until it is done.</p>
       </section>
 
       <section id="finance">
         <h2>Finance the company has outgrown</h2>
-        <p>The founder still runs cash in a spreadsheet. Investors ask for numbers the company cannot produce quickly. The next raise depends on both.</p>
-        <p>I build cash reporting from the bank accounts, a runway figure you can rely on, and the metrics an investor will recalculate anyway. Then board and investor reporting. Then the raise itself: the model, the data room, the diligence answers.</p>
-        <p>This is ongoing work inside the team, not a report.</p>
+        <p><strong>When:</strong> Revenue is real and the founder still runs cash in a spreadsheet.</p>
+        <ul>
+          <li>Reporting that runs without a finance team: bank and accounting data, with simple AI tools on top that produce weekly cash and runway.</li>
+          <li>The metrics an investor will recalculate anyway.</li>
+          <li>The financial model, the part of this work I have done most: assumptions an investor can test, scenarios the board can run the company on.</li>
+          <li>Board and investor reporting on a fixed rhythm.</li>
+          <li>The data room and the diligence answers.</li>
+        </ul>
+        <p><strong>You get:</strong> Numbers produced every week, not rebuilt for every investor meeting. This is ongoing work inside the team, not a report.</p>
       </section>
 
-      <section id="structure">
-        <h2>Structure ahead of diligence</h2>
-        <p>Operational is not the same as investable. A structure built for licensing, banking and invoicing rarely answers an investor's questions.</p>
-        <p>I review which entity the round closes into, where the intellectual property sits, who employs the team and signs the contracts, how cash moves between entities, and what equity was promised but never issued. I define what has to change and run the change with your counsel and corporate services providers.</p>
-        <p>The objective is to find the gaps before an investor does.</p>
+      <section id="financing">
+        <h2>A financing decision</h2>
+        <p><strong>When:</strong> A term sheet, a new convertible, a bridge or a down round is on the table.</p>
+        <p>The terms look reasonable one by one. Their combined effect shows up two rounds later.</p>
+        <ul>
+          <li>Ownership round by round, issued and fully diluted.</li>
+          <li>Control: board seats, veto rights, voting thresholds, drag-along.</li>
+          <li>Down-round protection, and who it lands on.</li>
+          <li>Exit distributions at several sale values, under the preference terms in the documents.</li>
+          <li>Competing proposals, side by side.</li>
+        </ul>
+        <p><strong>You get:</strong> An editable model, a short memo with the points to negotiate, and a walkthrough.</p>
+        <RecapChart />
       </section>
 
       <section id="border">
         <h2>A move across borders</h2>
-        <p>A holding in ADGM, DIFC, Luxembourg or the BVI. A headquarters that moves. Assets that have to follow it.</p>
-        <p>The structure has to work for banking, for tax and for the next investor at the same time. I design it from the capital stack backwards and coordinate the advisers in each jurisdiction until it is in place.</p>
+        <p><strong>When:</strong> The holding, the headquarters or the investors sit in a different country from the business.</p>
+        <ul>
+          <li>The target structure, designed from the capital stack backwards: ADGM, DIFC, Luxembourg or the BVI.</li>
+          <li>What moves and in what order: IP, contracts, people, cash.</li>
+          <li>Banking and tax, checked with advisers in each jurisdiction.</li>
+          <li>The advisers themselves, coordinated until the structure is in place.</li>
+        </ul>
+        <p><strong>You get:</strong> A structure that works for banking, for tax and for the next investor at the same time.</p>
       </section>
 
       <section>
@@ -54,9 +93,10 @@ const description =
       </section>
 
       <section>
-        <h2>One fixed-scope option: Financing Terms Review</h2>
-        <p>For a company with a reliable ownership record. It covers one proposed term sheet, up to three existing convertible instruments, one option-pool arrangement, one subsequent financing scenario and three exit values.</p>
-        <p>You receive an editable model, a commercial issues memo, a map of documented control terms and open legal questions, and a 30-minute walkthrough. The fixed fee and delivery date are confirmed before you commit.</p>
+        <h2>Ways to work together</h2>
+        <p><strong>Inside the team.</strong> A senior finance role alongside the founder, for as long as the company needs it.</p>
+        <p><strong>On the board.</strong> A board or advisory seat, with ownership and control kept in the room at every decision.</p>
+        <p><strong>One defined piece of work.</strong> A structure audit, a finance setup or a term sheet analysis. Scope and fee agreed before you commit.</p>
       </section>
 
       <section class="work-limits">
