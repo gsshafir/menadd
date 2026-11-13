@@ -32,7 +32,8 @@ export async function createSharedOg() {
   const portraitPath = `${runtime.process.cwd().replaceAll("\\", "/")}/src/assets/gennady-shafir.jpg`;
   const portrait = await sharp(portraitPath)
     .resize(630, 630, { fit: "cover", position: "top" })
-    .jpeg({ quality: 84, chromaSubsampling: "4:2:0", mozjpeg: true })
+    .sharpen({ sigma: 0.8, m1: 0.7, m2: 1.5, x1: 2, y2: 10, y3: 20 })
+    .png()
     .toBuffer();
   const overlay = encode(`
     <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +59,7 @@ export async function createSharedOg() {
       { input: portrait, left: 285, top: 0 },
       { input: overlay, left: 0, top: 0 }
     ])
-    .jpeg({ quality: 74, chromaSubsampling: "4:2:0", mozjpeg: true })
+    .jpeg({ quality: 90, chromaSubsampling: "4:4:4" })
     .toBuffer();
 }
 
