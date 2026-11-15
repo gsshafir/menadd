@@ -52,7 +52,7 @@ const articleHtml = (article.rendered?.html ?? "").replace(/<img\b([^>]*)>/g, (_
 
 <Base title={`${seoTitle} | MENADD`} description={article.data.description} canonical={href} ogType="article" ogImage={ogImage} ogImageAlt={`${section?.title}: ${article.data.title}`}>
   <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
-  <article>
+  <article class={`article-${article.id}`}>
     <p class="eyebrow"><a href={`/library/${article.data.section}/`}>{section?.title}</a></p>
     <h1>{article.data.title}</h1>
     <p class="lede">{article.data.description}</p>
