@@ -79,9 +79,20 @@ function makeEnquiry(form: FormData): Enquiry {
   };
 }
 
-function subjectFor(enquiry: Enquiry) {
+export function subjectFor(enquiry: Enquiry) {
   const subjectValue = (entry: string) => entry || "not given";
-  return `[MENADD] ${enquiry.type} · ${subjectValue(enquiry.company)} · ${subjectValue(enquiry.stage)} · raised ${subjectValue(enquiry.capital)} · revenue ${subjectValue(enquiry.revenue)} · intro: ${subjectValue(enquiry.introducedBy)}`;
+  const intro = enquiry.introducedBy ? ` · intro: ${enquiry.introducedBy}` : "";
+
+  if (enquiry.type === "investor") {
+    return `[MENADD] investor · ${subjectValue(enquiry.fund)}${intro}`;
+  }
+
+  if (enquiry.type === "other") {
+    const company = enquiry.company ? ` · ${enquiry.company}` : "";
+    return `[MENADD] other · ${subjectValue(enquiry.name)}${company}${intro}`;
+  }
+
+  return `[MENADD] founder · ${subjectValue(enquiry.company)} · ${subjectValue(enquiry.stage)} · raised ${subjectValue(enquiry.capital)} · revenue ${subjectValue(enquiry.revenue)}${intro}`;
 }
 
 function messageFor(enquiry: Enquiry) {

@@ -402,7 +402,7 @@ I have been CEO, COO and CFO in venture-backed companies. I have done diligence 
 1. Сайт статический, Astro на Cloudflare Pages. Анкета отправляется через fetch на Pages Function `/api/enquiry`. При любой ошибке введённые данные остаются на странице.
 2. Функция проверяет поля и токен Turnstile, сохраняет заявку в Cloudflare KV со сроком жизни 30 дней и отправляет письмо через Resend на gennady@menadd.com. При успехе страница переходит на /start/thanks/.
 3. Если письмо не ушло, заявка уже лежит в KV, а посетитель видит успех. Ошибка доставки пишется в лог функции без содержимого заявки.
-4. Тема письма: `[MENADD] {founder|investor|other} · {Company} · {Stage} · raised {Capital} · revenue {Revenue} · intro: {Introduced by}`. По теме заявку можно оценить, не открывая письмо.
+4. Тема письма зависит от типа заявки. Founder: `[MENADD] founder · {Company} · {Stage} · raised {Capital} · revenue {Revenue} · intro: {Introduced by}`. Investor: `[MENADD] investor · {Fund or firm} · intro: {Introduced by}`. Other: `[MENADD] other · {Name} · {Company, if given} · intro: {Introduced by}`. Часть `· intro: {Introduced by}` целиком опускается, если поле Introduced by пустое. По теме заявку можно оценить, не открывая письмо.
 5. Reply-To письма равен email посетителя.
 6. Защита от спама: скрытое поле-ловушка, Cloudflare Turnstile, ограничение частоты отправок с одного IP.
 7. Ключи Resend и Turnstile хранятся в переменных окружения Cloudflare Pages и не попадают в репозиторий. Codex даёт пошаговую инструкцию: аккаунт Resend, DNS-записи домена, ключи.
@@ -932,9 +932,18 @@ Accepted 15 November 2026. This section has priority over earlier sections where
 ### Work
 
 - `#financing`: order is the bullet list, then "You get", then the Example block with the chart, caption and link.
+- `#financing`, chart caption: "The bridge lender ends up with 10.2%, more than either founder (9.9% and 6.6%). Synthetic numbers, real mechanics."
 - `#structure`, replace "You get" with: "First, a short memo: what has to change and in what order. Then, if you want it, the change itself, run with your counsel until it is done."
 - `#border`, replace "You get" with: "The target structure on paper, the order in which IP, contracts, people and cash move, and the advisers coordinated until it is in place."
+- `#finance`, replace the first bullet with: "Weekly cash and runway reporting from bank and accounting data, with a clear view of upcoming payments and funding gaps. Simple AI tools do the assembly, so it runs without a finance team."
 - `#finance`, after "You get" add a block with the eyebrow "Across several companies", no heading: "As CFO I have run cash through ordinary months and through cash gaps. I have set up management accounts, opened the bank accounts, arranged credit lines and factoring, and built the accounting function, in-house or outsourced. None of this shows in a pitch deck. All of it decides whether the company reaches the next round."
+
+### Enquiry email subjects
+
+- Investor: `[MENADD] investor · {Fund or firm} · intro: {Introduced by}`.
+- Other: `[MENADD] other · {Name} · {Company, if given} · intro: {Introduced by}`.
+- Founder: unchanged.
+- Omit the `intro` part when Introduced by is empty.
 
 ### Investors
 
