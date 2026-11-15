@@ -34,6 +34,7 @@ const description = "A short form, two minutes. Tell me the company, the decisio
       <div class="form-field">
         <label for="company">Company and website</label>
         <input id="company" name="company" type="text" autocomplete="organization" required />
+        <span class="field-hint">A link is enough.</span>
         <span class="field-error" data-error-for="company"></span>
       </div>
 
@@ -59,6 +60,7 @@ const description = "A short form, two minutes. Tell me the company, the decisio
 
         <div class="form-field">
           <label for="capital">Capital raised to date</label>
+          <span class="field-hint">optional, helps me prepare</span>
           <select id="capital" name="capital">
             <option value=""></option>
             <option>None</option>
@@ -72,6 +74,7 @@ const description = "A short form, two minutes. Tell me the company, the decisio
 
         <div class="form-field">
           <label for="revenue">Revenue, last 12 months</label>
+          <span class="field-hint">optional, helps me prepare</span>
           <select id="revenue" name="revenue">
             <option value=""></option>
             <option>None yet</option>
@@ -91,14 +94,14 @@ const description = "A short form, two minutes. Tell me the company, the decisio
         </div>
 
         <div class="form-field">
-          <label for="portfolio-need">The portfolio company and what it needs</label>
+          <label for="portfolio-need">Which portfolio company or situation should we discuss? Include the timing if relevant.</label>
           <textarea id="portfolio-need" name="portfolioNeed" rows="5" disabled></textarea>
           <span class="field-error" data-error-for="portfolioNeed"></span>
         </div>
       </div>
 
-      <div class="form-field">
-        <label for="situation">What is in front of you, and by when</label>
+      <div class="form-field" id="situation-field">
+        <label for="situation" id="situation-label">What is in front of you, and by when</label>
         <textarea id="situation" name="situation" rows="6" required></textarea>
         <span class="field-error" data-error-for="situation"></span>
       </div>
@@ -150,35 +153,46 @@ const description = "A short form, two minutes. Tell me the company, the decisio
     const form = document.querySelector<HTMLFormElement>("#enquiry-form");
     const companyFields = document.querySelector<HTMLElement>("#company-fields");
     const investorFields = document.querySelector<HTMLElement>("#investor-fields");
+    const situationField = document.querySelector<HTMLElement>("#situation-field");
+    const situationLabel = document.querySelector<HTMLLabelElement>("#situation-label");
     const message = document.querySelector<HTMLElement>("#form-message");
 
-    if (form && companyFields && investorFields && message) {
+    if (form && companyFields && investorFields && situationField && situationLabel && message) {
       form.hidden = false;
 
       const typeInputs = Array.from(form.querySelectorAll<HTMLInputElement>('input[name="type"]'));
       const stage = form.elements.namedItem("stage") as HTMLSelectElement;
       const capital = form.elements.namedItem("capital") as HTMLSelectElement;
       const revenue = form.elements.namedItem("revenue") as HTMLSelectElement;
+      const company = form.elements.namedItem("company") as HTMLInputElement;
       const fund = form.elements.namedItem("fund") as HTMLInputElement;
       const portfolioNeed = form.elements.namedItem("portfolioNeed") as HTMLTextAreaElement;
+      const situation = form.elements.namedItem("situation") as HTMLTextAreaElement;
       const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
       const turnstileWidget = document.querySelector<HTMLElement>("#turnstile-widget");
 
       const selectedType = () => typeInputs.find((input) => input.checked)?.value || "founder";
       const setVariant = (type: string) => {
         const investor = type === "investor";
-        companyFields.hidden = investor;
+        const founder = type === "founder";
+        const other = type === "other";
+        companyFields.hidden = !founder;
         investorFields.hidden = !investor;
-        stage.disabled = investor;
-        capital.disabled = investor;
-        revenue.disabled = investor;
-        stage.required = type === "founder";
-        capital.required = type === "founder";
-        revenue.required = type === "founder";
+        stage.disabled = !founder;
+        capital.disabled = !founder;
+        revenue.disabled = !founder;
+        stage.required = founder;
+        capital.required = false;
+        revenue.required = false;
+        company.required = founder;
         fund.disabled = !investor;
         portfolioNeed.disabled = !investor;
         fund.required = investor;
         portfolioNeed.required = investor;
+        situationField.hidden = investor;
+        situation.disabled = investor;
+        situation.required = founder || other;
+        situationLabel.textContent = other ? "What would you like to discuss?" : "What is in front of you, and by when";
       };
 
       const requestedType = new URLSearchParams(location.search).get("type");
@@ -215,7 +229,7 @@ const description = "A short form, two minutes. Tell me the company, the decisio
           turnstile.render(turnstileWidget, { sitekey: config.siteKey });
           submit.disabled = false;
         } catch {
-          message.textContent = "The security check could not load. Please try again later.";
+          message.textContent = "The security check could not load. Email gennady@menadd.com instead.";
           message.dataset.state = "error";
         }
       };

@@ -42,19 +42,19 @@ function validate(form: FormData) {
   if (!(["founder", "investor", "other"] as string[]).includes(type)) errors.type = "Select one option.";
   if (!value(form, "name")) errors.name = "Name is required.";
   if (!emailPattern.test(value(form, "email"))) errors.email = "Enter a valid email address.";
-  if (!value(form, "company")) errors.company = "Company and website is required.";
-  if (!value(form, "situation")) errors.situation = "This field is required.";
 
   if (type === "founder") {
+    if (!value(form, "company")) errors.company = "Company and website is required.";
     if (!value(form, "stage")) errors.stage = "Stage is required.";
-    if (!value(form, "capital")) errors.capital = "Capital raised to date is required.";
-    if (!value(form, "revenue")) errors.revenue = "Revenue is required.";
+    if (!value(form, "situation")) errors.situation = "This field is required.";
   }
 
   if (type === "investor") {
     if (!value(form, "fund")) errors.fund = "Fund or firm is required.";
     if (!value(form, "portfolioNeed")) errors.portfolioNeed = "This field is required.";
   }
+
+  if (type === "other" && !value(form, "situation")) errors.situation = "This field is required.";
 
   return errors;
 }
@@ -80,11 +80,8 @@ function makeEnquiry(form: FormData): Enquiry {
 }
 
 function subjectFor(enquiry: Enquiry) {
-  const stage = enquiry.stage || "n/a";
-  const capital = enquiry.capital || "n/a";
-  const revenue = enquiry.revenue || "n/a";
-  const introducedBy = enquiry.introducedBy || "not provided";
-  return `[MENADD] ${enquiry.type} · ${enquiry.company} · ${stage} · raised ${capital} · revenue ${revenue} · intro: ${introducedBy}`;
+  const subjectValue = (entry: string) => entry || "not given";
+  return `[MENADD] ${enquiry.type} · ${subjectValue(enquiry.company)} · ${subjectValue(enquiry.stage)} · raised ${subjectValue(enquiry.capital)} · revenue ${subjectValue(enquiry.revenue)} · intro: ${subjectValue(enquiry.introducedBy)}`;
 }
 
 function messageFor(enquiry: Enquiry) {
@@ -98,8 +95,8 @@ function messageFor(enquiry: Enquiry) {
     `Capital raised to date: ${enquiry.capital || "Not applicable"}`,
     `Revenue, last 12 months: ${enquiry.revenue || "Not applicable"}`,
     `Fund or firm: ${enquiry.fund || "Not applicable"}`,
-    `The portfolio company and what it needs: ${enquiry.portfolioNeed || "Not applicable"}`,
-    `What is in front of you, and by when: ${enquiry.situation}`,
+    `Which portfolio company or situation should we discuss? Include the timing if relevant.: ${enquiry.portfolioNeed || "Not applicable"}`,
+    `${enquiry.type === "other" ? "What would you like to discuss?" : "What is in front of you, and by when"}: ${enquiry.situation || "Not applicable"}`,
     `Entities and jurisdictions today: ${enquiry.entities || "Not provided"}`,
     `What you are looking for: ${enquiry.lookingFor || "Not provided"}`,
     `Introduced by: ${enquiry.introducedBy || "Not provided"}`,

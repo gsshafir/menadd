@@ -914,3 +914,32 @@ Inside the team, on the board, or one defined piece of work to start. The situat
 Две ссылки: «See the work →» на /work/ и «Read the library →» на /library/.
 
 Разделы «Founder and board advisory», «Why this site exists», «Focus» и ссылка «Discuss the work and outputs» удаляются.
+
+## 16. Post-launch changes
+
+Accepted 15 November 2026. This section has priority over earlier sections where they conflict. Use the English copy verbatim.
+
+### Enquiry form
+
+- On `/start/` and in `functions/api/enquiry.ts`, update client and server validation together.
+- Founder: required are Name, Email, Company and website, Stage, and the situation text field. "Capital raised to date" and "Revenue, last 12 months" stay visible but optional, each with the note "optional, helps me prepare". In the email subject an empty value is written as "not given".
+- Investor: hide and disable the general field "What is in front of you, and by when". Keep one text field labelled "Which portfolio company or situation should we discuss? Include the timing if relevant." Fund or firm stays required.
+- Someone else: required are Name, Email and one text field labelled "What would you like to discuss?". Company is optional.
+- Under "Company and website" add the hint "A link is enough."
+- Hidden fields must be disabled so they never block submission.
+- If Turnstile fails to load, show an error message with the email address gennady@menadd.com.
+
+### Work
+
+- `#financing`: order is the bullet list, then "You get", then the Example block with the chart, caption and link.
+- `#structure`, replace "You get" with: "First, a short memo: what has to change and in what order. Then, if you want it, the change itself, run with your counsel until it is done."
+- `#border`, replace "You get" with: "The target structure on paper, the order in which IP, contracts, people and cash move, and the advisers coordinated until it is in place."
+- `#finance`, after "You get" add a block with the eyebrow "Across several companies", no heading: "As CFO I have run cash through ordinary months and through cash gaps. I have set up management accounts, opened the bank accounts, arranged credit lines and factoring, and built the accounting function, in-house or outsourced. None of this shows in a pitch deck. All of it decides whether the company reaches the next round."
+
+### Investors
+
+Split the "When it makes sense" list with two h3 subheadings. "Before you invest": the bullet about checking the structure and the ownership record. "In the portfolio": the other four bullets. Bullet copy unchanged.
+
+### Production acceptance
+
+Build, push `main`, wait for production. Then test on menadd.com: submit a founder enquiry with capital and revenue left empty, an investor enquiry via `/start/?type=investor`, and a "Someone else" enquiry, each with "Audit QA" in Introduced by. Confirm all three reach `/start/thanks/` and appear in the ENQUIRIES namespace, and report the three email subjects.
