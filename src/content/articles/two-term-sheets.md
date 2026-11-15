@@ -55,4 +55,4 @@ What to give in return is the valuation. Keep A's terms and move the pre-money t
 
 The higher valuation is the headline. The terms are the price.
 
-\*Model inputs: 10M shares before the round, founders 8.5M, angels 1.5M. $3M raised. Option pool 10% of post-money, carved out of pre-money, treated as fully issued and sharing in sale proceeds. The seed investor holds all preferred shares. Exit figures assume no further rounds. Down round: $4M at $8M pre-money, including anti-dilution shares.\*
+<p class="article-footnote">Model inputs: 10M shares before the round, founders 8.5M, angels 1.5M. $3M raised. Option pool 10% of post-money, carved out of pre-money, treated as fully issued and sharing in sale proceeds. The seed investor holds all preferred shares. Exit figures assume no further rounds. Down round: $4M at $8M pre-money, including anti-dilution shares.</p>

@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import Base from "./Base.astro";
 import SubscribeForm from "../components/SubscribeForm.astro";
 import { sections } from "../data";
+import { formatArticleDate } from "../lib/date";
 
 type Props = {
   article: CollectionEntry<"articles">;
@@ -16,11 +17,7 @@ const seoTitle = article.data.seoTitle ?? article.data.title;
 const ogImage = `/og/articles/${article.id}.jpg`;
 const ogImageUrl = new URL(ogImage, "https://menadd.com").toString();
 const modifiedDate = article.data.updated ?? article.data.date;
-const formattedDate = article.data.date.toLocaleDateString("en", {
-  year: "numeric",
-  month: "long",
-  day: "numeric"
-});
+const formattedDate = formatArticleDate(article.data.date);
 const articleJsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",

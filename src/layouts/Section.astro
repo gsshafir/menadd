@@ -2,6 +2,7 @@
 import Base from "./Base.astro";
 import type { CollectionEntry } from "astro:content";
 import { meta } from "../data";
+import { formatArticleDate } from "../lib/date";
 
 type SectionKey = "ownership" | "control" | "structure" | "cash" | "process";
 type Props = {
@@ -34,6 +35,7 @@ const { sectionKey, title, description, articles, intro } = Astro.props;
               <a href={`/library/${article.data.section}/${article.id}/`}>{article.data.title}</a>
             </h2>
             <p>{article.data.description}</p>
+            <p class="article-meta">{formatArticleDate(article.data.date)}</p>
           </article>
         ))
       }

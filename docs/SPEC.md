@@ -1016,17 +1016,18 @@ What to give in return is the valuation. Keep A's terms and move the pre-money t
 
 The higher valuation is the headline. The terms are the price.
 
-\*Model inputs: 10M shares before the round, founders 8.5M, angels 1.5M. $3M raised. Option pool 10% of post-money, carved out of pre-money, treated as fully issued and sharing in sale proceeds. The seed investor holds all preferred shares. Exit figures assume no further rounds. Down round: $4M at $8M pre-money, including anti-dilution shares.\*
+*Model inputs: 10M shares before the round, founders 8.5M, angels 1.5M. $3M raised. Option pool 10% of post-money, carved out of pre-money, treated as fully issued and sharing in sale proceeds. The seed investor holds all preferred shares. Exit figures assume no further rounds. Down round: $4M at $8M pre-money, including anti-dilution shares.*
 
 Rendering rules for this article:
 
-- The asterisk after "down round" and at the start of the footnote is a literal character, not Markdown emphasis.
-- Tables must never overflow horizontally. Below 640 px, render the first table as stacked cards: the term as a small label, then "A" and "B" values on separate lines. The second table can stay a table if it fits at 375 px; if not, use the same card pattern.
+- Keep the literal asterisk only after "down round" and at the start of "*Next round: $4M at $8M pre-money." The final "Model inputs" paragraph has no visible asterisks and renders as a small italic note, in the same style as other article footnotes.
+- Tables must never overflow horizontally. Below 640 px, render the first table as stacked cards: the term as a small label, then "A" and "B" values on separate lines. Each A/B row uses a two-column grid so wrapped lines align with the value text rather than the label. The second table can stay a table if it fits at 375 px; if not, use the same card pattern.
 - Numbers in table cells use tabular figures and stay on one line.
+- Article dates use British format everywhere they are shown, including article pages and library lists. Example: "15 November 2026".
 
 ### Work, financing
 
-On `/work/` at `#financing`, directly after the "You get" line add the link "See a worked example →" to `/library/ownership/two-term-sheets/`, styled like other text links on the page.
+On `/work/` at `#financing`, directly after the "You get" line add the link "Worked example: two term sheets →" to `/library/ownership/two-term-sheets/`, styled like other text links on the page.
 
 ### Work, finance
 

@@ -808,6 +808,13 @@ a.card {
   margin-top: 1.05rem;
 }
 
+.article-body .article-footnote {
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-style: italic;
+  line-height: 1.55;
+}
+
 .section-intro p {
   color: var(--text);
   font-size: 1rem;
@@ -1603,8 +1610,13 @@ button:disabled {
     display: inline-block;
     font-family: var(--sans);
     font-size: 0.76rem;
-    margin-right: 0.6rem;
-    width: 1rem;
+  }
+
+  .article-two-term-sheets .article-body table:first-of-type td:nth-child(2),
+  .article-two-term-sheets .article-body table:first-of-type td:nth-child(3) {
+    column-gap: 0.6rem;
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr);
   }
 
   .article-two-term-sheets .article-body table:first-of-type td:nth-child(3)::before {
