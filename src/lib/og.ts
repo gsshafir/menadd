@@ -35,31 +35,14 @@ export async function createSharedOg() {
     .sharpen({ sigma: 0.8, m1: 0.7, m2: 1.5, x1: 2, y2: 10, y3: 20 })
     .png()
     .toBuffer();
-  const overlay = encode(`
-    <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-      <text x="34" y="210" fill="${accent}" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="3">MENADD</text>
-      <text x="34" y="278" fill="${text}" font-family="Georgia, serif" font-size="45" font-weight="600">
-        <tspan x="34">Gennady</tspan>
-        <tspan x="34" dy="52">Shafir</tspan>
-      </text>
-      <text x="947" y="174" fill="${muted}" font-family="Arial, sans-serif" font-size="22">
-        <tspan x="947">CFO and board</tspan>
-        <tspan x="947" dy="30">advisor</tspan>
-      </text>
-      <text x="947" y="282" fill="${text}" font-family="Georgia, serif" font-size="31" font-weight="600">
-        <tspan x="947">I read the</tspan>
-        <tspan x="947" dy="40">cap table</tspan>
-        <tspan x="947" dy="40">before I read</tspan>
-        <tspan x="947" dy="40">the plan.</tspan>
-      </text>
-    </svg>`);
+  const composed = await sharp({ create: { width: 1200, height: 630, channels: 3, background } })
+    .composite([{ input: portrait, left: 285, top: 0 }])
+    .png()
+    .toBuffer();
 
-  return sharp({ create: { width: 1200, height: 630, channels: 3, background } })
-    .composite([
-      { input: portrait, left: 285, top: 0 },
-      { input: overlay, left: 0, top: 0 }
-    ])
-    .jpeg({ quality: 90, chromaSubsampling: "4:4:4" })
+  return sharp(composed)
+    .extract({ left: 0, top: 0, width: 1200, height: 627 })
+    .jpeg({ quality: 78, chromaSubsampling: "4:2:0", mozjpeg: true })
     .toBuffer();
 }
 
