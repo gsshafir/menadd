@@ -863,11 +863,6 @@ a.card {
   white-space: nowrap;
 }
 
-.work-note {
-  border-left: 2px solid var(--rule);
-  padding-left: 1rem;
-}
-
 .article-body blockquote {
   border-left: 2px solid var(--accent);
   margin: 1.4rem 0 0;

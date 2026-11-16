@@ -1031,17 +1031,9 @@ On `/work/` at `#financing`, directly after the "You get" line add the link "Wor
 
 ### Work, finance
 
-On `/work/` at `#finance`, directly after the "Across several companies" block add a new block. Style it as a short first-person note: thin left rule, indent, eyebrow in the site's eyebrow style, no heading.
+Remove the note block with the eyebrow "What I check before we sign" completely, including all paragraphs and the left rule.
 
-**Eyebrow:** What I check before we sign
-
-A large B2B customer signs. The founder sees revenue. I see how many months the company will finance the work before the first payment arrives.
-
-When one customer is more than a quarter of revenue, one late payment can take the company off track. Payroll and suppliers do not wait for the customer's approval cycle.
-
-Thirty days sounds safe until you read what starts the clock. If it is formal acceptance, a late sign-off moves everything. Budget cycles and multi-level approvals move it again.
-
-My standard is part of the payment upfront and the balance within 30 days of invoice, not of acceptance. Before signing I want three answers: who signs off each milestone, when we can invoice, and how much cash we need if the first payment is a month late.
+Replace the "Across several companies" paragraph with: As CFO I have run cash through ordinary months and through cash gaps. I have set up management accounts, opened the bank accounts, arranged credit lines and factoring, negotiated favourable payment terms with large customers, and taken companies through audits and tax filings. I have built the accounting function, in-house or outsourced. None of this shows in a pitch deck. All of it decides whether the company reaches the next round.
 
 ### Production acceptance
 
