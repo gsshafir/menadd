@@ -218,6 +218,12 @@ main.wide-main {
   margin-top: 0.7em;
 }
 
+.work-intro > p,
+.work-sections > section > p,
+.work-detail {
+  max-width: var(--measure);
+}
+
 .work-limits {
   color: var(--muted);
 }
@@ -294,6 +300,11 @@ main.wide-main {
 
 .investors-sections li + li {
   margin-top: 0.65em;
+}
+
+.investors-intro > p,
+.investors-sections p {
+  max-width: var(--measure);
 }
 
 .investors-cta .button-link {
@@ -621,6 +632,11 @@ main.wide-main {
   margin-top: 0;
 }
 
+.situation-card:last-child p,
+.term-sheet-pattern > p:not(.eyebrow) {
+  max-width: var(--measure);
+}
+
 .case-note {
   color: var(--muted);
   font-family: var(--sans);
@@ -798,6 +814,7 @@ a.card {
 
 .article-body {
   margin-top: 2.5rem;
+  max-width: var(--measure);
 }
 
 .article-body h2 {
@@ -820,6 +837,7 @@ a.card {
   font-size: 1rem;
   line-height: 1.68;
   margin-top: 1.05rem;
+  max-width: var(--measure);
 }
 
 .article-body img {
